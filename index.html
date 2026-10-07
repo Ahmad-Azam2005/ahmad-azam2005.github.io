@@ -3,7 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Screen Color & Dead Pixel Tester</title>
+  <title>Screen Color & Dead Pixel Tester | Monitor Check Online</title>
+  <meta name="description" content="Free online screen color and dead pixel tester. Check monitors, laptops, and mobile screens for dead pixels, backlight bleed, and IPS glow in full screen.">
+
+  <!-- GOOGLE SEARCH CONSOLE VERIFICATION TAG -->
+  <meta name="google-site-verification" content="googlee72f2e338b28e207" />
+
+  <!-- GOOGLE ADSENSE SCRIPT -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5501194472375706"
+       crossorigin="anonymous"></script>
+
   <style>
     * {
       box-sizing: border-box;
@@ -14,75 +23,143 @@
     body {
       background: #11141a;
       color: #ffffff;
-      font-family: Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
       text-align: center;
-      padding: 30px 15px;
+      padding: 24px 16px 40px;
       min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     h1 {
       font-size: 28px;
       margin-bottom: 8px;
+      font-weight: 700;
     }
 
     p.subtitle {
-      color: #a0aec0;
+      color: #94a3b8;
       font-size: 15px;
-      margin-bottom: 25px;
+      margin-bottom: 24px;
+      max-width: 600px;
     }
 
-    /* Ad Placeholder Container (Top) */
+    /* Ad Banner Placeholders */
     .ad-banner {
+      width: 100%;
       max-width: 728px;
-      height: 90px;
-      margin: 0 auto 25px auto;
-      background: #1e2430;
-      border: 1px dashed #4a5568;
+      min-height: 90px;
+      margin: 0 auto 24px auto;
+      background: #1a202c;
+      border: 1px dashed #334155;
       border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #718096;
+      color: #64748b;
       font-size: 13px;
-      letter-spacing: 1px;
+      letter-spacing: 0.5px;
     }
 
+    /* Color Grid */
     .palette-box {
+      width: 100%;
       max-width: 700px;
       margin: 0 auto;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
+      gap: 14px;
     }
 
     .color-btn {
-      height: 100px;
+      height: 95px;
       border-radius: 10px;
-      border: 2px solid #2d3748;
+      border: 2px solid #334155;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: bold;
-      font-size: 18px;
-      transition: transform 0.1s ease;
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 0.5px;
+      transition: transform 0.15s ease, border-color 0.15s ease;
       user-select: none;
     }
 
     .color-btn:hover {
-      transform: scale(1.03);
+      transform: translateY(-2px);
       border-color: #ffffff;
     }
 
-    /* Colors */
     .c-red    { background-color: #ff0000; color: #ffffff; }
     .c-green  { background-color: #00ff00; color: #000000; }
     .c-blue   { background-color: #0000ff; color: #ffffff; }
     .c-yellow { background-color: #ffff00; color: #000000; }
     .c-white  { background-color: #ffffff; color: #000000; }
-    .c-black  { background-color: #000000; color: #ffffff; border-color: #4a5568; }
+    .c-black  { background-color: #000000; color: #ffffff; border-color: #475569; }
 
-    /* Fullscreen Mode Layer */
+    /* Educational Guide Section for AdSense Compliance */
+    .content-container {
+      width: 100%;
+      max-width: 700px;
+      margin: 36px auto 20px auto;
+      text-align: left;
+      background: #181d26;
+      border: 1px solid #283141;
+      padding: 24px;
+      border-radius: 10px;
+      color: #cbd5e1;
+      line-height: 1.65;
+      font-size: 14.5px;
+    }
+
+    .content-container h2 {
+      color: #f8fafc;
+      font-size: 18px;
+      margin: 18px 0 8px 0;
+    }
+
+    .content-container h2:first-of-type {
+      margin-top: 0;
+    }
+
+    .content-container p, .content-container ul {
+      margin-bottom: 12px;
+    }
+
+    .content-container ul {
+      padding-left: 20px;
+    }
+
+    .content-container li {
+      margin-bottom: 6px;
+    }
+
+    /* Footer & Policies */
+    footer {
+      width: 100%;
+      max-width: 700px;
+      margin-top: 30px;
+      font-size: 13px;
+      color: #64748b;
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    footer a {
+      color: #94a3b8;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    footer a:hover {
+      color: #f1f5f9;
+    }
+
+    /* Fullscreen Overlay */
     #fullscreen-layer {
       display: none;
       position: fixed;
@@ -99,119 +176,47 @@
       top: 20px;
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(0, 0, 0, 0.7);
-      color: #fff;
+      background: rgba(0, 0, 0, 0.75);
+      color: #ffffff;
       padding: 8px 18px;
       border-radius: 20px;
-      font-size: 14px;
+      font-size: 13px;
       pointer-events: none;
     }
 
-    /* Info / SEO Section for AdSense */
-    .info-section {
-      max-width: 700px;
-      margin: 40px auto 20px auto;
-      text-align: left;
+    /* Policy Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 10000;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-box {
       background: #1a202c;
-      padding: 20px;
-      border-radius: 8px;
-      color: #cbd5e0;
-      line-height: 1.6;
+      border: 1px solid #334155;
+      border-radius: 10px;
+      max-width: 580px;
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 24px;
+      text-align: left;
       font-size: 14px;
+      color: #cbd5e1;
+      line-height: 1.6;
     }
 
-    .info-section h2 {
-      color: #fff;
+    .modal-box h3 {
+      color: #f8fafc;
+      margin-bottom: 12px;
       font-size: 18px;
-      margin-bottom: 10px;
-    }
-  </style>
-</head>
-<body>
-
-  <!-- Top Ad Slot for AdSense -->
-  <div class="ad-banner">
-    Google AdSense Banner (728x90)
-  </div>
-
-  <h1>Screen Color & Dead Pixel Tester</h1>
-  <p class="subtitle">Click any color below to test your display in full screen mode.</p>
-
-  <div class="palette-box">
-    <div class="color-btn c-red" onclick="showColor('#ff0000')">RED</div>
-    <div class="color-btn c-green" onclick="showColor('#00ff00')">GREEN</div>
-    <div class="color-btn c-blue" onclick="showColor('#0000ff')">BLUE</div>
-    <div class="color-btn c-yellow" onclick="showColor('#ffff00')">YELLOW</div>
-    <div class="color-btn c-white" onclick="showColor('#ffffff')">WHITE</div>
-    <div class="color-btn c-black" onclick="showColor('#000000')">BLACK</div>
-  </div>
-
-  <div class="info-section">
-    <h2>How to test for dead pixels</h2>
-    <p>1. Select a color to open fullscreen view.</p>
-    <p>2. Look closely across your screen for any dots that do not match the color.</p>
-    <p>3. <strong>Click anywhere</strong> or use the <strong>Left / Right Arrow keys</strong> to cycle colors.</p>
-    <p>4. Press <strong>Esc</strong> to return here.</p>
-  </div>
-
-  <!-- Bottom Ad Slot for AdSense -->
-  <div class="ad-banner">
-    Google AdSense Banner (Bottom)
-  </div>
-
-  <!-- The Fullscreen Overlay -->
-  <div id="fullscreen-layer" onclick="nextColor()">
-    <div id="tip-box">Click anywhere or use Arrow Keys to switch • Press Esc to exit</div>
-  </div>
-
-  <script>
-    const colorList = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ffffff', '#000000'];
-    let currentIndex = 0;
-    const layer = document.getElementById('fullscreen-layer');
-
-    function showColor(colorHex) {
-      currentIndex = colorList.indexOf(colorHex);
-      if (currentIndex === -1) currentIndex = 0;
-      
-      layer.style.backgroundColor = colorList[currentIndex];
-      layer.style.display = 'block';
-
-      // Request true browser fullscreen if allowed
-      const root = document.documentElement;
-      if (root.requestFullscreen) {
-        root.requestFullscreen().catch(() => {});
-      }
     }
 
-    function nextColor() {
-      currentIndex = (currentIndex + 1) % colorList.length;
-      layer.style.backgroundColor = colorList[currentIndex];
-    }
-
-    function prevColor() {
-      currentIndex = (currentIndex - 1 + colorList.length) % colorList.length;
-      layer.style.backgroundColor = colorList[currentIndex];
-    }
-
-    // Keyboard controls
-    window.addEventListener('keydown', (e) => {
-      if (layer.style.display === 'block') {
-        if (e.key === 'ArrowRight' || e.key === ' ') {
-          nextColor();
-        } else if (e.key === 'ArrowLeft') {
-          prevColor();
-        } else if (e.key === 'Escape') {
-          layer.style.display = 'none';
-        }
-      }
-    });
-
-    // Exit overlay if user exits browser fullscreen
-    document.addEventListener('fullscreenchange', () => {
-      if (!document.fullscreenElement) {
-        layer.style.display = 'none';
-      }
-    });
-  </script>
-</body>
-</html>
+    .modal-box button {
+      background: #2563eb;
+      color: #fff;
+      border: none
