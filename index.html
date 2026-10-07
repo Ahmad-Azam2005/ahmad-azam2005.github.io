@@ -99,7 +99,7 @@
     .c-white  { background-color: #ffffff; color: #000000; }
     .c-black  { background-color: #000000; color: #ffffff; border-color: #475569; }
 
-    /* Educational Guide Section for AdSense Compliance */
+    /* Educational Guide Section */
     .content-container {
       width: 100%;
       max-width: 700px;
@@ -136,7 +136,7 @@
       margin-bottom: 6px;
     }
 
-    /* Footer & Policies */
+    /* Footer */
     footer {
       width: 100%;
       max-width: 700px;
@@ -219,4 +219,144 @@
     .modal-box button {
       background: #2563eb;
       color: #fff;
-      border: none
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Ad Slot -->
+  <div class="ad-banner">
+    Google AdSense Display Unit (Top)
+  </div>
+
+  <h1>Screen Color & Dead Pixel Tester</h1>
+  <p class="subtitle">Quickly inspect LCD, IPS, VA, and OLED screens for stuck pixels, dead sub-pixels, and backlight bleed.</p>
+
+  <div class="palette-box">
+    <div class="color-btn c-red" onclick="showColor('#ff0000')">RED</div>
+    <div class="color-btn c-green" onclick="showColor('#00ff00')">GREEN</div>
+    <div class="color-btn c-blue" onclick="showColor('#0000ff')">BLUE</div>
+    <div class="color-btn c-yellow" onclick="showColor('#ffff00')">YELLOW</div>
+    <div class="color-btn c-white" onclick="showColor('#ffffff')">WHITE</div>
+    <div class="color-btn c-black" onclick="showColor('#000000')">BLACK</div>
+  </div>
+
+  <!-- Educational Guide -->
+  <section class="content-container">
+    <h2>Dead Pixel vs. Stuck Pixel: What is the Difference?</h2>
+    <p>A <strong>dead pixel</strong> is a pixel where all sub-pixels remain permanently unpowered, appearing as a persistent black dot on bright backgrounds. A <strong>stuck pixel</strong> occurs when one or more sub-pixels (red, green, or blue) remain locked in an "on" state, showing a brightly colored dot on darker scenes.</p>
+
+    <h2>Recommended Testing Steps</h2>
+    <ul>
+      <li>Clean the display with a dry microfiber cloth before testing to eliminate dust particles.</li>
+      <li>Click any solid color above to enter true full-screen testing.</li>
+      <li>Use the <strong>Left and Right Arrow keys</strong> or click anywhere on the screen to switch between test colors.</li>
+      <li>Examine the display on pure white and solid primary colors to spot dead sub-pixels, and test pure black in a darkened room to assess backlight bleed and panel uniformity.</li>
+      <li>Press <strong>Esc</strong> at any time to return.</li>
+    </ul>
+
+    <h2>Can Stuck Pixels Be Fixed?</h2>
+    <p>While physically dead pixels are permanent hardware defects, stuck sub-pixels can sometimes be revived by cycling colors rapidly or applying gentle pressure around the affected spot with a microfiber cloth.</p>
+  </section>
+
+  <!-- Bottom Ad Slot -->
+  <div class="ad-banner">
+    Google AdSense Display Unit (Bottom)
+  </div>
+
+  <footer>
+    <span>&copy; 2026 Online Screen Tester</span>
+    <a onclick="openModal('privacy-modal')">Privacy Policy</a>
+    <a onclick="openModal('about-modal')">About & Contact</a>
+  </footer>
+
+  <!-- Fullscreen Testing Element -->
+  <div id="fullscreen-layer" onclick="nextColor()">
+    <div id="tip-box">Click or use Arrow Keys to switch colors • Press Esc to exit</div>
+  </div>
+
+  <!-- Privacy Policy Modal -->
+  <div class="modal-overlay" id="privacy-modal">
+    <div class="modal-box">
+      <h3>Privacy Policy</h3>
+      <p>This website respects your privacy. We do not collect personal login credentials or private identity records.</p>
+      <br>
+      <p><strong>Third-Party Advertising:</strong> Third-party vendors, including Google, use cookies to serve ads based on prior visits to this website or other sites. Google's use of advertising cookies enables it and its partners to serve ads based on your visit to our site and/or other sites on the Internet.</p>
+      <br>
+      <p>Users may opt out of personalized advertising by visiting Google's Ads Settings.</p>
+      <button onclick="closeModal('privacy-modal')">Close</button>
+    </div>
+  </div>
+
+  <!-- About Modal -->
+  <div class="modal-overlay" id="about-modal">
+    <div class="modal-box">
+      <h3>About & Contact</h3>
+      <p>Online Screen Tester is a free web-based utility designed to help users diagnose display irregularities, stuck sub-pixels, and backlight uniformity issues on computer monitors, laptops, and mobile devices.</p>
+      <br>
+      <p>For questions or feedback, reach out via the GitHub repository project page.</p>
+      <button onclick="closeModal('about-modal')">Close</button>
+    </div>
+  </div>
+
+  <script>
+    const colorList = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ffffff', '#000000'];
+    let currentIndex = 0;
+    const layer = document.getElementById('fullscreen-layer');
+
+    function showColor(colorHex) {
+      currentIndex = colorList.indexOf(colorHex);
+      if (currentIndex === -1) currentIndex = 0;
+      layer.style.backgroundColor = colorList[currentIndex];
+      layer.style.display = 'block';
+
+      const root = document.documentElement;
+      if (root.requestFullscreen) {
+        root.requestFullscreen().catch(() => {});
+      }
+    }
+
+    function nextColor() {
+      currentIndex = (currentIndex + 1) % colorList.length;
+      layer.style.backgroundColor = colorList[currentIndex];
+    }
+
+    function prevColor() {
+      currentIndex = (currentIndex - 1 + colorList.length) % colorList.length;
+      layer.style.backgroundColor = colorList[currentIndex];
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (layer.style.display === 'block') {
+        if (e.key === 'ArrowRight' || e.key === ' ') {
+          nextColor();
+        } else if (e.key === 'ArrowLeft') {
+          prevColor();
+        } else if (e.key === 'Escape') {
+          layer.style.display = 'none';
+        }
+      }
+    });
+
+    document.addEventListener('fullscreenchange', () => {
+      if (!document.fullscreenElement) {
+        layer.style.display = 'none';
+      }
+    });
+
+    function openModal(id) {
+      document.getElementById(id).style.display = 'flex';
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+  </script>
+</body>
+</html>
