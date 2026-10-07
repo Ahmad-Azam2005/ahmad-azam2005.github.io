@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xbox Controller Tester & Drift Checker</title>
+  <style>
+    :root {
+      --bg-color: #0f1115;
+      --card-bg: #1a1d24;
+      --accent-green: #107c10;
+      --accent-active: #52c41a;
+      --text-main: #f0f2f5;
+      --text-muted: #8c9ba5;
+      --border-color: #2b313d;
+      --font-family: system-ui, -apple-system, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-family);
+      line-height: 1.5;
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+    header { text-align: center; max-width: 650px; margin-bottom: 24px; }
+    header h1 { font-size: 2rem; font-weight: 700; margin-bottom: 6px; }
+    header p { color: var(--text-muted); font-size: 0.95rem; }
+    .status-banner {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 999px;
+      padding: 8px 18px;
+      margin-top: 14px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    .indicator-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #e5484d;
+      transition: background 0.3s ease;
+    }
+    .indicator-dot.connected {
+      background: var(--accent-active);
+      box-shadow: 0 0 10px rgba(82, 196, 26, 0.6);
+    }
+    .dashboard {
+      width: 100%;
+      max-width: 820px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 18px;
+    }
+    .card-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+    .stick-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .stick-pad {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: #14161b;
+      border: 2px solid var(--border-color);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .stick-pad::before, .stick-pad::after {
+      content: '';
+      position: absolute;
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .stick-pad::before { width: 100%; height: 1px; }
+    .stick-pad::after { height: 100%; width: 1px; }
+    .stick-thumb {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #2e3440;
+      border: 2px solid #5294e2;
+      position: absolute;
+      transform: translate(0px, 0px);
+      box-shadow: 0 0 8px rgba(82, 148, 226, 0.4);
+    }
+    .axis-readout {
+      font-family: monospace;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      display: flex;
+      gap: 16px;
+    }
+    .button-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+    .btn-cell {
+      background: #14161b;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px 6px;
+      text-align: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      transition: all 0.08s ease;
+      user-select: none;
+    }
+    .btn-cell.active {
+      background: var(--accent-green);
+      color: #fff;
+      border-color: var(--accent-active);
+      box-shadow: 0 0 12px rgba(16, 124, 16, 0.5);
+      transform: scale(0.97);
+    }
+    .trigger-wrapper { margin-top: 10px; }
+    .trigger-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      margin-bottom: 4px;
+      color: var(--text-muted);
+    }
+    .trigger-bar-bg {
+      height: 10px;
+      background: #14161b;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+    .trigger-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--accent-active);
+      transition: width 0.05s ease-out;
+    }
+    .test-vibe-btn {
+      background: #21252d;
+      color: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      font-weight: 500;
+      width: 100%;
+      margin-top: 14px;
+    }
+    .test-vibe-btn:hover { background: #2a303a; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Xbox Controller Tester</h1>
+    <p>Check button presses, stick drift, deadzones, and trigger calibration in real time.</p>
+    <div class="status-banner">
+      <div class="indicator-dot" id="dot"></div>
+      <span id="status-text">Connect controller & press any button</span>
+    </div>
+  </header>
+
+  <main class="dashboard">
+    <div class="card">
+      <div class="card-title">Left Analog Stick</div>
+      <div class="stick-container">
+        <div class="stick-pad">
+          <div class="stick-thumb" id="stick-left"></div>
+        </div>
+        <div class="axis-readout">
+          <span>X: <strong id="lx-val">0.00</strong></span>
+          <span>Y: <strong id="ly-val">0.00</strong></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Right Analog Stick</div>
+      <div class="stick-container">
+        <div class="stick-pad">
+          <div class="stick-thumb" id="stick-right"></div>
+        </div>
+        <div class="axis-readout">
+          <span>X: <strong id="rx-val">0.00</strong></span>
+          <span>Y: <strong id="ry-val">0.00</strong></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Triggers & Bumpers</div>
+      <div class="trigger-wrapper">
+        <div class="trigger-label"><span>LT (Left Trigger)</span><span id="lt-val">0%</span></div>
+        <div class="trigger-bar-bg"><div class="trigger-bar-fill" id="lt-fill"></div></div>
+      </div>
+      <div class="trigger-wrapper" style="margin-top: 14px;">
+        <div class="trigger-label"><span>RT (Right Trigger)</span><span id="rt-val">0%</span></div>
+        <div class="trigger-bar-bg"><div class="trigger-bar-fill" id="rt-fill"></div></div>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 18px;">
+        <div class="btn-cell" id="btn-4">LB</div>
+        <div class="btn-cell" id="btn-5">RB</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Buttons & D-Pad</div>
+      <div class="button-grid">
+        <div class="btn-cell" id="btn-0">A</div>
+        <div class="btn-cell" id="btn-1">B</div>
+        <div class="btn-cell" id="btn-2">X</div>
+        <div class="btn-cell" id="btn-3">Y</div>
+        <div class="btn-cell" id="btn-12">Up</div>
+        <div class="btn-cell" id="btn-13">Down</div>
+        <div class="btn-cell" id="btn-14">Left</div>
+        <div class="btn-cell" id="btn-15">Right</div>
+        <div class="btn-cell" id="btn-8">View (⧉)</div>
+        <div class="btn-cell" id="btn-9">Menu (≡)</div>
+        <div class="btn-cell" id="btn-10">LS Click</div>
+        <div class="btn-cell" id="btn-11">RS Click</div>
+      </div>
+      <button class="test-vibe-btn" id="vibe-btn" disabled>Test Vibration</button>
+    </div>
+  </main>
+
+  <script>
+    let activeGamepadIndex = null;
+    const dot = document.getElementById('dot');
+    const statusText = document.getElementById('status-text');
+    const vibeBtn = document.getElementById('vibe-btn');
+
+    window.addEventListener('gamepadconnected', (e) => {
+      activeGamepadIndex = e.gamepad.index;
+      dot.classList.add('connected');
+      statusText.textContent = `Connected: ${e.gamepad.id.split('(')[0].trim() || 'Controller'}`;
+      vibeBtn.disabled = false;
+      requestAnimationFrame(updateLoop);
+    });
+
+    window.addEventListener('gamepaddisconnected', (e) => {
+      if (activeGamepadIndex === e.gamepad.index) {
+        activeGamepadIndex = null;
+        dot.classList.remove('connected');
+        statusText.textContent = 'Controller disconnected. Press any button to reconnect.';
+        vibeBtn.disabled = true;
+      }
+    });
+
+    vibeBtn.addEventListener('click', () => {
+      if (activeGamepadIndex === null) return;
+      const gp = navigator.getGamepads()[activeGamepadIndex];
+      if (gp && gp.vibrationActuator) {
+        gp.vibrationActuator.playEffect('dual-rumble', {
+          startDelay: 0,
+          duration: 350,
+          weakMagnitude: 0.8,
+          strongMagnitude: 0.8
+        });
+      }
+    });
+
+    function updateLoop() {
+      const gamepads = navigator.getGamepads ? navigator.getGamepads() : [];
+      let gp = activeGamepadIndex !== null ? gamepads[activeGamepadIndex] : null;
+
+      if (!gp) {
+        for (let i = 0; i < gamepads.length; i++) {
+          if (gamepads[i]) {
+            gp = gamepads[i];
+            activeGamepadIndex = i;
+            dot.classList.add('connected');
+            statusText.textContent = `Connected: ${gp.id.split('(')[0].trim() || 'Controller'}`;
+            vibeBtn.disabled = false;
+            break;
+          }
+        }
+      }
+
+      if (gp) {
+        gp.buttons.forEach((btn, idx) => {
+          const el = document.getElementById(`btn-${idx}`);
+          if (el) {
+            if (btn.pressed) el.classList.add('active');
+            else el.classList.remove('active');
+          }
+        });
+
+        const ltVal = gp.buttons[6] ? gp.buttons[6].value : 0;
+        const rtVal = gp.buttons[7] ? gp.buttons[7].value : 0;
+
+        document.getElementById('lt-fill').style.width = `${(ltVal * 100).toFixed(0)}%`;
+        document.getElementById('lt-val').textContent = `${(ltVal * 100).toFixed(0)}%`;
+
+        document.getElementById('rt-fill').style.width = `${(rtVal * 100).toFixed(0)}%`;
+        document.getElementById('rt-val').textContent = `${(rtVal * 100).toFixed(0)}%`;
+
+        const maxRadius = 55;
+        const lx = gp.axes[0] || 0;
+        const ly = gp.axes[1] || 0;
+        const rx = gp.axes[2] || 0;
+        const ry = gp.axes[3] || 0;
+
+        document.getElementById('stick-left').style.transform = `translate(${lx * maxRadius}px, ${ly * maxRadius}px)`;
+        document.getElementById('lx-val').textContent = lx.toFixed(2);
+        document.getElementById('ly-val').textContent = ly.toFixed(2);
+
+        document.getElementById('stick-right').style.transform = `translate(${rx * maxRadius}px, ${ry * maxRadius}px)`;
+        document.getElementById('rx-val').textContent = rx.toFixed(2);
+        document.getElementById('ry-val').textContent = ry.toFixed(2);
+      }
+
+      requestAnimationFrame(updateLoop);
+    }
+
+    requestAnimationFrame(updateLoop);
+  </script>
+</body>
+</html>
