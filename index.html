@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Screen Color & Dead Pixel Tester | Monitor Check Online</title>
+  <title>Screen Color & Dead Pixel Tester | Display Diagnostic Guide</title>
   <meta name="description" content="Free online screen color and dead pixel tester. Check monitors, laptops, and mobile screens for dead pixels, backlight bleed, and IPS glow in full screen.">
 
   <!-- GOOGLE SEARCH CONSOLE VERIFICATION TAG -->
@@ -21,59 +21,48 @@
     }
 
     body {
-      background: #11141a;
-      color: #ffffff;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
       text-align: center;
       padding: 24px 16px 40px;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
+      line-height: 1.7;
+    }
+
+    .wrapper {
+      max-width: 820px;
+      width: 100%;
     }
 
     h1 {
-      font-size: 28px;
+      font-size: 30px;
+      color: #f8fafc;
       margin-bottom: 8px;
-      font-weight: 700;
+      font-weight: 800;
+      letter-spacing: -0.5px;
     }
 
     p.subtitle {
       color: #94a3b8;
-      font-size: 15px;
+      font-size: 15.5px;
       margin-bottom: 24px;
-      max-width: 600px;
-    }
-
-    /* Ad Banner Placeholders */
-    .ad-banner {
-      width: 100%;
-      max-width: 728px;
-      min-height: 90px;
-      margin: 0 auto 24px auto;
-      background: #1a202c;
-      border: 1px dashed #334155;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #64748b;
-      font-size: 13px;
-      letter-spacing: 0.5px;
     }
 
     /* Color Grid */
     .palette-box {
       width: 100%;
-      max-width: 700px;
-      margin: 0 auto;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
+      gap: 12px;
+      margin-bottom: 30px;
     }
 
     .color-btn {
-      height: 95px;
+      height: 85px;
       border-radius: 10px;
       border: 2px solid #334155;
       cursor: pointer;
@@ -81,10 +70,11 @@
       align-items: center;
       justify-content: center;
       font-weight: 700;
-      font-size: 16px;
+      font-size: 15px;
       letter-spacing: 0.5px;
       transition: transform 0.15s ease, border-color 0.15s ease;
       user-select: none;
+      -webkit-tap-highlight-color: transparent;
     }
 
     .color-btn:hover {
@@ -99,54 +89,75 @@
     .c-white  { background-color: #ffffff; color: #000000; }
     .c-black  { background-color: #000000; color: #ffffff; border-color: #475569; }
 
-    /* Educational Guide Section */
-    .content-container {
-      width: 100%;
-      max-width: 700px;
-      margin: 36px auto 20px auto;
+    /* Editorial Content to resolve AdSense Policy */
+    .article-section {
       text-align: left;
-      background: #181d26;
-      border: 1px solid #283141;
-      padding: 24px;
-      border-radius: 10px;
+      background: #1e293b;
+      border: 1px solid #334155;
+      padding: 28px 20px;
+      border-radius: 12px;
       color: #cbd5e1;
-      line-height: 1.65;
       font-size: 14.5px;
+      margin-bottom: 30px;
     }
 
-    .content-container h2 {
+    .article-section h2 {
       color: #f8fafc;
-      font-size: 18px;
-      margin: 18px 0 8px 0;
+      font-size: 20px;
+      margin: 22px 0 10px 0;
+      font-weight: 700;
     }
 
-    .content-container h2:first-of-type {
+    .article-section h2:first-of-type {
       margin-top: 0;
     }
 
-    .content-container p, .content-container ul {
-      margin-bottom: 12px;
+    .article-section p {
+      margin-bottom: 14px;
     }
 
-    .content-container ul {
-      padding-left: 20px;
+    .article-section ul, .article-section ol {
+      padding-left: 22px;
+      margin-bottom: 16px;
     }
 
-    .content-container li {
+    .article-section li {
       margin-bottom: 6px;
+    }
+
+    .spec-table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      margin: 18px 0;
+    }
+
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      min-width: 500px;
+    }
+
+    .spec-table th, .spec-table td {
+      border: 1px solid #334155;
+      padding: 10px 12px;
+      text-align: left;
+    }
+
+    .spec-table th {
+      background: #0f172a;
+      color: #f8fafc;
     }
 
     /* Footer */
     footer {
-      width: 100%;
-      max-width: 700px;
-      margin-top: 30px;
       font-size: 13px;
       color: #64748b;
       display: flex;
       justify-content: center;
-      gap: 16px;
+      gap: 18px;
       flex-wrap: wrap;
+      padding-top: 8px;
     }
 
     footer a {
@@ -169,27 +180,52 @@
       height: 100vh;
       z-index: 99999;
       cursor: pointer;
+      touch-action: manipulation;
     }
 
     #tip-box {
       position: absolute;
-      top: 20px;
+      top: 18px;
       left: 50%;
       transform: translateX(-50%);
       background: rgba(0, 0, 0, 0.75);
       color: #ffffff;
-      padding: 8px 18px;
+      padding: 8px 16px;
       border-radius: 20px;
-      font-size: 13px;
+      font-size: 12.5px;
       pointer-events: none;
+      text-align: center;
+      width: max-content;
+      max-width: 85vw;
     }
 
-    /* Policy Modal */
+    /* Dedicated Mobile & Desktop Exit Button */
+    #exit-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: rgba(0, 0, 0, 0.85);
+      color: #ffffff;
+      border: 1.5px solid rgba(255, 255, 255, 0.4);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: pointer;
+      z-index: 100000;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    #exit-btn:active {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Modals */
     .modal-overlay {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(0, 0, 0, 0.75);
       z-index: 10000;
       align-items: center;
       justify-content: center;
@@ -197,17 +233,16 @@
     }
 
     .modal-box {
-      background: #1a202c;
+      background: #1e293b;
       border: 1px solid #334155;
-      border-radius: 10px;
-      max-width: 580px;
+      border-radius: 12px;
+      max-width: 600px;
       max-height: 80vh;
       overflow-y: auto;
       padding: 24px;
       text-align: left;
       font-size: 14px;
       color: #cbd5e1;
-      line-height: 1.6;
     }
 
     .modal-box h3 {
@@ -230,66 +265,100 @@
 </head>
 <body>
 
-  <!-- Top Ad Slot -->
-  <div class="ad-banner">
-    Google AdSense Display Unit (Top)
+  <div class="wrapper">
+    <h1>Screen Color & Dead Pixel Tester</h1>
+    <p class="subtitle">Full-screen display diagnostic suite for monitors, laptops, and mobile screens.</p>
+
+    <!-- Interactive Grid -->
+    <div class="palette-box">
+      <div class="color-btn c-red" onclick="showColor('#ff0000')">RED</div>
+      <div class="color-btn c-green" onclick="showColor('#00ff00')">GREEN</div>
+      <div class="color-btn c-blue" onclick="showColor('#0000ff')">BLUE</div>
+      <div class="color-btn c-yellow" onclick="showColor('#ffff00')">YELLOW</div>
+      <div class="color-btn c-white" onclick="showColor('#ffffff')">WHITE</div>
+      <div class="color-btn c-black" onclick="showColor('#000000')">BLACK</div>
+    </div>
+
+    <!-- Editorial Publisher Content -->
+    <article class="article-section">
+      <h2>Display Defect Diagnostics & Visual Inspection</h2>
+      <p>Modern flat panels—including IPS, VA, and OLED displays—are constructed from millions of individual picture elements (pixels). Each pixel comprises three primary sub-pixels: red, green, and blue (RGB). A malfunction in individual thin-film transistors (TFT) or organic emissive layers can lead to permanent or intermittent visual anomalies.</p>
+
+      <h2>Dead Pixels vs. Stuck Pixels vs. Hot Pixels</h2>
+      <div class="spec-table-wrapper">
+        <table class="spec-table">
+          <thead>
+            <tr>
+              <th>Defect Type</th>
+              <th>Visual Appearance</th>
+              <th>Underlying Cause</th>
+              <th>Fixability</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Dead Pixel</strong></td>
+              <td>Persistent black dot on white/colored backgrounds</td>
+              <td>Transistor unpowered or broken electrode path</td>
+              <td>Permanent hardware fault</td>
+            </tr>
+            <tr>
+              <td><strong>Stuck Pixel</strong></td>
+              <td>Fixed colored dot (red, green, blue, or yellow)</td>
+              <td>Liquid crystal locked in a single pass-through state</td>
+              <td>Often recoverable</td>
+            </tr>
+            <tr>
+              <td><strong>Hot Pixel</strong></td>
+              <td>Bright pure white dot on dark background</td>
+              <td>All three sub-pixels permanently saturated with current</td>
+              <td>Rarely recoverable</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>How to Inspect Your Display</h2>
+      <ol>
+        <li><strong>Clean Your Screen:</strong> Power off the device and wipe the surface with a lint-free microfiber cloth. Surface dust and skin oils often resemble dead sub-pixels.</li>
+        <li><strong>Primary Sub-Pixel Check:</strong> Select <strong>Red</strong>, <strong>Green</strong>, and <strong>Blue</strong> above to enter full-screen testing. Carefully scan the grid for any pixels that remain dark.</li>
+        <li><strong>Inspect Black Uniformity:</strong> Select the <strong>Black</strong> screen mode in a darkened room to evaluate edge-lit backlight bleed versus normal off-angle IPS glow.</li>
+        <li><strong>Navigating the Tester:</strong> Tap the screen or press the <strong>Arrow Keys</strong> to switch colors. Tap <strong>✕ Exit</strong> or press <strong>Esc</strong> to return to this guide.</li>
+      </ol>
+
+      <h2>Resolving Stuck Sub-Pixels</h2>
+      <p>While unpowered dead pixels cannot be repaired without replacing the panel, stuck sub-pixels can occasionally be revived via non-invasive procedures:</p>
+      <ul>
+        <li><strong>Rapid Color Cycling:</strong> High-speed color strobing can activate sluggish liquid crystal matrices and restore default orientation.</li>
+        <li><strong>Targeted Pressure Application:</strong> Turn off the panel and apply gentle, uniform pressure over the affected sub-pixel with a clean microfiber cloth while powering the display on. Avoid excessive force to protect the polarizing film.</li>
+      </ul>
+
+      <h2>Manufacturer Return Policies (ISO 9241-307)</h2>
+      <p>Most major display manufacturers categorize consumer screens under ISO 9241-307 Class II. Under this standard, displays are typically not considered defective for warranty claims unless they exhibit more than 2 dead pixels or 5 stuck sub-pixels per million pixels, making thorough inspection upon delivery essential.</p>
+    </article>
+
+    <footer>
+      <span>&copy; 2026 Screen Diagnostic Utility</span>
+      <a onclick="openModal('privacy-modal')">Privacy Policy</a>
+      <a onclick="openModal('about-modal')">About & Diagnostics</a>
+    </footer>
   </div>
-
-  <h1>Screen Color & Dead Pixel Tester</h1>
-  <p class="subtitle">Quickly inspect LCD, IPS, VA, and OLED screens for stuck pixels, dead sub-pixels, and backlight bleed.</p>
-
-  <div class="palette-box">
-    <div class="color-btn c-red" onclick="showColor('#ff0000')">RED</div>
-    <div class="color-btn c-green" onclick="showColor('#00ff00')">GREEN</div>
-    <div class="color-btn c-blue" onclick="showColor('#0000ff')">BLUE</div>
-    <div class="color-btn c-yellow" onclick="showColor('#ffff00')">YELLOW</div>
-    <div class="color-btn c-white" onclick="showColor('#ffffff')">WHITE</div>
-    <div class="color-btn c-black" onclick="showColor('#000000')">BLACK</div>
-  </div>
-
-  <!-- Educational Guide -->
-  <section class="content-container">
-    <h2>Dead Pixel vs. Stuck Pixel: What is the Difference?</h2>
-    <p>A <strong>dead pixel</strong> is a pixel where all sub-pixels remain permanently unpowered, appearing as a persistent black dot on bright backgrounds. A <strong>stuck pixel</strong> occurs when one or more sub-pixels (red, green, or blue) remain locked in an "on" state, showing a brightly colored dot on darker scenes.</p>
-
-    <h2>Recommended Testing Steps</h2>
-    <ul>
-      <li>Clean the display with a dry microfiber cloth before testing to eliminate dust particles.</li>
-      <li>Click any solid color above to enter true full-screen testing.</li>
-      <li>Use the <strong>Left and Right Arrow keys</strong> or click anywhere on the screen to switch between test colors.</li>
-      <li>Examine the display on pure white and solid primary colors to spot dead sub-pixels, and test pure black in a darkened room to assess backlight bleed and panel uniformity.</li>
-      <li>Press <strong>Esc</strong> at any time to return.</li>
-    </ul>
-
-    <h2>Can Stuck Pixels Be Fixed?</h2>
-    <p>While physically dead pixels are permanent hardware defects, stuck sub-pixels can sometimes be revived by cycling colors rapidly or applying gentle pressure around the affected spot with a microfiber cloth.</p>
-  </section>
-
-  <!-- Bottom Ad Slot -->
-  <div class="ad-banner">
-    Google AdSense Display Unit (Bottom)
-  </div>
-
-  <footer>
-    <span>&copy; 2026 Online Screen Tester</span>
-    <a onclick="openModal('privacy-modal')">Privacy Policy</a>
-    <a onclick="openModal('about-modal')">About & Contact</a>
-  </footer>
 
   <!-- Fullscreen Testing Element -->
-  <div id="fullscreen-layer" onclick="nextColor()">
-    <div id="tip-box">Click or use Arrow Keys to switch colors • Press Esc to exit</div>
+  <div id="fullscreen-layer" onclick="handleLayerClick(event)">
+    <button id="exit-btn" onclick="exitFullscreenMode(event)">✕ Exit</button>
+    <div id="tip-box">Tap screen to switch colors • Tap ✕ Exit to leave</div>
   </div>
 
   <!-- Privacy Policy Modal -->
   <div class="modal-overlay" id="privacy-modal">
     <div class="modal-box">
       <h3>Privacy Policy</h3>
-      <p>This website respects your privacy. We do not collect personal login credentials or private identity records.</p>
+      <p>This utility operates entirely client-side in your web browser. No personal identification records or private telemetry data are collected.</p>
       <br>
-      <p><strong>Third-Party Advertising:</strong> Third-party vendors, including Google, use cookies to serve ads based on prior visits to this website or other sites. Google's use of advertising cookies enables it and its partners to serve ads based on your visit to our site and/or other sites on the Internet.</p>
+      <p><strong>Third-Party Vendors and Cookies:</strong> Third-party vendors, including Google, use cookies to serve ads based on user visits to this website and other sites across the internet. Google's use of advertising cookies enables it and its partners to serve relevant ads based on browsing history.</p>
       <br>
-      <p>Users may opt out of personalized advertising by visiting Google's Ads Settings.</p>
+      <p>Users may opt out of personalized advertising by visiting Google Ads Settings.</p>
       <button onclick="closeModal('privacy-modal')">Close</button>
     </div>
   </div>
@@ -297,10 +366,10 @@
   <!-- About Modal -->
   <div class="modal-overlay" id="about-modal">
     <div class="modal-box">
-      <h3>About & Contact</h3>
-      <p>Online Screen Tester is a free web-based utility designed to help users diagnose display irregularities, stuck sub-pixels, and backlight uniformity issues on computer monitors, laptops, and mobile devices.</p>
+      <h3>About This Utility</h3>
+      <p>Screen Color & Dead Pixel Tester is an open diagnostic tool created to help hardware buyers, gamers, and professionals inspect display panel integrity and color uniformity.</p>
       <br>
-      <p>For questions or feedback, reach out via the GitHub repository project page.</p>
+      <p>Source repository maintained on GitHub Pages.</p>
       <button onclick="closeModal('about-modal')">Close</button>
     </div>
   </div>
@@ -309,6 +378,7 @@
     const colorList = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ffffff', '#000000'];
     let currentIndex = 0;
     const layer = document.getElementById('fullscreen-layer');
+    let lastTap = 0;
 
     function showColor(colorHex) {
       currentIndex = colorList.indexOf(colorHex);
@@ -316,10 +386,62 @@
       layer.style.backgroundColor = colorList[currentIndex];
       layer.style.display = 'block';
 
+      // Push history state so the phone's native hardware/swipe back button exits the test
+      window.history.pushState({ testMode: true }, "");
+
       const root = document.documentElement;
       if (root.requestFullscreen) {
         root.requestFullscreen().catch(() => {});
+      } else if (root.webkitRequestFullscreen) {
+        root.webkitRequestFullscreen().catch(() => {});
       }
+    }
+
+    function exitFullscreenMode(e) {
+      if (e) {
+        e.stopPropagation();
+        e.preventDefault();
+      }
+      layer.style.display = 'none';
+
+      // Revert history state if active
+      if (window.history.state && window.history.state.testMode) {
+        window.history.back();
+      }
+
+      if (document.fullscreenElement || document.webkitFullscreenElement) {
+        if (document.exitFullscreen) {
+          document.exitFullscreen().catch(() => {});
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen().catch(() => {});
+        }
+      }
+    }
+
+    // Handles hardware back button or swipe-to-back on mobile phones
+    window.addEventListener('popstate', () => {
+      layer.style.display = 'none';
+      if (document.fullscreenElement || document.webkitFullscreenElement) {
+        if (document.exitFullscreen) {
+          document.exitFullscreen().catch(() => {});
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen().catch(() => {});
+        }
+      }
+    });
+
+    function handleLayerClick(e) {
+      // Double tap to exit detection
+      const currentTime = new Date().getTime();
+      const tapLength = currentTime - lastTap;
+      if (tapLength < 350 && tapLength > 0) {
+        exitFullscreenMode(e);
+        return;
+      }
+      lastTap = currentTime;
+
+      // Single tap switches color
+      nextColor();
     }
 
     function nextColor() {
@@ -339,13 +461,13 @@
         } else if (e.key === 'ArrowLeft') {
           prevColor();
         } else if (e.key === 'Escape') {
-          layer.style.display = 'none';
+          exitFullscreenMode(e);
         }
       }
     });
 
     document.addEventListener('fullscreenchange', () => {
-      if (!document.fullscreenElement) {
+      if (!document.fullscreenElement && !document.webkitFullscreenElement) {
         layer.style.display = 'none';
       }
     });
