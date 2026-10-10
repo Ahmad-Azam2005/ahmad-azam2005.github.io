@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Screen Color & Dead Pixel Tester | Monitor Check Online</title>
-  <meta name="description" content="Free online screen color and dead pixel tester. Check monitors, laptops, and mobile screens for dead pixels, backlight bleed, and IPS glow in full screen.">
+  <title>DisplayCore - Complete Screen, Touch & Hardware Diagnostic Suite</title>
+  <meta name="description" content="Free online monitor, touchscreen, and hardware diagnostic suite. Test dead pixels, stuck pixel reviver flasher, backlight bleed, touch digitizer dead zones, GPU specs, and stereo audio.">
   <link rel="canonical" href="https://ahmad-azam2005.github.io/">
   <meta name="robots" content="index, follow">
 
@@ -16,8 +16,8 @@
        crossorigin="anonymous"></script>
 
   <!-- OPEN GRAPH META TAGS -->
-  <meta property="og:title" content="Screen Color & Dead Pixel Tester | Display Diagnostic Guide">
-  <meta property="og:description" content="Test your monitor, laptop, or phone screen for dead pixels and backlight bleed in full screen.">
+  <meta property="og:title" content="DisplayCore - Hardware & Display Diagnostic Suite">
+  <meta property="og:description" content="All-in-one browser hardware metrology: dead pixels, touch digitizers, stuck pixel reviver, GPU detection, and audio drivers.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ahmad-azam2005.github.io/">
 
@@ -26,16 +26,30 @@
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "Screen Color & Dead Pixel Tester",
+    "name": "DisplayCore Metrology Suite",
     "url": "https://ahmad-azam2005.github.io/",
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "All",
-    "browserRequirements": "Requires JavaScript",
-    "description": "Full-screen online monitor diagnostic utility to detect dead pixels, stuck sub-pixels, and backlight bleed on LCD, OLED, and IPS panels."
+    "browserRequirements": "Requires JavaScript and HTML5 Canvas support",
+    "description": "Comprehensive browser-based hardware metrology suite for monitor color uniformity, dead pixels, rapid stuck pixel flashing, touch digitizer health, display resolutions, and acoustic driver diagnostics."
   }
   </script>
 
   <style>
+    :root {
+      --bg-void: #0a0e17;
+      --bg-surface: #111827;
+      --bg-card: #1f2937;
+      --border-subtle: #374151;
+      --accent-blue: #3b82f6;
+      --accent-cyan: #06b6d4;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -43,164 +57,283 @@
     }
 
     body {
-      background: #0f172a;
-      color: #e2e8f0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      text-align: center;
-      padding: 24px 16px 48px;
-      min-height: 100vh;
+      background-color: var(--bg-void);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      padding-bottom: 60px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Top Navigation Bar */
+    header {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-subtle);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
       display: flex;
-      flex-direction: column;
+      justify-content: space-between;
       align-items: center;
-      line-height: 1.7;
+      padding: 14px 20px;
     }
 
-    .wrapper {
-      max-width: 800px;
-      width: 100%;
-    }
-
-    h1 {
-      font-size: 30px;
-      color: #f8fafc;
-      margin-bottom: 8px;
+    .logo {
+      font-size: 1.25rem;
       font-weight: 800;
-      letter-spacing: -0.5px;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
     }
 
-    p.subtitle {
-      color: #94a3b8;
-      font-size: 15.5px;
+    .logo-badge {
+      background: var(--accent-blue);
+      color: #fff;
+      font-size: 0.7rem;
+      padding: 2px 7px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    /* Sub-nav Tabs */
+    .tabs-bar {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 10px 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+      scrollbar-width: none;
+    }
+
+    .tabs-bar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tab-btn {
+      background: var(--bg-card);
+      color: var(--text-muted);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .tab-btn:hover {
+      color: var(--text-main);
+      border-color: var(--accent-blue);
+    }
+
+    .tab-btn.active {
+      background: var(--accent-blue);
+      color: #fff;
+      border-color: var(--accent-blue);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px 20px;
+    }
+
+    /* Tab Panes */
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.25s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Card Panels */
+    .panel-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 24px;
       margin-bottom: 24px;
     }
 
-    /* Color Grid */
-    .palette-box {
-      width: 100%;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-bottom: 30px;
+    .panel-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text-main);
     }
 
-    .color-btn {
-      height: 85px;
+    .panel-desc {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 20px;
+    }
+
+    /* Grid Layouts */
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+    }
+
+    .btn-test {
+      height: 80px;
       border-radius: 10px;
-      border: 2px solid #334155;
+      border: 2px solid var(--border-subtle);
       cursor: pointer;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       font-weight: 700;
-      font-size: 15px;
-      letter-spacing: 0.5px;
+      font-size: 0.9rem;
       transition: transform 0.15s ease, border-color 0.15s ease;
       user-select: none;
-      -webkit-tap-highlight-color: transparent;
     }
 
-    .color-btn:hover {
+    .btn-test:hover {
       transform: translateY(-2px);
-      border-color: #ffffff;
+      border-color: #fff;
     }
 
-    .c-red    { background-color: #ff0000; color: #ffffff; }
-    .c-green  { background-color: #00ff00; color: #000000; }
-    .c-blue   { background-color: #0000ff; color: #ffffff; }
-    .c-yellow { background-color: #ffff00; color: #000000; }
-    .c-white  { background-color: #ffffff; color: #000000; }
-    .c-black  { background-color: #000000; color: #ffffff; border-color: #475569; }
+    /* Specific Button Themes */
+    .bg-red { background: #ff0000; color: #fff; }
+    .bg-green { background: #00ff00; color: #000; }
+    .bg-blue { background: #0000ff; color: #fff; }
+    .bg-white { background: #ffffff; color: #000; }
+    .bg-black { background: #000000; color: #fff; border-color: #4b5563; }
+    .bg-cyan { background: #00ffff; color: #000; }
+    .bg-magenta { background: #ff00ff; color: #fff; }
+    .bg-yellow { background: #ffff00; color: #000; }
+    .bg-gray-dark { background: #18181b; color: #fff; }
 
-    /* Educational Section */
-    .content-container {
-      width: 100%;
+    /* Telemetry Info Cards */
+    .telemetry-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .telemetry-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 16px;
       text-align: left;
-      background: #1e293b;
-      border: 1px solid #334155;
-      padding: 28px 24px;
-      border-radius: 12px;
-      color: #cbd5e1;
-      line-height: 1.7;
-      font-size: 14.5px;
-      margin-bottom: 28px;
     }
 
-    .content-container h2 {
-      color: #f8fafc;
-      font-size: 20px;
-      margin: 22px 0 10px 0;
+    .telemetry-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
       font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
     }
 
-    .content-container h2:first-of-type {
-      margin-top: 0;
+    .telemetry-val {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--accent-cyan);
+      word-break: break-all;
     }
 
-    .content-container p {
-      margin-bottom: 12px;
-    }
-
-    .content-container ul, .content-container ol {
-      padding-left: 22px;
-      margin-bottom: 14px;
-    }
-
-    .content-container li {
-      margin-bottom: 6px;
-    }
-
-    .spec-table-wrapper {
+    /* Touchscreen Interactive Canvas */
+    .touch-canvas-box {
+      position: relative;
       width: 100%;
+      height: 380px;
+      background: #000;
+      border: 2px dashed var(--border-subtle);
+      border-radius: 10px;
+      overflow: hidden;
+      touch-action: none;
+    }
+
+    #touchCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* General Action Buttons */
+    .btn-action {
+      background: var(--accent-blue);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 20px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      transition: background 0.15s ease;
+    }
+
+    .btn-action:hover {
+      background: #2563eb;
+    }
+
+    .btn-secondary {
+      background: var(--bg-card);
+      color: var(--text-main);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .btn-secondary:hover {
+      background: #374151;
+    }
+
+    /* Defect Reference Table */
+    .spec-table-wrapper {
       overflow-x: auto;
-      margin: 18px 0;
+      margin: 16px 0;
     }
 
     .spec-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 13.5px;
-      min-width: 500px;
+      font-size: 0.88rem;
+      min-width: 550px;
     }
 
     .spec-table th, .spec-table td {
-      border: 1px solid #334155;
-      padding: 10px 12px;
+      border: 1px solid var(--border-subtle);
+      padding: 12px;
       text-align: left;
     }
 
     .spec-table th {
-      background: #0f172a;
-      color: #f8fafc;
+      background: var(--bg-card);
+      color: var(--text-main);
     }
 
-    /* Footer & Policies */
-    footer {
-      width: 100%;
-      font-size: 13px;
-      color: #64748b;
-      display: flex;
-      justify-content: center;
-      gap: 18px;
-      flex-wrap: wrap;
-      padding-top: 10px;
-    }
-
-    footer a {
-      color: #94a3b8;
-      text-decoration: underline;
-      cursor: pointer;
-    }
-
-    footer a:hover {
-      color: #f1f5f9;
-    }
-
-    /* Fullscreen Overlay */
+    /* Fullscreen Overlay Component */
     #fullscreen-layer {
       display: none;
       position: fixed;
-      top: 0;
-      left: 0;
+      inset: 0;
       width: 100vw;
       height: 100vh;
       z-index: 99999;
@@ -208,49 +341,69 @@
       touch-action: manipulation;
     }
 
-    #tip-box {
-      position: absolute;
-      top: 18px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0, 0, 0, 0.75);
-      color: #ffffff;
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-size: 12.5px;
-      pointer-events: none;
-      text-align: center;
-      width: max-content;
-      max-width: 85vw;
-    }
-
-    /* Floating Exit Button for Mobile & Desktop */
     #exit-btn {
       position: absolute;
-      top: 16px;
-      right: 16px;
+      top: 18px;
+      right: 18px;
       background: rgba(0, 0, 0, 0.85);
       color: #ffffff;
       border: 1.5px solid rgba(255, 255, 255, 0.4);
-      padding: 8px 16px;
+      padding: 8px 18px;
       border-radius: 20px;
       font-size: 13.5px;
       font-weight: 700;
       cursor: pointer;
       z-index: 100000;
-      -webkit-tap-highlight-color: transparent;
     }
 
-    #exit-btn:active {
-      background: rgba(255, 255, 255, 0.2);
+    #tip-banner {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 12.5px;
+      pointer-events: none;
+      text-align: center;
+      max-width: 90vw;
     }
 
-    /* Policy Modal */
+    /* Footer */
+    footer {
+      max-width: 1100px;
+      margin: 40px auto 0;
+      padding: 24px 20px 0;
+      border-top: 1px solid var(--border-subtle);
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--accent-blue);
+      text-decoration: none;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    /* Modal Windows */
     .modal-overlay {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.75);
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(4px);
       z-index: 10000;
       align-items: center;
       justify-content: center;
@@ -258,169 +411,355 @@
     }
 
     .modal-box {
-      background: #1e293b;
-      border: 1px solid #334155;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
       border-radius: 12px;
-      max-width: 580px;
-      max-height: 80vh;
+      max-width: 600px;
+      max-height: 85vh;
       overflow-y: auto;
-      padding: 24px;
+      padding: 26px;
       text-align: left;
-      font-size: 14px;
-      color: #cbd5e1;
-      line-height: 1.6;
+      font-size: 0.9rem;
+      color: var(--text-muted);
     }
 
     .modal-box h3 {
-      color: #f8fafc;
+      color: var(--text-main);
       margin-bottom: 12px;
-      font-size: 18px;
-    }
-
-    .modal-box button {
-      background: #2563eb;
-      color: #fff;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 6px;
-      font-weight: 600;
-      cursor: pointer;
-      margin-top: 16px;
+      font-size: 1.15rem;
     }
   </style>
 </head>
 <body>
 
-  <div class="wrapper">
-    <h1>Screen Color & Dead Pixel Tester</h1>
-    <p class="subtitle">Quickly inspect LCD, IPS, VA, and OLED screens for stuck pixels, dead sub-pixels, and backlight bleed.</p>
-
-    <!-- Color Palette Grid -->
-    <div class="palette-box">
-      <div class="color-btn c-red" onclick="showColor('#ff0000')">RED</div>
-      <div class="color-btn c-green" onclick="showColor('#00ff00')">GREEN</div>
-      <div class="color-btn c-blue" onclick="showColor('#0000ff')">BLUE</div>
-      <div class="color-btn c-yellow" onclick="showColor('#ffff00')">YELLOW</div>
-      <div class="color-btn c-white" onclick="showColor('#ffffff')">WHITE</div>
-      <div class="color-btn c-black" onclick="showColor('#000000')">BLACK</div>
+  <!-- Top Header Navigation -->
+  <header>
+    <div class="nav-container">
+      <a href="/" class="logo">
+        DisplayCore <span class="logo-badge">Metrology</span>
+      </a>
+      <div style="font-size: 0.82rem; color: var(--text-muted);">
+        All-In-One Hardware Diagnostics
+      </div>
     </div>
+    <div class="tabs-bar">
+      <button class="tab-btn active" data-tab="tab-screen">🖥️ Dead Pixel Tester</button>
+      <button class="tab-btn" data-tab="tab-flasher">⚡ Stuck Pixel Reviver</button>
+      <button class="tab-btn" data-tab="tab-patterns">📐 Linearity & Moiré</button>
+      <button class="tab-btn" data-tab="tab-touch">📱 Touch Digitizer Grid</button>
+      <button class="tab-btn" data-tab="tab-specs">🔍 Hardware & GPU Metrology</button>
+      <button class="tab-btn" data-tab="tab-audio">🔊 Acoustic Transducer</button>
+    </div>
+  </header>
 
-    <!-- Editorial Diagnostic Guide -->
-    <article class="content-container">
-      <h2>Understanding Display Defect Diagnostics</h2>
-      <p>Modern flat-panel displays—including In-Plane Switching (IPS), Vertical Alignment (VA), and Organic Light Emitting Diode (OLED) panels—contain millions of picture elements (pixels). Each pixel comprises red, green, and blue (RGB) sub-pixels. A failure in individual thin-film transistors (TFT) or liquid crystals produces distinct visible defects.</p>
+  <main class="container">
 
-      <h2>Dead Pixels vs. Stuck Pixels vs. Hot Pixels</h2>
-      <div class="spec-table-wrapper">
-        <table class="spec-table">
-          <thead>
-            <tr>
-              <th>Defect Type</th>
-              <th>Visual Appearance</th>
-              <th>Underlying Cause</th>
-              <th>Fixability</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Dead Pixel</strong></td>
-              <td>Permanent dark dot on light backgrounds</td>
-              <td>Transistor unpowered or broken electrode path</td>
-              <td>Permanent hardware fault</td>
-            </tr>
-            <tr>
-              <td><strong>Stuck Pixel</strong></td>
-              <td>Fixed colored dot (red, green, blue, yellow)</td>
-              <td>Liquid crystal locked in one position</td>
-              <td>Often recoverable</td>
-            </tr>
-            <tr>
-              <td><strong>Hot Pixel</strong></td>
-              <td>Bright white dot on dark backgrounds</td>
-              <td>All three sub-pixels continuously receiving power</td>
-              <td>Rarely recoverable</td>
-            </tr>
-          </tbody>
-        </table>
+    <!-- TAB 1: SCREEN COLOR & DEAD PIXEL TESTER -->
+    <section id="tab-screen" class="tab-content active">
+      <div class="panel-card">
+        <h1 class="panel-title">Screen Color & Dead Pixel Tester</h1>
+        <p class="panel-desc">Launch calibrated solid color fields in full screen to detect inactive (dead) sub-pixels, stuck liquid crystals, and edge backlight bleeding.</p>
+        
+        <div class="color-grid">
+          <div class="btn-test bg-red" onclick="launchColor('#ff0000')">RED<span>(Sub-Pixel)</span></div>
+          <div class="btn-test bg-green" onclick="launchColor('#00ff00')">GREEN<span>(Sub-Pixel)</span></div>
+          <div class="btn-test bg-blue" onclick="launchColor('#0000ff')">BLUE<span>(Sub-Pixel)</span></div>
+          <div class="btn-test bg-white" onclick="launchColor('#ffffff')">WHITE<span>(Dead Pixel)</span></div>
+          <div class="btn-test bg-black" onclick="launchColor('#000000')">BLACK<span>(Backlight)</span></div>
+          <div class="btn-test bg-gray-dark" onclick="launchColor('#141416')">DARK GRAY<span>(Uniformity)</span></div>
+          <div class="btn-test bg-cyan" onclick="launchColor('#00ffff')">CYAN<span>(RG Balance)</span></div>
+          <div class="btn-test bg-magenta" onclick="launchColor('#ff00ff')">MAGENTA<span>(RB Balance)</span></div>
+          <div class="btn-test bg-yellow" onclick="launchColor('#ffff00')">YELLOW<span>(GB Balance)</span></div>
+        </div>
       </div>
 
-      <h2>Recommended Testing Procedure</h2>
-      <ol>
-        <li><strong>Clean Your Display:</strong> Turn off the display and gently clean the glass with a microfiber cloth. External dust specks and dried smudges often resemble dead pixels.</li>
-        <li><strong>Inspect Solid Colors:</strong> Tap or click <strong>Red</strong>, <strong>Green</strong>, and <strong>Blue</strong> above to enter full-screen testing. Slowly scan the panel for dark specks indicating a non-functioning sub-pixel.</li>
-        <li><strong>Examine Black Uniformity:</strong> Select the <strong>Black</strong> screen mode in a darkened room to distinguish edge-lit backlight bleed from off-angle IPS glow.</li>
-        <li><strong>Navigating During Test:</strong> Tap the screen or press the <strong>Arrow Keys</strong> to cycle colors. Tap <strong>✕ Exit</strong> or press <strong>Esc</strong> to return here.</li>
-      </ol>
+      <!-- Diagnostic Reference Section for AdSense & SEO -->
+      <article class="panel-card">
+        <h2 style="font-size:1.15rem; color:#fff; margin-bottom:12px;">Display Defect Metrology (ISO 9241-307)</h2>
+        <p class="panel-desc">Modern liquid crystal displays (IPS, VA, TN) and Organic Light Emitting Diode (OLED) panels comprise millions of individual sub-pixels. Mechanical or electrical flaws manifest in distinct failure modes:</p>
+        
+        <div class="spec-table-wrapper">
+          <table class="spec-table">
+            <thead>
+              <tr>
+                <th>Defect Category</th>
+                <th>Visual Presentation</th>
+                <th>Physical Mechanism</th>
+                <th>ISO 9241 Class II Policy</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Dead Pixel</strong></td>
+                <td>Permanent dark speck across light fields</td>
+                <td>Thin-film transistor (TFT) unpowered or open-circuit</td>
+                <td>Up to 2 per million tolerated</td>
+              </tr>
+              <tr>
+                <td><strong>Stuck Pixel</strong></td>
+                <td>Continuous illuminated color (Red, Green, Blue)</td>
+                <td>Liquid crystal physically locked in state</td>
+                <td>Up to 5 per million tolerated</td>
+              </tr>
+              <tr>
+                <td><strong>Backlight Bleed</strong></td>
+                <td>Cloudy white/amber glow along display edges</td>
+                <td>Mechanical frame pressure pinching panel layers</td>
+                <td>Evaluated via darkroom uniformity test</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+    </section>
 
-      <h2>Methods for Fixing Stuck Pixels</h2>
-      <p>Unlike physically dead pixels, stuck sub-pixels can occasionally be revived via non-invasive procedures:</p>
-      <ul>
-        <li><strong>Rapid Color Cycling:</strong> Fast alternating screen flashes can stimulate sluggish liquid crystals back into proper alignment.</li>
-        <li><strong>Microfiber Pressure Technique:</strong> Power off the screen and gently apply light pressure to the stuck pixel using a folded microfiber cloth while turning power back on. Avoid excess pressure to prevent polarizing layer damage.</li>
-      </ul>
+    <!-- TAB 2: STUCK PIXEL REVIVER (FLASHER) -->
+    <section id="tab-flasher" class="tab-content">
+      <div class="panel-card">
+        <h2 class="panel-title">Stuck Pixel Reviver & Rapid Flasher</h2>
+        <p class="panel-desc">High-frequency sub-pixel exercise utility. Rapidly forces liquid crystals to switch between primary RGB states to stimulate sluggish or stuck sub-pixels.</p>
 
-      <h2>Manufacturer Return Thresholds (ISO 9241-307)</h2>
-      <p>Most commercial consumer displays belong to ISO 9241-307 Class II. Under this standard, manufacturers typically require more than 2 completely dead pixels or 5 stuck sub-pixels per million before approving warranty replacement, making immediate inspection upon delivery critical.</p>
-    </article>
+        <div style="display:flex; gap:14px; flex-wrap:wrap; margin-bottom:20px; align-items:center;">
+          <button id="btnStartFlasher" class="btn-action">
+            ⚡ Launch Fullscreen Flasher
+          </button>
+          <span style="font-size:0.85rem; color:var(--text-muted);">
+            ⚠️ Photosensitive warning: Contains rapid screen flashes.
+          </span>
+        </div>
 
-    <footer>
-      <span>&copy; 2026 Screen Diagnostic Utility</span>
-      <a onclick="openModal('privacy-modal')">Privacy Policy</a>
-      <a onclick="openModal('about-modal')">About & Contact</a>
-    </footer>
-  </div>
+        <div style="background:var(--bg-card); padding:16px; border-radius:8px; font-size:0.88rem; color:var(--text-muted);">
+          <strong>Recommended Procedure:</strong> Run the flasher for 15 to 30 minutes. If the sub-pixel remains stuck, power down the screen and apply gentle pressure using a clean microfiber cloth around the coordinate while re-powering.
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: LINEARITY, MOIRÉ & CONTRAST -->
+    <section id="tab-patterns" class="tab-content">
+      <div class="panel-card">
+        <h2 class="panel-title">Sharpness, Contrast & Moiré Linearity</h2>
+        <p class="panel-desc">Inspect digital scaler distortion, gamma stepping, and display sharpness calibration using mathematical pixel patterns.</p>
+        
+        <div class="color-grid">
+          <div class="btn-test bg-black" style="border-color:#fff;" onclick="launchPattern('moire')">
+            MOIRÉ GRID<span>(1px Alternating)</span>
+          </div>
+          <div class="btn-test bg-black" style="border-color:#fff;" onclick="launchPattern('gamma')">
+            GAMMA WEDGE<span>(16-Step Grayscale)</span>
+          </div>
+          <div class="btn-test bg-black" style="border-color:#fff;" onclick="launchPattern('gradient')">
+            RGB GRADIENT<span>(Banding Check)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: TOUCHSCREEN & DIGITIZER GRID -->
+    <section id="tab-touch" class="tab-content">
+      <div class="panel-card">
+        <h2 class="panel-title">Touchscreen Digitizer Dead-Zone & Multi-Touch Tester</h2>
+        <p class="panel-desc">Test smartphone, tablet, or touch-laptop screens. Drag your fingers across the canvas: blocks turn green when registered. Gaps indicate dead digitizer ribbons.</p>
+
+        <div style="display:flex; justify-content:space-between; margin-bottom:12px; align-items:center;">
+          <span id="touchPointsReadout" style="font-weight:700; color:var(--accent-cyan); font-size:0.9rem;">
+            Active Touch Points: 0
+          </span>
+          <button id="btnClearTouch" class="btn-action btn-secondary" style="padding:6px 14px; font-size:0.8rem;">
+            Clear Grid
+          </button>
+        </div>
+
+        <div class="touch-canvas-box">
+          <canvas id="touchCanvas"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: HARDWARE & GPU METROLOGY -->
+    <section id="tab-specs" class="tab-content">
+      <div class="panel-card">
+        <h2 class="panel-title">Hardware, GPU & Display Metrology</h2>
+        <p class="panel-desc">Real-time parameters extracted directly from your browser's Graphics and Display API pipelines.</p>
+
+        <div class="telemetry-grid">
+          <div class="telemetry-box">
+            <div class="telemetry-label">Physical Display Resolution</div>
+            <div class="telemetry-val" id="specResolution">-- x --</div>
+          </div>
+          <div class="telemetry-box">
+            <div class="telemetry-label">Device Pixel Ratio (DPR)</div>
+            <div class="telemetry-val" id="specDPR">--</div>
+          </div>
+          <div class="telemetry-box">
+            <div class="telemetry-label">Color Depth & Gamut</div>
+            <div class="telemetry-val" id="specColorGamut">--</div>
+          </div>
+          <div class="telemetry-box">
+            <div class="telemetry-label">Measured Refresh Rate</div>
+            <div class="telemetry-val" id="specRefreshRate">Benchmarking...</div>
+          </div>
+          <div class="telemetry-box" style="grid-column: 1 / -1;">
+            <div class="telemetry-label">GPU Render Pipeline (WebGL)</div>
+            <div class="telemetry-val" id="specGPU" style="font-size:1.05rem;">Detecting...</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 6: ACOUSTIC TRANSDUCER METROLOGY -->
+    <section id="tab-audio" class="tab-content">
+      <div class="panel-card">
+        <h2 class="panel-title">Acoustic Driver & Speaker Diagnostics</h2>
+        <p class="panel-desc">Synthesized pure sine wave calibration sweeps to expose blown voice coils, chassis resonance, and discrete stereo separation.</p>
+
+        <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:20px;">
+          <button id="btnAudioLeft" class="btn-action btn-secondary">🔊 Test Left Channel</button>
+          <button id="btnAudioRight" class="btn-action btn-secondary">🔊 Test Right Channel</button>
+          <button id="btnAudioSweep" class="btn-action">📈 Run 20Hz - 20kHz Sweep</button>
+          <button id="btnAudioStop" class="btn-action" style="background:var(--accent-rose);">⏹️ Stop Audio</button>
+        </div>
+
+        <div style="background:var(--bg-card); padding:16px; border-radius:8px; font-size:0.85rem; color:var(--text-muted);" id="audioStatus">
+          Audio Engine: Standby (Click a test to initialize Web Audio context)
+        </div>
+      </div>
+    </section>
+
+  </main>
 
   <!-- Fullscreen Testing Element -->
-  <div id="fullscreen-layer" onclick="handleLayerClick(event)">
+  <div id="fullscreen-layer">
     <button id="exit-btn" onclick="exitFullscreenMode(event)">✕ Exit</button>
-    <div id="tip-box">Tap screen to switch colors • Tap ✕ Exit to leave</div>
+    <div id="tip-banner">Tap anywhere to cycle colors • Press Esc or tap ✕ Exit to leave</div>
   </div>
 
+  <!-- Footer -->
+  <footer>
+    <div class="footer-links">
+      <a onclick="openModal('modal-about')">About DisplayCore</a>
+      <a onclick="openModal('modal-privacy')">Privacy Policy</a>
+      <a onclick="openModal('modal-terms')">Terms of Service</a>
+      <a onclick="openModal('modal-contact')">Contact & GitHub</a>
+    </div>
+    <div>&copy; 2026 DisplayCore Metrology Suite. Open web hardware diagnostic engine.</div>
+  </footer>
+
   <!-- Privacy Policy Modal -->
-  <div class="modal-overlay" id="privacy-modal">
+  <div class="modal-overlay" id="modal-privacy">
     <div class="modal-box">
       <h3>Privacy Policy</h3>
-      <p>This website respects your privacy. We do not collect personal login credentials or private identity records.</p>
+      <p>DisplayCore operates 100% on client-side browser APIs. No audio streams, touch gestures, or device identifiers are harvested, stored, or transmitted to any remote servers.</p>
       <br>
-      <p><strong>Third-Party Advertising:</strong> Third-party vendors, including Google, use cookies to serve ads based on prior visits to this website or other sites. Google's use of advertising cookies enables it and its partners to serve ads based on your visit to our site and/or other sites on the Internet.</p>
-      <br>
-      <p>Users may opt out of personalized advertising by visiting Google's Ads Settings.</p>
-      <button onclick="closeModal('privacy-modal')">Close</button>
+      <p><strong>Third-Party Advertising:</strong> Third-party vendors, including Google, use cookies to serve ads based on prior visits. Users may opt out of personalized advertising by visiting Google Ads Settings.</p>
+      <button class="btn-action" style="margin-top:16px;" onclick="closeModal('modal-privacy')">Close</button>
     </div>
   </div>
 
   <!-- About Modal -->
-  <div class="modal-overlay" id="about-modal">
+  <div class="modal-overlay" id="modal-about">
     <div class="modal-box">
-      <h3>About & Contact</h3>
-      <p>Online Screen Tester is a free web-based utility designed to help users diagnose display irregularities, stuck sub-pixels, and backlight uniformity issues on computer monitors, laptops, and mobile devices.</p>
-      <br>
-      <p>For questions or feedback, reach out via the GitHub repository project page.</p>
-      <button onclick="closeModal('about-modal')">Close</button>
+      <h3>About DisplayCore</h3>
+      <p>DisplayCore is an open web metrology utility engineered to verify display panel health, digitizer responsiveness, and acoustic transducer performance for desktop monitors, laptops, and mobile phones.</p>
+      <button class="btn-action" style="margin-top:16px;" onclick="closeModal('modal-about')">Close</button>
+    </div>
+  </div>
+
+  <!-- Terms Modal -->
+  <div class="modal-overlay" id="modal-terms">
+    <div class="modal-box">
+      <h3>Terms of Service</h3>
+      <p>This software is provided for hardware evaluation. Rapid flashing modes should be used with discretion by photosensitive individuals. Audio sweeps should be monitored at safe volume levels.</p>
+      <button class="btn-action" style="margin-top:16px;" onclick="closeModal('modal-terms')">Close</button>
+    </div>
+  </div>
+
+  <!-- Contact Modal -->
+  <div class="modal-overlay" id="modal-contact">
+    <div class="modal-box">
+      <h3>Contact & Open Source</h3>
+      <p>Hosted on GitHub Pages. Contributions, bug tickets, and feature requests can be submitted directly via the root GitHub repository.</p>
+      <button class="btn-action" style="margin-top:16px;" onclick="closeModal('modal-contact')">Close</button>
     </div>
   </div>
 
   <script>
-    const colorList = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ffffff', '#000000'];
-    let currentIndex = 0;
-    const layer = document.getElementById('fullscreen-layer');
+    /* ==========================================================================
+       TAB SWITCHING ENGINE
+       ========================================================================== */
+    const tabs = document.querySelectorAll(".tab-btn");
+    const tabPanes = document.querySelectorAll(".tab-content");
+
+    tabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        tabs.forEach(t => t.classList.remove("active"));
+        tabPanes.forEach(p => p.classList.remove("active"));
+
+        tab.classList.add("active");
+        const targetId = tab.getAttribute("data-tab");
+        const targetPane = document.getElementById(targetId);
+        if (targetPane) targetPane.classList.add("active");
+
+        if (targetId === "tab-touch") initTouchGrid();
+      });
+    });
+
+    /* ==========================================================================
+       FULLSCREEN COLOR & PATTERN RUNNER
+       ========================================================================== */
+    const colorList = ['#ff0000', '#00ff00', '#0000ff', '#ffffff', '#000000', '#141416', '#00ffff', '#ff00ff', '#ffff00'];
+    let currentColorIndex = 0;
+    let flasherInterval = null;
+    const fullscreenLayer = document.getElementById("fullscreen-layer");
     let lastTap = 0;
 
-    function showColor(colorHex) {
-      currentIndex = colorList.indexOf(colorHex);
-      if (currentIndex === -1) currentIndex = 0;
-      layer.style.backgroundColor = colorList[currentIndex];
-      layer.style.display = 'block';
+    function launchColor(hex) {
+      clearInterval(flasherInterval);
+      fullscreenLayer.innerHTML = `
+        <button id="exit-btn" onclick="exitFullscreenMode(event)">✕ Exit</button>
+        <div id="tip-banner">Tap anywhere to cycle colors • Tap ✕ Exit to leave</div>
+      `;
+      currentColorIndex = colorList.indexOf(hex);
+      if (currentColorIndex === -1) currentColorIndex = 0;
+      fullscreenLayer.style.background = colorList[currentColorIndex];
+      enterFullscreen();
+    }
 
-      // Push history state so mobile back gestures close the test cleanly
-      window.history.pushState({ testMode: true }, "");
-
-      const root = document.documentElement;
-      if (root.requestFullscreen) {
-        root.requestFullscreen().catch(() => {});
-      } else if (root.webkitRequestFullscreen) {
-        root.webkitRequestFullscreen().catch(() => {});
+    function launchPattern(type) {
+      clearInterval(flasherInterval);
+      fullscreenLayer.innerHTML = `
+        <button id="exit-btn" onclick="exitFullscreenMode(event)">✕ Exit</button>
+        <div id="tip-banner">Pattern Mode: ${type.toUpperCase()} • Tap ✕ Exit to leave</div>
+      `;
+      if (type === 'moire') {
+        fullscreenLayer.style.background = 'repeating-linear-gradient(0deg, #000, #000 1px, #fff 1px, #fff 2px)';
+      } else if (type === 'gamma') {
+        fullscreenLayer.style.background = 'linear-gradient(to right, #000 0%, #111 6.25%, #222 12.5%, #333 18.75%, #444 25%, #555 31.25%, #666 37.5%, #777 43.75%, #888 50%, #999 56.25%, #aaa 62.5%, #bbb 68.75%, #ccc 75%, #ddd 81.25%, #eee 87.5%, #fff 100%)';
+      } else if (type === 'gradient') {
+        fullscreenLayer.style.background = 'linear-gradient(to right, #000, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #fff)';
       }
+      enterFullscreen();
+    }
+
+    document.getElementById("btnStartFlasher").addEventListener("click", () => {
+      enterFullscreen();
+      fullscreenLayer.innerHTML = `
+        <button id="exit-btn" onclick="exitFullscreenMode(event)">✕ Exit</button>
+        <div id="tip-banner">Stuck Pixel Flasher Active • Tap ✕ Exit to stop</div>
+      `;
+      const flashColors = ['#ff0000', '#00ff00', '#0000ff', '#ffffff', '#000000'];
+      let idx = 0;
+      flasherInterval = setInterval(() => {
+        fullscreenLayer.style.background = flashColors[idx];
+        idx = (idx + 1) % flashColors.length;
+      }, 45); // ~22Hz alternating flash cycle
+    });
+
+    function enterFullscreen() {
+      fullscreenLayer.style.display = "block";
+      window.history.pushState({ fullTest: true }, "");
+      const root = document.documentElement;
+      if (root.requestFullscreen) root.requestFullscreen().catch(() => {});
+      else if (root.webkitRequestFullscreen) root.webkitRequestFullscreen().catch(() => {});
     }
 
     function exitFullscreenMode(e) {
@@ -428,82 +767,263 @@
         e.stopPropagation();
         e.preventDefault();
       }
-      layer.style.display = 'none';
-
-      if (window.history.state && window.history.state.testMode) {
-        window.history.back();
-      }
+      clearInterval(flasherInterval);
+      fullscreenLayer.style.display = "none";
+      if (window.history.state && window.history.state.fullTest) window.history.back();
 
       if (document.fullscreenElement || document.webkitFullscreenElement) {
-        if (document.exitFullscreen) {
-          document.exitFullscreen().catch(() => {});
-        } else if (document.webkitExitFullscreen) {
-          document.webkitExitFullscreen().catch(() => {});
-        }
+        if (document.exitFullscreen) document.exitFullscreen().catch(() => {});
+        else if (document.webkitExitFullscreen) document.webkitExitFullscreen().catch(() => {});
       }
     }
 
-    // Handles hardware back button or swipe-to-back on mobile phones
-    window.addEventListener('popstate', () => {
-      layer.style.display = 'none';
-      if (document.fullscreenElement || document.webkitFullscreenElement) {
-        if (document.exitFullscreen) {
-          document.exitFullscreen().catch(() => {});
-        } else if (document.webkitExitFullscreen) {
-          document.webkitExitFullscreen().catch(() => {});
-        }
-      }
+    window.addEventListener("popstate", () => {
+      clearInterval(flasherInterval);
+      fullscreenLayer.style.display = "none";
     });
 
-    function handleLayerClick(e) {
-      // Double tap to exit detection
-      const currentTime = new Date().getTime();
-      const tapLength = currentTime - lastTap;
-      if (tapLength < 350 && tapLength > 0) {
+    fullscreenLayer.addEventListener("click", (e) => {
+      if (e.target.id === "exit-btn") return;
+      if (flasherInterval) return; // Don't cycle manually if flasher is running
+
+      const now = new Date().getTime();
+      if (now - lastTap < 350 && now - lastTap > 0) {
         exitFullscreenMode(e);
         return;
       }
-      lastTap = currentTime;
+      lastTap = now;
 
-      // Single tap/click advances to next color
-      nextColor();
-    }
+      // Cycle next color
+      currentColorIndex = (currentColorIndex + 1) % colorList.length;
+      fullscreenLayer.style.background = colorList[currentColorIndex];
+    });
 
-    function nextColor() {
-      currentIndex = (currentIndex + 1) % colorList.length;
-      layer.style.backgroundColor = colorList[currentIndex];
-    }
-
-    function prevColor() {
-      currentIndex = (currentIndex - 1 + colorList.length) % colorList.length;
-      layer.style.backgroundColor = colorList[currentIndex];
-    }
-
-    window.addEventListener('keydown', (e) => {
-      if (layer.style.display === 'block') {
-        if (e.key === 'ArrowRight' || e.key === ' ') {
-          nextColor();
-        } else if (e.key === 'ArrowLeft') {
-          prevColor();
-        } else if (e.key === 'Escape') {
-          exitFullscreenMode(e);
+    window.addEventListener("keydown", (e) => {
+      if (fullscreenLayer.style.display === "block") {
+        if (e.key === "Escape") exitFullscreenMode(e);
+        if (!flasherInterval && (e.key === "ArrowRight" || e.key === " ")) {
+          currentColorIndex = (currentColorIndex + 1) % colorList.length;
+          fullscreenLayer.style.background = colorList[currentColorIndex];
         }
       }
     });
 
-    document.addEventListener('fullscreenchange', () => {
-      if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-        layer.style.display = 'none';
+    /* ==========================================================================
+       TOUCHSCREEN DIGITIZER ENGINE
+       ========================================================================== */
+    const touchCanvas = document.getElementById("touchCanvas");
+    const tCtx = touchCanvas.getContext("2d");
+    const touchPointsReadout = document.getElementById("touchPointsReadout");
+    let gridCols = 15;
+    let gridRows = 10;
+    let gridState = [];
+
+    function initTouchGrid() {
+      touchCanvas.width = touchCanvas.parentElement.clientWidth;
+      touchCanvas.height = touchCanvas.parentElement.clientHeight;
+      gridState = Array(gridRows).fill(null).map(() => Array(gridCols).fill(false));
+      drawTouchGrid();
+    }
+
+    function drawTouchGrid() {
+      const w = touchCanvas.width / gridCols;
+      const h = touchCanvas.height / gridRows;
+
+      tCtx.fillStyle = "#0a0a0c";
+      tCtx.fillRect(0, 0, touchCanvas.width, touchCanvas.height);
+
+      for (let r = 0; r < gridRows; r++) {
+        for (let c = 0; c < gridCols; c++) {
+          tCtx.fillStyle = gridState[r][c] ? "#10b981" : "#181f2c";
+          tCtx.fillRect(c * w + 1, r * h + 1, w - 2, h - 2);
+        }
+      }
+    }
+
+    function registerTouch(x, y) {
+      const rect = touchCanvas.getBoundingClientRect();
+      const posX = x - rect.left;
+      const posY = y - rect.top;
+      const c = Math.floor(posX / (touchCanvas.width / gridCols));
+      const r = Math.floor(posY / (touchCanvas.height / gridRows));
+
+      if (r >= 0 && r < gridRows && c >= 0 && c < gridCols) {
+        gridState[r][c] = true;
+      }
+    }
+
+    touchCanvas.addEventListener("pointermove", (e) => {
+      if (e.buttons > 0 || e.pointerType === "touch") {
+        registerTouch(e.clientX, e.clientY);
+        drawTouchGrid();
       }
     });
 
-    function openModal(id) {
-      document.getElementById(id).style.display = 'flex';
+    touchCanvas.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+      touchPointsReadout.textContent = `Active Touch Points: ${e.touches.length}`;
+      for (let i = 0; i < e.touches.length; i++) {
+        registerTouch(e.touches[i].clientX, e.touches[i].clientY);
+      }
+      drawTouchGrid();
+    }, { passive: false });
+
+    touchCanvas.addEventListener("touchmove", (e) => {
+      e.preventDefault();
+      for (let i = 0; i < e.touches.length; i++) {
+        registerTouch(e.touches[i].clientX, e.touches[i].clientY);
+      }
+      drawTouchGrid();
+    }, { passive: false });
+
+    touchCanvas.addEventListener("touchend", (e) => {
+      touchPointsReadout.textContent = `Active Touch Points: ${e.touches.length}`;
+    });
+
+    document.getElementById("btnClearTouch").addEventListener("click", () => {
+      gridState = Array(gridRows).fill(null).map(() => Array(gridCols).fill(false));
+      drawTouchGrid();
+    });
+
+    /* ==========================================================================
+       HARDWARE & GPU METROLOGY INSPECTOR
+       ========================================================================== */
+    function detectHardwareSpecs() {
+      // 1. Resolution & Pixel Ratio
+      const dpr = window.devicePixelRatio || 1;
+      const physicalW = Math.round(window.screen.width * dpr);
+      const physicalH = Math.round(window.screen.height * dpr);
+      document.getElementById("specResolution").textContent = `${physicalW} x ${physicalH} px`;
+      document.getElementById("specDPR").textContent = `${dpr.toFixed(2)}x (${window.screen.width}x${window.screen.height} CSS)`;
+
+      // 2. Color Depth & Gamut
+      let gamut = "sRGB (Standard)";
+      if (window.matchMedia("(color-gamut: p3)").matches) gamut = "Display P3 (Wide Gamut)";
+      if (window.matchMedia("(color-gamut: rec2020)").matches) gamut = "Rec. 2020 (Ultra HDR)";
+      document.getElementById("specColorGamut").textContent = `${window.screen.colorDepth}-Bit | ${gamut}`;
+
+      // 3. WebGL GPU String
+      try {
+        const glCanvas = document.createElement("canvas");
+        const gl = glCanvas.getContext("webgl") || glCanvas.getContext("experimental-webgl");
+        if (gl) {
+          const debugInfo = gl.getExtension("WEBGL_debug_renderer_info");
+          if (debugInfo) {
+            const renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
+            document.getElementById("specGPU").textContent = renderer;
+          } else {
+            document.getElementById("specGPU").textContent = "Supported (Generic WebGL Driver)";
+          }
+        }
+      } catch (err) {
+        document.getElementById("specGPU").textContent = "Hardware Acceleration Disabled";
+      }
+
+      // 4. Measured Refresh Rate Benchmark
+      let frameCount = 0;
+      let startTime = performance.now();
+      function measureFrames(now) {
+        frameCount++;
+        if (now - startTime >= 1000) {
+          const fps = Math.round((frameCount * 1000) / (now - startTime));
+          document.getElementById("specRefreshRate").textContent = `${fps} Hz`;
+        } else {
+          requestAnimationFrame(measureFrames);
+        }
+      }
+      requestAnimationFrame(measureFrames);
+    }
+    detectHardwareSpecs();
+
+    /* ==========================================================================
+       ACOUSTIC TRANSDUCER AUDIO ENGINE
+       ========================================================================== */
+    let audioCtx = null;
+    let activeNodes = [];
+    const audioStatusEl = document.getElementById("audioStatus");
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === "suspended") audioCtx.resume();
+      return audioCtx;
     }
 
-    function closeModal(id) {
-      document.getElementById(id).style.display = 'none';
+    function stopAllAudio() {
+      activeNodes.forEach(n => {
+        try { n.stop(); n.disconnect(); } catch (e) {}
+      });
+      activeNodes = [];
+      audioStatusEl.textContent = "Audio Engine: Stopped / Standby";
     }
+
+    document.getElementById("btnAudioStop").addEventListener("click", stopAllAudio);
+
+    document.getElementById("btnAudioLeft").addEventListener("click", () => {
+      stopAllAudio();
+      const ctx = getAudioContext();
+      const osc = ctx.createOscillator();
+      const pan = ctx.createStereoPanner ? ctx.createStereoPanner() : null;
+      osc.frequency.setValueAtTime(440, ctx.currentTime);
+
+      if (pan) {
+        pan.pan.setValueAtTime(-1, ctx.currentTime);
+        osc.connect(pan);
+        pan.connect(ctx.destination);
+      } else {
+        osc.connect(ctx.destination);
+      }
+      osc.start();
+      activeNodes.push(osc);
+      audioStatusEl.textContent = "Playing: Isolated 440 Hz on LEFT channel only";
+    });
+
+    document.getElementById("btnAudioRight").addEventListener("click", () => {
+      stopAllAudio();
+      const ctx = getAudioContext();
+      const osc = ctx.createOscillator();
+      const pan = ctx.createStereoPanner ? ctx.createStereoPanner() : null;
+      osc.frequency.setValueAtTime(440, ctx.currentTime);
+
+      if (pan) {
+        pan.pan.setValueAtTime(1, ctx.currentTime);
+        osc.connect(pan);
+        pan.connect(ctx.destination);
+      } else {
+        osc.connect(ctx.destination);
+      }
+      osc.start();
+      activeNodes.push(osc);
+      audioStatusEl.textContent = "Playing: Isolated 440 Hz on RIGHT channel only";
+    });
+
+    document.getElementById("btnAudioSweep").addEventListener("click", () => {
+      stopAllAudio();
+      const ctx = getAudioContext();
+      const osc = ctx.createOscillator();
+      const now = ctx.currentTime;
+      osc.frequency.setValueAtTime(20, now);
+      osc.frequency.exponentialRampToValueAtTime(20000, now + 5);
+      osc.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 5);
+      activeNodes.push(osc);
+      audioStatusEl.textContent = "Running: 20 Hz to 20,000 Hz Logarithmic Sweep (5 seconds)";
+    });
+
+    /* ==========================================================================
+       MODAL CONTROLLERS
+       ========================================================================== */
+    function openModal(id) {
+      document.getElementById(id).style.display = "flex";
+    }
+    function closeModal(id) {
+      document.getElementById(id).style.display = "none";
+    }
+    window.addEventListener("click", (e) => {
+      if (e.target.classList.contains("modal-overlay")) e.target.style.display = "none";
+    });
   </script>
 </body>
 </html>
