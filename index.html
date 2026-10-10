@@ -21,17 +21,66 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ahmad-azam2005.github.io/">
 
-  <!-- SCHEMA.ORG STRUCTURED DATA -->
+  <!-- SCHEMA.ORG DUAL STRUCTURED DATA: WEBAPPLICATION & FAQPAGE -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "OmniHardware Lab",
-    "url": "https://ahmad-azam2005.github.io/",
-    "applicationCategory": "UtilitiesApplication",
-    "operatingSystem": "All",
-    "browserRequirements": "Requires JavaScript, Web Audio API, and MediaDevices support",
-    "description": "Multi-device hardware diagnostic suite engineered for monitors, laptops, smartphones, and TVs. Features display calibration, pixel tests, mic analyzers, webcam inspectors, and acoustic frequency sweeps."
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "OmniHardware Lab",
+        "url": "https://ahmad-azam2005.github.io/",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "All",
+        "browserRequirements": "Requires JavaScript, Web Audio API, and MediaDevices support",
+        "description": "Multi-device hardware diagnostic suite engineered for monitors, laptops, smartphones, and TVs. Features display calibration, pixel tests, mic analyzers, webcam inspectors, and acoustic frequency sweeps."
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How do you fix a stuck pixel on a computer monitor or phone screen?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Stuck pixels can often be revived using high-frequency color cycling tools. The rapid alternation between pure red, green, and blue stimuli forces the sluggish liquid crystal to untangle and return to its normal state. Alternatively, applying gentle pressure with a microfiber cloth around the sub-pixel while cycling power can help resolve stubborn stuck crystals."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the difference between IPS glow and backlight bleed?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Backlight bleed is a hardware assembly flaw where physical pressure or imperfect bezel seating allows light from the backlight to escape around the display edges; it stays visible from all viewing angles. IPS glow is an inherent optical characteristic of In-Plane Switching liquid crystals that shifts in intensity and color depending on your viewing angle."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How many dead pixels are allowed before a monitor can be returned under warranty?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Most consumer monitors fall under ISO 9241-307 Class II. Under this standard, manufacturers generally require more than 2 fully dead pixels or more than 5 stuck sub-pixels per million pixels before approving warranty repairs or replacements."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do you test for touchscreen dead zones on mobile phones?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A touch digitizer grid test fills the display with interactive grid tiles. By dragging your finger across the entire display area, responsive zones highlight in green. Any lines or blocks that remain unhighlighted indicate dead digitizer tracks, fractured flex ribbons, or localized controller sensor failure."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why do laptop speakers crackle or buzz at high volumes?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Speaker crackling usually indicates either a torn driver surround, physical chassis vibration where loose screws or brackets rattle at specific resonant frequencies, or audio software clipping. Running a continuous 20Hz to 20kHz frequency sweep helps isolate the exact resonance frequency causing the rattle."
+            }
+          }
+        ]
+      }
+    ]
   }
   </script>
 
@@ -297,7 +346,7 @@
       border-color: var(--text-muted);
     }
 
-    /* Screen Selector Modal Content (EIZO Style inside) */
+    /* Screen Selector Modal Content */
     .eizo-list {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -540,9 +589,10 @@
     }
 
     .article-card h2 {
-      font-size: 1.25rem;
+      font-size: 1.35rem;
       font-weight: 800;
       margin-bottom: 12px;
+      color: #fff;
     }
 
     .spec-table-wrapper {
@@ -565,6 +615,69 @@
 
     .spec-table th {
       background: var(--bg-card);
+      color: #fff;
+    }
+
+    /* SEO FAQ & Knowledge Base Styling */
+    .faq-container {
+      margin-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .faq-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: border-color 0.15s ease;
+    }
+
+    .faq-item:hover {
+      border-color: var(--accent-blue);
+    }
+
+    .faq-item summary {
+      padding: 16px 20px;
+      font-weight: 700;
+      font-size: 0.98rem;
+      color: var(--text-main);
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-item summary::after {
+      content: "＋";
+      font-size: 1.1rem;
+      color: var(--accent-cyan);
+      font-weight: 800;
+      transition: transform 0.2s ease;
+    }
+
+    .faq-item[open] summary::after {
+      content: "−";
+    }
+
+    .faq-content {
+      padding: 0 20px 20px 20px;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      line-height: 1.7;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      margin-top: 4px;
+      padding-top: 14px;
+    }
+
+    .faq-content strong {
       color: #fff;
     }
 
@@ -783,11 +896,11 @@
       </div>
     </div>
 
-    <!-- ISO Defect Metrology Article for SEO & AdSense Content Quality -->
+    <!-- ISO DEFECT METROLOGY ARTICLE (ADSENSE & SEARCH COMPLIANCE) -->
     <article class="article-card">
       <h2>Display Metrology & Calibration Physics (ISO 9241-307)</h2>
       <p class="hub-desc" style="margin-bottom:14px;">
-        Diagnosing liquid crystal displays (IPS, VA, TN) and Organic Light Emitting Diode (OLED) panels requires calibrated spatial and colorimetric stimuli:
+        Evaluating liquid crystal displays (IPS, VA, TN) and Organic Light Emitting Diode (OLED) panels requires calibrated spatial and colorimetric stimuli:
       </p>
       <div class="spec-table-wrapper">
         <table class="spec-table">
@@ -823,6 +936,88 @@
         </table>
       </div>
     </article>
+
+    <!-- KNOWLEDGE BASE & DIAGNOSTIC FAQS (HIGH-INTENT SEO CONTENT) -->
+    <section class="article-card">
+      <h2>Hardware Diagnostic Knowledge Base & Frequently Asked Questions</h2>
+      <p class="hub-desc">
+        Comprehensive hardware inspection guides covering display panel defects, acoustic calibration, and sensor validation.
+      </p>
+
+      <div class="faq-container">
+
+        <details class="faq-item" open>
+          <summary>How do I fix a stuck pixel on a gaming monitor or laptop screen?</summary>
+          <div class="faq-content">
+            A <strong>stuck pixel</strong> occurs when one or two liquid crystal sub-pixels (Red, Green, or Blue) remain permanently energized, displaying a persistent bright dot on dark backgrounds. Unlike physically dead pixels, stuck sub-pixels can often be revived:
+            <br><br>
+            1. <strong>Rapid Color Cycling (Flasher):</strong> Run our <em>⚡ Stuck Pixel Reviver</em> for 15 to 30 minutes. Rapid 22Hz transitions between primary RGB values force the liquid crystals to repeatedly untangle and resume their normal alignment.<br>
+            2. <strong>The Microfiber Pressure Method:</strong> Turn off the display. Take a clean, dry microfiber cloth and wrap it around your fingertip. Apply gentle, concentrated pressure directly to the coordinate of the stuck pixel, then power the monitor on while holding the pressure. Release after 2 seconds.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>What is the difference between IPS glow and backlight bleed?</summary>
+          <div class="faq-content">
+            While both issues appear as unwanted luminescence on dark backgrounds, their root causes and solutions differ:
+            <br><br>
+            • <strong>Backlight Bleed:</strong> A physical assembly flaw caused by uneven bezel pressure pinching the LCD sandwich, letting backlight LEDs escape around the frame edges. Backlight bleed remains in the exact same spot regardless of your head position.<br>
+            • <strong>IPS Glow:</strong> An inherent optical byproduct of wide-viewing-angle In-Plane Switching liquid crystal geometry. IPS glow shifts, changes color (often yellowish or purplish), and changes intensity as you tilt your head or move further back from the display.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>How many dead pixels are allowed under manufacturer warranty returns?</summary>
+          <div class="faq-content">
+            Under international standard <strong>ISO 9241-307 Class II</strong> (which applies to virtually all commercial displays from ASUS, Dell, HP, LG, and Samsung), a monitor is not considered legally defective if it contains up to 2 permanently dead pixels or 5 stuck sub-pixels per million pixels. 
+            <br><br>
+            For a standard 1080p display (approx. 2 million pixels), manufacturers typically require 4 or more defective pixels before approving an RMA replacement, making an immediate inspection during your retailer's 14–30 day return window critical.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>How do I test for touchscreen dead zones on mobile phones and tablets?</summary>
+          <div class="faq-content">
+            Touch digitizer panels use fine grid conductive lines (Indium Tin Oxide) overlaid above the display. Drops or flex damage can sever a single ribbon trace, causing an entire horizontal or vertical band of the screen to become unresponsive.
+            <br><br>
+            Using our <strong>📱 Touch Digitizer Grid</strong>, swipe your finger systematically across the screen. Every touched block illuminates in green. Any strip or block that remains uncolored indicates a dead digitizer zone requiring a screen assembly replacement.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Why do laptop speakers crackle or rattle at high volumes?</summary>
+          <div class="faq-content">
+            Audio buzz and distortion in laptop speakers generally stem from three causes:
+            <br><br>
+            1. <strong>Chassis Resonance:</strong> Thin ultrabook speaker cavities can vibrate loose screws, fan shrouds, or battery adhesives when playing specific low-mid frequencies.<br>
+            2. <strong>Blown Driver Gasket:</strong> If the speaker cone's flexible rubber surround has torn, the voice coil will physically scrape against the magnet.<br>
+            3. <strong>Digital Clipping:</strong> Operating system audio enhancements (such as Dolby Atmos or Windows Audio Enhancements) pushing gain past 0 dBFS.
+            <br><br>
+            Running our <strong>20Hz–20kHz Logarithmic Frequency Sweep</strong> isolates the exact resonant frequency triggering the vibration.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>How can I test whether my microphone is picking up room background noise?</summary>
+          <div class="faq-content">
+            Launch our <strong>🎙️ Microphone Diagnostics</strong> tool in a quiet room without speaking. Observe the live decibel VU meter:
+            <br><br>
+            • <strong>Ideal Noise Floor:</strong> The meter should remain completely below 5–10% when silent.<br>
+            • <strong>High Noise Floor (&gt; 20%):</strong> Indicates electrical ground loop hum, aggressive PC fan noise, or unshielded microphone cables. Adjust your operating system microphone gain slider down to 70–80% to eliminate digital preamp hiss.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Can OLED screens suffer from permanent burn-in or image retention?</summary>
+          <div class="faq-content">
+            Yes. Organic Light Emitting Diodes degrade based on cumulative usage and luminance. If static user interface elements (such as taskbars, game HUDs, or TV news chyrons) remain displayed for thousands of hours, those individual sub-pixels lose luminance faster than neighboring pixels.
+            <br><br>
+            To evaluate OLED health, launch our <strong>Screen & Display Test</strong> and inspect solid 50% gray and solid magenta fields in full screen. Image retention will reveal faint outlines of the static element.
+          </div>
+        </details>
+
+      </div>
+    </section>
 
   </main>
 
