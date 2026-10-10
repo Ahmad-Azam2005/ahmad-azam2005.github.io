@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DisplayCore - Complete Screen, Touch & Hardware Diagnostic Suite</title>
-  <meta name="description" content="Free online monitor, touchscreen, and hardware diagnostic suite. Test dead pixels, stuck pixel reviver flasher, backlight bleed, touch digitizer dead zones, GPU specs, and stereo audio.">
+  <title>DisplayCore Professional - Monitor Diagnostic & Hardware Metrology Suite</title>
+  <meta name="description" content="Professional online monitor and display test suite. Calibrate gamma, test defective pixels, uniformity, color distances, gradients, sharpness, viewing angle, response time ghosting, and touch digitizers.">
   <link rel="canonical" href="https://ahmad-azam2005.github.io/">
   <meta name="robots" content="index, follow">
 
@@ -16,8 +16,8 @@
        crossorigin="anonymous"></script>
 
   <!-- OPEN GRAPH META TAGS -->
-  <meta property="og:title" content="DisplayCore - Hardware & Display Diagnostic Suite">
-  <meta property="og:description" content="All-in-one browser hardware metrology: dead pixels, touch digitizers, stuck pixel reviver, GPU detection, and audio drivers.">
+  <meta property="og:title" content="DisplayCore Professional - Monitor Diagnostic Suite">
+  <meta property="og:description" content="All-in-one monitor calibration & hardware auditor: EIZO-grade patterns, defective pixels, gamma, sharpness, ghosting, and touchscreen diagnostics.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ahmad-azam2005.github.io/">
 
@@ -26,28 +26,30 @@
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "DisplayCore Metrology Suite",
+    "name": "DisplayCore Professional Monitor Test",
     "url": "https://ahmad-azam2005.github.io/",
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "All",
     "browserRequirements": "Requires JavaScript and HTML5 Canvas support",
-    "description": "Comprehensive browser-based hardware metrology suite for monitor color uniformity, dead pixels, rapid stuck pixel flashing, touch digitizer health, display resolutions, and acoustic driver diagnostics."
+    "description": "Professional browser-based hardware and monitor test suite featuring 13 calibration routines: defective pixels, uniformity, gamma curves, sharpness, motion blur response time, digitizer dead-zones, and GPU inspection."
   }
   </script>
 
   <style>
     :root {
-      --bg-void: #0a0e17;
-      --bg-surface: #111827;
-      --bg-card: #1f2937;
-      --border-subtle: #374151;
-      --accent-blue: #3b82f6;
+      --bg-void: #0a0b16;
+      --bg-surface: #121424;
+      --bg-card: #1a1d33;
+      --border-subtle: #292d4d;
+      --accent-primary: #3b82f6;
+      --accent-hover: #2563eb;
       --accent-cyan: #06b6d4;
       --accent-emerald: #10b981;
-      --accent-amber: #f59e0b;
       --accent-rose: #f43f5e;
-      --text-main: #f9fafb;
-      --text-muted: #9ca3af;
+      --accent-amber: #f59e0b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
     }
 
     * {
@@ -61,13 +63,18 @@
       color: var(--text-main);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       line-height: 1.6;
-      padding-bottom: 60px;
+      padding-bottom: 70px;
       -webkit-font-smoothing: antialiased;
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.15) 0%, transparent 60%),
+        linear-gradient(to bottom, #0f1122 0%, var(--bg-void) 100%);
+      background-attachment: fixed;
     }
 
-    /* Top Navigation Bar */
+    /* Header & Top Bar */
     header {
-      background: var(--bg-surface);
+      background: rgba(18, 20, 36, 0.85);
+      backdrop-filter: blur(8px);
       border-bottom: 1px solid var(--border-subtle);
       position: sticky;
       top: 0;
@@ -75,7 +82,7 @@
     }
 
     .nav-container {
-      max-width: 1100px;
+      max-width: 1150px;
       margin: 0 auto;
       display: flex;
       justify-content: space-between;
@@ -83,33 +90,42 @@
       padding: 14px 20px;
     }
 
-    .logo {
-      font-size: 1.25rem;
-      font-weight: 800;
-      color: var(--text-main);
+    .brand-logo {
+      font-size: 1.3rem;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      color: #fff;
       display: flex;
       align-items: center;
       gap: 8px;
       text-decoration: none;
     }
 
-    .logo-badge {
-      background: var(--accent-blue);
-      color: #fff;
-      font-size: 0.7rem;
-      padding: 2px 7px;
-      border-radius: 4px;
-      text-transform: uppercase;
-      font-weight: 700;
+    .brand-logo span {
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    /* Sub-nav Tabs */
+    .suite-badge {
+      font-size: 0.68rem;
+      font-weight: 800;
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.35);
+      color: var(--accent-cyan);
+      padding: 3px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    /* Tabbed Navigation Bar */
     .tabs-bar {
       display: flex;
       gap: 8px;
       overflow-x: auto;
       padding: 10px 20px;
-      max-width: 1100px;
+      max-width: 1150px;
       margin: 0 auto;
       scrollbar-width: none;
     }
@@ -135,23 +151,22 @@
     }
 
     .tab-btn:hover {
-      color: var(--text-main);
-      border-color: var(--accent-blue);
+      color: #fff;
+      border-color: var(--accent-primary);
     }
 
     .tab-btn.active {
-      background: var(--accent-blue);
+      background: var(--accent-primary);
       color: #fff;
-      border-color: var(--accent-blue);
+      border-color: var(--accent-primary);
     }
 
     .container {
-      max-width: 1100px;
+      max-width: 1150px;
       margin: 0 auto;
-      padding: 24px 20px;
+      padding: 30px 20px;
     }
 
-    /* Tab Panes */
     .tab-content {
       display: none;
     }
@@ -166,20 +181,207 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Card Panels */
+    /* Hero Title Area */
+    .hero-title {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .hero-title h1 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .hero-title p {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    /* EIZO-Style Test Selector Box */
+    .eizo-box {
+      background: #ffffff;
+      color: #0f172a;
+      border-radius: 14px;
+      padding: 32px 36px;
+      max-width: 820px;
+      margin: 0 auto 30px auto;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+    }
+
+    .eizo-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      border-bottom: 2px solid #f1f5f9;
+      padding-bottom: 14px;
+    }
+
+    .eizo-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #1e293b;
+    }
+
+    .eizo-subtitle {
+      font-size: 0.82rem;
+      color: #64748b;
+      font-weight: 600;
+    }
+
+    .eizo-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px 36px;
+      margin-bottom: 28px;
+    }
+
+    @media (max-width: 640px) {
+      .eizo-grid {
+        grid-template-columns: 1fr;
+      }
+      .eizo-box {
+        padding: 24px 20px;
+      }
+    }
+
+    .eizo-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: background 0.15s ease;
+    }
+
+    .eizo-item:hover {
+      background: #f8fafc;
+    }
+
+    .eizo-item-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-play-mini {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      box-shadow: 0 2px 6px rgba(37, 99, 235, 0.35);
+    }
+
+    .btn-play-mini:hover {
+      background: #1d4ed8;
+      transform: scale(1.08);
+    }
+
+    .eizo-item-label {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #334155;
+      cursor: pointer;
+    }
+
+    .eizo-checkbox {
+      width: 18px;
+      height: 18px;
+      accent-color: #2563eb;
+      cursor: pointer;
+    }
+
+    .eizo-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 2px solid #f1f5f9;
+      padding-top: 18px;
+      font-size: 0.85rem;
+    }
+
+    .eizo-toggle-all {
+      color: #2563eb;
+      text-decoration: underline;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .eizo-version {
+      color: #94a3b8;
+      font-family: monospace;
+    }
+
+    .eizo-actions {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      max-width: 820px;
+      margin: 0 auto 35px auto;
+      flex-wrap: wrap;
+    }
+
+    .btn-large {
+      padding: 13px 28px;
+      border-radius: 8px;
+      font-size: 0.96rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: var(--accent-primary);
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: var(--bg-card);
+      color: var(--text-main);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .btn-secondary:hover {
+      background: #252a48;
+      border-color: var(--text-muted);
+    }
+
+    /* Standard Cards */
     .panel-card {
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
       border-radius: 12px;
-      padding: 24px;
+      padding: 26px;
       margin-bottom: 24px;
     }
 
     .panel-title {
       font-size: 1.25rem;
-      font-weight: 700;
+      font-weight: 800;
       margin-bottom: 8px;
-      color: var(--text-main);
+      color: #fff;
     }
 
     .panel-desc {
@@ -188,48 +390,10 @@
       margin-bottom: 20px;
     }
 
-    /* Grid Layouts */
-    .color-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 12px;
-    }
-
-    .btn-test {
-      height: 80px;
-      border-radius: 10px;
-      border: 2px solid var(--border-subtle);
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 0.9rem;
-      transition: transform 0.15s ease, border-color 0.15s ease;
-      user-select: none;
-    }
-
-    .btn-test:hover {
-      transform: translateY(-2px);
-      border-color: #fff;
-    }
-
-    /* Specific Button Themes */
-    .bg-red { background: #ff0000; color: #fff; }
-    .bg-green { background: #00ff00; color: #000; }
-    .bg-blue { background: #0000ff; color: #fff; }
-    .bg-white { background: #ffffff; color: #000; }
-    .bg-black { background: #000000; color: #fff; border-color: #4b5563; }
-    .bg-cyan { background: #00ffff; color: #000; }
-    .bg-magenta { background: #ff00ff; color: #fff; }
-    .bg-yellow { background: #ffff00; color: #000; }
-    .bg-gray-dark { background: #18181b; color: #fff; }
-
     /* Telemetry Info Cards */
     .telemetry-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
       gap: 16px;
     }
 
@@ -242,7 +406,7 @@
     }
 
     .telemetry-label {
-      font-size: 0.75rem;
+      font-size: 0.74rem;
       color: var(--text-muted);
       text-transform: uppercase;
       font-weight: 700;
@@ -257,7 +421,7 @@
       word-break: break-all;
     }
 
-    /* Touchscreen Interactive Canvas */
+    /* Touch Canvas */
     .touch-canvas-box {
       position: relative;
       width: 100%;
@@ -275,36 +439,6 @@
       display: block;
     }
 
-    /* General Action Buttons */
-    .btn-action {
-      background: var(--accent-blue);
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      padding: 12px 20px;
-      font-weight: 700;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.9rem;
-      transition: background 0.15s ease;
-    }
-
-    .btn-action:hover {
-      background: #2563eb;
-    }
-
-    .btn-secondary {
-      background: var(--bg-card);
-      color: var(--text-main);
-      border: 1px solid var(--border-subtle);
-    }
-
-    .btn-secondary:hover {
-      background: #374151;
-    }
-
     /* Defect Reference Table */
     .spec-table-wrapper {
       overflow-x: auto;
@@ -315,7 +449,7 @@
       width: 100%;
       border-collapse: collapse;
       font-size: 0.88rem;
-      min-width: 550px;
+      min-width: 580px;
     }
 
     .spec-table th, .spec-table td {
@@ -329,7 +463,7 @@
       color: var(--text-main);
     }
 
-    /* Fullscreen Overlay Component */
+    /* Fullscreen Overlay & Interactive Navigation HUD */
     #fullscreen-layer {
       display: none;
       position: fixed;
@@ -337,43 +471,73 @@
       width: 100vw;
       height: 100vh;
       z-index: 99999;
-      cursor: pointer;
-      touch-action: manipulation;
+      cursor: crosshair;
+      user-select: none;
+      overflow: hidden;
+      background: #000;
     }
 
-    #exit-btn {
+    #screen-hud {
       position: absolute;
-      top: 18px;
-      right: 18px;
-      background: rgba(0, 0, 0, 0.85);
-      color: #ffffff;
-      border: 1.5px solid rgba(255, 255, 255, 0.4);
-      padding: 8px 18px;
-      border-radius: 20px;
-      font-size: 13.5px;
-      font-weight: 700;
-      cursor: pointer;
-      z-index: 100000;
-    }
-
-    #tip-banner {
-      position: absolute;
-      top: 20px;
+      top: 16px;
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(0, 0, 0, 0.8);
-      color: #fff;
+      background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 30px;
       padding: 8px 18px;
-      border-radius: 20px;
-      font-size: 12.5px;
-      pointer-events: none;
-      text-align: center;
-      max-width: 90vw;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      z-index: 100000;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+      max-width: 95vw;
+    }
+
+    .hud-title {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: #fff;
+      white-space: nowrap;
+    }
+
+    .hud-btn {
+      background: rgba(255, 255, 255, 0.15);
+      border: none;
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 16px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: background 0.15s ease;
+    }
+
+    .hud-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .hud-btn.btn-exit {
+      background: var(--accent-rose);
+    }
+
+    .hud-btn.btn-exit:hover {
+      background: #e11d48;
+    }
+
+    #testCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
     }
 
     /* Footer */
     footer {
-      max-width: 1100px;
+      max-width: 1150px;
       margin: 40px auto 0;
       padding: 24px 20px 0;
       border-top: 1px solid var(--border-subtle);
@@ -391,18 +555,18 @@
     }
 
     .footer-links a {
-      color: var(--accent-blue);
+      color: var(--accent-primary);
       text-decoration: none;
       cursor: pointer;
       font-weight: 600;
     }
 
-    /* Modal Windows */
+    /* Modals */
     .modal-overlay {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(0, 0, 0, 0.85);
       backdrop-filter: blur(4px);
       z-index: 10000;
       align-items: center;
@@ -414,7 +578,7 @@
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
       border-radius: 12px;
-      max-width: 600px;
+      max-width: 620px;
       max-height: 85vh;
       overflow-y: auto;
       padding: 26px;
@@ -432,20 +596,17 @@
 </head>
 <body>
 
-  <!-- Top Header Navigation -->
+  <!-- Top Navigation Header -->
   <header>
     <div class="nav-container">
-      <a href="/" class="logo">
-        DisplayCore <span class="logo-badge">Metrology</span>
+      <a href="/" class="brand-logo">
+        DisplayCore <span>Professional</span>
       </a>
-      <div style="font-size: 0.82rem; color: var(--text-muted);">
-        All-In-One Hardware Diagnostics
-      </div>
+      <div class="suite-badge">EIZO-Standard Metrology</div>
     </div>
     <div class="tabs-bar">
-      <button class="tab-btn active" data-tab="tab-screen">🖥️ Dead Pixel Tester</button>
+      <button class="tab-btn active" data-tab="tab-eizo">🎯 Monitor Test Suite</button>
       <button class="tab-btn" data-tab="tab-flasher">⚡ Stuck Pixel Reviver</button>
-      <button class="tab-btn" data-tab="tab-patterns">📐 Linearity & Moiré</button>
       <button class="tab-btn" data-tab="tab-touch">📱 Touch Digitizer Grid</button>
       <button class="tab-btn" data-tab="tab-specs">🔍 Hardware & GPU Metrology</button>
       <button class="tab-btn" data-tab="tab-audio">🔊 Acoustic Transducer</button>
@@ -454,58 +615,190 @@
 
   <main class="container">
 
-    <!-- TAB 1: SCREEN COLOR & DEAD PIXEL TESTER -->
-    <section id="tab-screen" class="tab-content active">
-      <div class="panel-card">
-        <h1 class="panel-title">Screen Color & Dead Pixel Tester</h1>
-        <p class="panel-desc">Launch calibrated solid color fields in full screen to detect inactive (dead) sub-pixels, stuck liquid crystals, and edge backlight bleeding.</p>
-        
-        <div class="color-grid">
-          <div class="btn-test bg-red" onclick="launchColor('#ff0000')">RED<span>(Sub-Pixel)</span></div>
-          <div class="btn-test bg-green" onclick="launchColor('#00ff00')">GREEN<span>(Sub-Pixel)</span></div>
-          <div class="btn-test bg-blue" onclick="launchColor('#0000ff')">BLUE<span>(Sub-Pixel)</span></div>
-          <div class="btn-test bg-white" onclick="launchColor('#ffffff')">WHITE<span>(Dead Pixel)</span></div>
-          <div class="btn-test bg-black" onclick="launchColor('#000000')">BLACK<span>(Backlight)</span></div>
-          <div class="btn-test bg-gray-dark" onclick="launchColor('#141416')">DARK GRAY<span>(Uniformity)</span></div>
-          <div class="btn-test bg-cyan" onclick="launchColor('#00ffff')">CYAN<span>(RG Balance)</span></div>
-          <div class="btn-test bg-magenta" onclick="launchColor('#ff00ff')">MAGENTA<span>(RB Balance)</span></div>
-          <div class="btn-test bg-yellow" onclick="launchColor('#ffff00')">YELLOW<span>(GB Balance)</span></div>
+    <!-- TAB 1: EIZO-STYLE MONITOR TEST ENGINE -->
+    <section id="tab-eizo" class="tab-content active">
+      <div class="hero-title">
+        <h1>Display Quality & Defect Metrology</h1>
+        <p>Comprehensive ISO 9241-307 calibration suite. Check defective pixels, uniformity, color distances, gamma stepping, sharpness, and motion response time.</p>
+      </div>
+
+      <!-- EIZO Test Selector Box -->
+      <div class="eizo-box">
+        <div class="eizo-header">
+          <div class="eizo-title">Choose the test(s) you would like to carry out</div>
+          <div class="eizo-subtitle">Desktop & Mobile Calibrated</div>
+        </div>
+
+        <div class="eizo-grid">
+          <!-- Item 1: Test Pattern -->
+          <div class="eizo-item">
+            <div class="eizo-item-left">
+              <button class="btn-play-mini" title="Run single test" onclick="runSingleTest('pattern')">▶</button>
+              <span class="eizo-item-label" onclick="runSingleTest('pattern')">Test Pattern</span>
+            </div>
+            <input type="checkbox" class="eizo-checkbox" data-test="pattern" checked>
+          </div>
+
+          <!-- Item 2: Sharpness -->
+          <div class="eizo-item">
+            <div class="eizo-item-left">
+              <button class="btn-play-mini" title="Run single test" onclick="runSingleTest('sharpness')">▶</button>
+              <span class="eizo-item-label" onclick="runSingleTest('sharpness')">Sharpness</span>
+            </div>
+            <input type="checkbox" class="eizo-checkbox" data-test="sharpness" checked>
+          </div>
+
+          <!-- Item 3: Defective Pixels -->
+          <div class="eizo-item">
+            <div class="eizo-item-left">
+              <button class="btn-play-mini" title="Run single test" onclick="runSingleTest('defective_pixels')">▶</button>
+              <span class="eizo-item-label" onclick="runSingleTest('defective_pixels')">Defective Pixels</span>
+            </div>
+            <input type="checkbox" class="eizo-checkbox" data-test="defective_pixels" checked>
+          </div>
+
+          <!-- Item 4: Viewing Angle -->
+          <div class="eizo-item">
+            <div class="eizo-item-left">
+              <button class="btn-play-mini" title="Run single test" onclick="runSingleTest('viewing_angle')">▶</button>
+              <span class="eizo-item-label" onclick="runSingleTest('viewing_angle')">Viewing Angle</span>
+            </div>
+            <input type="checkbox" class="eizo-checkbox" data-test="viewing_angle" checked>
+          </div>
+
+          <!-- Item 5: Uniformity -->
+          <div class="eizo-item">
+            <div class="eizo-item-left">
+              <button class="btn-play-mini" title="Run single test" onclick="runSingleTest('uniformity')">▶</button>
+              <span class="eizo-item-label" onclick="runSingleTest('uniformity')">Uniformity</span>
+            </div>
+            <input type="checkbox" class="eizo-checkbox" data-test="uniformity" checked>
+          </div>
+
+          <!-- Item 6: Gamma -->
+          <div class="eizo-item">
+            <div class="eizo-item-left">
+              <button class="btn-play-mini" title="Run single test" onclick="runSingleTest('gamma')">▶</button>
+              <span class="eizo-item-label" onclick="runSingleTest('gamma')">Gamma</span>
+            </div>
+            <input type="checkbox" class="eizo-checkbox" data-test="gamma" checked>
+          </div>
+
+          <!-- Item 7: Color Distances -->
+          <div class="eizo-item">
+            <div class="eizo-item-left">
+              <button class="btn-play-mini" title="Run single test" onclick="runSingleTest('color_distances')">▶</button>
+              <span class="eizo-item-label" onclick="runSingleTest('color_distances')">Color Distances</span>
+            </div>
+            <input type="checkbox" class="eizo-checkbox" data-test="color_distances" checked>
+          </div>
+
+          <!-- Item 8: Response Time -->
+          <div class="eizo-item">
+            <div class="eizo-item-left">
+              <button class="btn-play-mini" title="Run single test" onclick="runSingleTest('response_time')">▶</button>
+              <span class="eizo-item-label" onclick="runSingleTest('response_time')">Response Time</span>
+            </div>
+            <input type="checkbox" class="eizo-checkbox" data-test="response_time" checked>
+          </div>
+
+          <!-- Item 9: Gradients -->
+          <div class="eizo-item">
+            <div class="eizo-item-left">
+              <button class="btn-play-mini" title="Run single test" onclick="runSingleTest('gradients')">▶</button>
+              <span class="eizo-item-label" onclick="runSingleTest('gradients')">Gradients</span>
+            </div>
+            <input type="checkbox" class="eizo-checkbox" data-test="gradients" checked>
+          </div>
+        </div>
+
+        <div class="eizo-footer">
+          <span class="eizo-toggle-all" id="toggleAllCheckboxes" onclick="toggleAll()">Select none</span>
+          <span class="eizo-version">v2.4 Core</span>
         </div>
       </div>
 
-      <!-- Diagnostic Reference Section for AdSense & SEO -->
+      <!-- Action Buttons -->
+      <div class="eizo-actions">
+        <button class="btn-large btn-secondary" onclick="openModal('modal-setup-guide')">
+          📖 View Setup Guide
+        </button>
+        <button class="btn-large btn-primary" onclick="startSelectedSequence()">
+          ▶ Start test
+        </button>
+      </div>
+
+      <!-- ISO Defect Metrology Article for AdSense & Search Rank -->
       <article class="panel-card">
-        <h2 style="font-size:1.15rem; color:#fff; margin-bottom:12px;">Display Defect Metrology (ISO 9241-307)</h2>
-        <p class="panel-desc">Modern liquid crystal displays (IPS, VA, TN) and Organic Light Emitting Diode (OLED) panels comprise millions of individual sub-pixels. Mechanical or electrical flaws manifest in distinct failure modes:</p>
+        <h2 style="font-size:1.2rem; color:#fff; margin-bottom:12px;">Display Metrology & Calibration Physics</h2>
+        <p class="panel-desc">
+          Evaluating liquid crystal displays (IPS, VA, TN) and Organic Light Emitting Diode (OLED) panels requires calibrated stimuli across spatial frequency, colorimetry, and temporal transition metrics:
+        </p>
         
         <div class="spec-table-wrapper">
           <table class="spec-table">
             <thead>
               <tr>
-                <th>Defect Category</th>
-                <th>Visual Presentation</th>
-                <th>Physical Mechanism</th>
-                <th>ISO 9241 Class II Policy</th>
+                <th>Test Routine</th>
+                <th>Diagnostic Objective</th>
+                <th>Evaluation Criteria</th>
+                <th>Standard Baseline</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Dead Pixel</strong></td>
-                <td>Permanent dark speck across light fields</td>
-                <td>Thin-film transistor (TFT) unpowered or open-circuit</td>
-                <td>Up to 2 per million tolerated</td>
+                <td><strong>Test Pattern</strong></td>
+                <td>Aspect ratio, geometry & scaling check</td>
+                <td>Squares must remain square, concentric circles circular</td>
+                <td>1:1 Native Pixel Mapping</td>
               </tr>
               <tr>
-                <td><strong>Stuck Pixel</strong></td>
-                <td>Continuous illuminated color (Red, Green, Blue)</td>
-                <td>Liquid crystal physically locked in state</td>
-                <td>Up to 5 per million tolerated</td>
+                <td><strong>Defective Pixels</strong></td>
+                <td>Spot dead transistors or stuck liquid crystals</td>
+                <td>Inspect primary Red, Green, Blue, White, Black</td>
+                <td>ISO 9241-307 Class II Standard</td>
               </tr>
               <tr>
-                <td><strong>Backlight Bleed</strong></td>
-                <td>Cloudy white/amber glow along display edges</td>
-                <td>Mechanical frame pressure pinching panel layers</td>
-                <td>Evaluated via darkroom uniformity test</td>
+                <td><strong>Uniformity</strong></td>
+                <td>Edge backlight bleed & panel brightness distribution</td>
+                <td>Darkroom evaluation of 10% and 50% luminance steps</td>
+                <td>&lt; 15% Delta L* Luminance variance</td>
+              </tr>
+              <tr>
+                <td><strong>Color Distances</strong></td>
+                <td>Color saturation & discrete channel differentiation</td>
+                <td>Adjacent saturated hues must remain visually distinct</td>
+                <td>Delta E (ΔE) &lt; 2.0 (Target)</td>
+              </tr>
+              <tr>
+                <td><strong>Gradients</strong></td>
+                <td>Bit-depth resolution (8-bit vs 10-bit) & dithering</td>
+                <td>Smooth color ramps without harsh vertical banding lines</td>
+                <td>256 Steps per Primary Channel</td>
+              </tr>
+              <tr>
+                <td><strong>Sharpness</strong></td>
+                <td>Monitor DSP over-sharpening & halo artifacts</td>
+                <td>Alternating 1px moiré grid lines without ghost fringes</td>
+                <td>Zero Halo Artifacts at 100% Scale</td>
+              </tr>
+              <tr>
+                <td><strong>Viewing Angle</strong></td>
+                <td>Sub-pixel contrast collapse & IPS glow / VA shift</td>
+                <td>Consistent color reproduction off-axis</td>
+                <td>178° Horizontal / Vertical Target</td>
+              </tr>
+              <tr>
+                <td><strong>Gamma</strong></td>
+                <td>Luminance transfer curve linearity</td>
+                <td>Equal visual brightness on intermediate test squares</td>
+                <td>Standard Gamma 2.2 Curve</td>
+              </tr>
+              <tr>
+                <td><strong>Response Time</strong></td>
+                <td>Pixel Gray-to-Gray (GtG) transition & motion blur</td>
+                <td>Moving blocks should not produce trailing ghost streaks</td>
+                <td>Low Motion Smear (Hz Sync)</td>
               </tr>
             </tbody>
           </table>
@@ -513,58 +806,38 @@
       </article>
     </section>
 
-    <!-- TAB 2: STUCK PIXEL REVIVER (FLASHER) -->
+    <!-- TAB 2: STUCK PIXEL REVIVER (RAPID FLASHER) -->
     <section id="tab-flasher" class="tab-content">
       <div class="panel-card">
         <h2 class="panel-title">Stuck Pixel Reviver & Rapid Flasher</h2>
-        <p class="panel-desc">High-frequency sub-pixel exercise utility. Rapidly forces liquid crystals to switch between primary RGB states to stimulate sluggish or stuck sub-pixels.</p>
+        <p class="panel-desc">Forces stuck liquid crystals to transition at 22Hz between primary color states, helping unstick sluggish sub-pixels.</p>
 
         <div style="display:flex; gap:14px; flex-wrap:wrap; margin-bottom:20px; align-items:center;">
-          <button id="btnStartFlasher" class="btn-action">
-            ⚡ Launch Fullscreen Flasher
+          <button class="btn-large btn-primary" onclick="launchFlasher()">
+            ⚡ Launch High-Frequency Flasher
           </button>
           <span style="font-size:0.85rem; color:var(--text-muted);">
             ⚠️ Photosensitive warning: Contains rapid screen flashes.
           </span>
         </div>
 
-        <div style="background:var(--bg-card); padding:16px; border-radius:8px; font-size:0.88rem; color:var(--text-muted);">
-          <strong>Recommended Procedure:</strong> Run the flasher for 15 to 30 minutes. If the sub-pixel remains stuck, power down the screen and apply gentle pressure using a clean microfiber cloth around the coordinate while re-powering.
+        <div style="background:var(--bg-card); padding:18px; border-radius:8px; font-size:0.88rem; color:var(--text-muted);">
+          <strong>Procedure:</strong> Allow the tool to run full screen for 15 to 30 minutes. If the sub-pixel remains illuminated, turn the display off and apply gentle pressure using a clean microfiber cloth over the defect coordinates while turning the display back on.
         </div>
       </div>
     </section>
 
-    <!-- TAB 3: LINEARITY, MOIRÉ & CONTRAST -->
-    <section id="tab-patterns" class="tab-content">
-      <div class="panel-card">
-        <h2 class="panel-title">Sharpness, Contrast & Moiré Linearity</h2>
-        <p class="panel-desc">Inspect digital scaler distortion, gamma stepping, and display sharpness calibration using mathematical pixel patterns.</p>
-        
-        <div class="color-grid">
-          <div class="btn-test bg-black" style="border-color:#fff;" onclick="launchPattern('moire')">
-            MOIRÉ GRID<span>(1px Alternating)</span>
-          </div>
-          <div class="btn-test bg-black" style="border-color:#fff;" onclick="launchPattern('gamma')">
-            GAMMA WEDGE<span>(16-Step Grayscale)</span>
-          </div>
-          <div class="btn-test bg-black" style="border-color:#fff;" onclick="launchPattern('gradient')">
-            RGB GRADIENT<span>(Banding Check)</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- TAB 4: TOUCHSCREEN & DIGITIZER GRID -->
+    <!-- TAB 3: TOUCHSCREEN & DIGITIZER GRID -->
     <section id="tab-touch" class="tab-content">
       <div class="panel-card">
         <h2 class="panel-title">Touchscreen Digitizer Dead-Zone & Multi-Touch Tester</h2>
-        <p class="panel-desc">Test smartphone, tablet, or touch-laptop screens. Drag your fingers across the canvas: blocks turn green when registered. Gaps indicate dead digitizer ribbons.</p>
+        <p class="panel-desc">Swipe across the canvas: blocks turn green when registered. Gaps or unhighlighted tracks identify broken digitizer ribbon circuits.</p>
 
         <div style="display:flex; justify-content:space-between; margin-bottom:12px; align-items:center;">
-          <span id="touchPointsReadout" style="font-weight:700; color:var(--accent-cyan); font-size:0.9rem;">
+          <span id="touchPointsReadout" style="font-weight:700; color:var(--accent-cyan); font-size:0.92rem;">
             Active Touch Points: 0
           </span>
-          <button id="btnClearTouch" class="btn-action btn-secondary" style="padding:6px 14px; font-size:0.8rem;">
+          <button class="btn-large btn-secondary" style="padding:6px 14px; font-size:0.8rem;" onclick="clearTouchGrid()">
             Clear Grid
           </button>
         </div>
@@ -575,11 +848,11 @@
       </div>
     </section>
 
-    <!-- TAB 5: HARDWARE & GPU METROLOGY -->
+    <!-- TAB 4: HARDWARE & GPU METROLOGY -->
     <section id="tab-specs" class="tab-content">
       <div class="panel-card">
         <h2 class="panel-title">Hardware, GPU & Display Metrology</h2>
-        <p class="panel-desc">Real-time parameters extracted directly from your browser's Graphics and Display API pipelines.</p>
+        <p class="panel-desc">Live parameters reported by your browser's Graphics and Display API pipelines.</p>
 
         <div class="telemetry-grid">
           <div class="telemetry-box">
@@ -606,17 +879,17 @@
       </div>
     </section>
 
-    <!-- TAB 6: ACOUSTIC TRANSDUCER METROLOGY -->
+    <!-- TAB 5: ACOUSTIC TRANSDUCER METROLOGY -->
     <section id="tab-audio" class="tab-content">
       <div class="panel-card">
         <h2 class="panel-title">Acoustic Driver & Speaker Diagnostics</h2>
         <p class="panel-desc">Synthesized pure sine wave calibration sweeps to expose blown voice coils, chassis resonance, and discrete stereo separation.</p>
 
         <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:20px;">
-          <button id="btnAudioLeft" class="btn-action btn-secondary">🔊 Test Left Channel</button>
-          <button id="btnAudioRight" class="btn-action btn-secondary">🔊 Test Right Channel</button>
-          <button id="btnAudioSweep" class="btn-action">📈 Run 20Hz - 20kHz Sweep</button>
-          <button id="btnAudioStop" class="btn-action" style="background:var(--accent-rose);">⏹️ Stop Audio</button>
+          <button id="btnAudioLeft" class="btn-large btn-secondary">🔊 Test Left Channel</button>
+          <button id="btnAudioRight" class="btn-large btn-secondary">🔊 Test Right Channel</button>
+          <button id="btnAudioSweep" class="btn-large btn-primary">📈 Run 20Hz - 20kHz Sweep</button>
+          <button id="btnAudioStop" class="btn-large" style="background:var(--accent-rose); color:#fff;">⏹️ Stop Audio</button>
         </div>
 
         <div style="background:var(--bg-card); padding:16px; border-radius:8px; font-size:0.85rem; color:var(--text-muted);" id="audioStatus">
@@ -627,31 +900,53 @@
 
   </main>
 
-  <!-- Fullscreen Testing Element -->
+  <!-- Fullscreen Interactive Canvas & HUD Overlay -->
   <div id="fullscreen-layer">
-    <button id="exit-btn" onclick="exitFullscreenMode(event)">✕ Exit</button>
-    <div id="tip-banner">Tap anywhere to cycle colors • Press Esc or tap ✕ Exit to leave</div>
+    <div id="screen-hud">
+      <span class="hud-title" id="hudTestTitle">Test Routine</span>
+      <button class="hud-btn" onclick="prevScreen()">◀ Prev</button>
+      <button class="hud-btn" onclick="nextScreen()">Next ▶</button>
+      <button class="hud-btn" id="btnToggleAuto" onclick="toggleAutoSequence()">Auto: Off</button>
+      <button class="hud-btn btn-exit" onclick="exitFullscreen()">✕ Exit</button>
+    </div>
+    <canvas id="testCanvas"></canvas>
   </div>
 
   <!-- Footer -->
   <footer>
     <div class="footer-links">
+      <a onclick="openModal('modal-setup-guide')">Setup Guide</a>
       <a onclick="openModal('modal-about')">About DisplayCore</a>
       <a onclick="openModal('modal-privacy')">Privacy Policy</a>
       <a onclick="openModal('modal-terms')">Terms of Service</a>
       <a onclick="openModal('modal-contact')">Contact & GitHub</a>
     </div>
-    <div>&copy; 2026 DisplayCore Metrology Suite. Open web hardware diagnostic engine.</div>
+    <div>&copy; 2026 DisplayCore Professional. Open Web Metrology Suite.</div>
   </footer>
+
+  <!-- Setup Guide Modal -->
+  <div class="modal-overlay" id="modal-setup-guide">
+    <div class="modal-box">
+      <h3>Monitor Test Setup Guide</h3>
+      <p>Follow these steps to obtain accurate evaluation results:</p>
+      <ul style="padding-left:20px; margin: 12px 0;">
+        <li>Clean your display surface with a microfiber cloth to remove dust particles that can mimic dead pixels.</li>
+        <li>Disable ambient lighting or dim the room to properly detect backlight bleed during uniformity tests.</li>
+        <li>Set your monitor to its native resolution at 100% display scaling in your operating system.</li>
+        <li>Use <strong>Spacebar</strong>, <strong>Arrow Keys</strong>, or click anywhere on the screen to navigate through test screens.</li>
+      </ul>
+      <button class="btn-large btn-primary" onclick="closeModal('modal-setup-guide')">Understood</button>
+    </div>
+  </div>
 
   <!-- Privacy Policy Modal -->
   <div class="modal-overlay" id="modal-privacy">
     <div class="modal-box">
       <h3>Privacy Policy</h3>
-      <p>DisplayCore operates 100% on client-side browser APIs. No audio streams, touch gestures, or device identifiers are harvested, stored, or transmitted to any remote servers.</p>
+      <p>DisplayCore processes all diagnostics locally using browser JavaScript and HTML5 Canvas. No telemetry, audio, or touch coordinates are collected or stored on remote servers.</p>
       <br>
-      <p><strong>Third-Party Advertising:</strong> Third-party vendors, including Google, use cookies to serve ads based on prior visits. Users may opt out of personalized advertising by visiting Google Ads Settings.</p>
-      <button class="btn-action" style="margin-top:16px;" onclick="closeModal('modal-privacy')">Close</button>
+      <p><strong>Advertising:</strong> Third-party vendors, including Google, use cookies to serve ads based on prior visits. Users may opt out of personalized advertising by visiting Google Ads Settings.</p>
+      <button class="btn-large btn-primary" style="margin-top:16px;" onclick="closeModal('modal-privacy')">Close</button>
     </div>
   </div>
 
@@ -660,7 +955,7 @@
     <div class="modal-box">
       <h3>About DisplayCore</h3>
       <p>DisplayCore is an open web metrology utility engineered to verify display panel health, digitizer responsiveness, and acoustic transducer performance for desktop monitors, laptops, and mobile phones.</p>
-      <button class="btn-action" style="margin-top:16px;" onclick="closeModal('modal-about')">Close</button>
+      <button class="btn-large btn-primary" style="margin-top:16px;" onclick="closeModal('modal-about')">Close</button>
     </div>
   </div>
 
@@ -669,16 +964,16 @@
     <div class="modal-box">
       <h3>Terms of Service</h3>
       <p>This software is provided for hardware evaluation. Rapid flashing modes should be used with discretion by photosensitive individuals. Audio sweeps should be monitored at safe volume levels.</p>
-      <button class="btn-action" style="margin-top:16px;" onclick="closeModal('modal-terms')">Close</button>
+      <button class="btn-large btn-primary" style="margin-top:16px;" onclick="closeModal('modal-terms')">Close</button>
     </div>
   </div>
 
   <!-- Contact Modal -->
   <div class="modal-overlay" id="modal-contact">
     <div class="modal-box">
-      <h3>Contact & Open Source</h3>
-      <p>Hosted on GitHub Pages. Contributions, bug tickets, and feature requests can be submitted directly via the root GitHub repository.</p>
-      <button class="btn-action" style="margin-top:16px;" onclick="closeModal('modal-contact')">Close</button>
+      <h3>Contact & GitHub</h3>
+      <p>Submit bug tickets, feature proposals, and pull requests directly via the GitHub repository page.</p>
+      <button class="btn-large btn-primary" style="margin-top:16px;" onclick="closeModal('modal-contact')">Close</button>
     </div>
   </div>
 
@@ -704,72 +999,355 @@
     });
 
     /* ==========================================================================
-       FULLSCREEN COLOR & PATTERN RUNNER
+       EIZO TEST REGISTRY & RENDER ROUTINES
        ========================================================================== */
-    const colorList = ['#ff0000', '#00ff00', '#0000ff', '#ffffff', '#000000', '#141416', '#00ffff', '#ff00ff', '#ffff00'];
-    let currentColorIndex = 0;
-    let flasherInterval = null;
+    const testCanvas = document.getElementById("testCanvas");
+    const ctx = testCanvas.getContext("2d");
     const fullscreenLayer = document.getElementById("fullscreen-layer");
-    let lastTap = 0;
+    const hudTitle = document.getElementById("hudTestTitle");
 
-    function launchColor(hex) {
-      clearInterval(flasherInterval);
-      fullscreenLayer.innerHTML = `
-        <button id="exit-btn" onclick="exitFullscreenMode(event)">✕ Exit</button>
-        <div id="tip-banner">Tap anywhere to cycle colors • Tap ✕ Exit to leave</div>
-      `;
-      currentColorIndex = colorList.indexOf(hex);
-      if (currentColorIndex === -1) currentColorIndex = 0;
-      fullscreenLayer.style.background = colorList[currentColorIndex];
-      enterFullscreen();
-    }
+    let activeSequence = [];
+    let currentStepIndex = 0;
+    let animFrameId = null;
+    let autoInterval = null;
+    let autoActive = false;
+    let flasherInterval = null;
+    let lastTapTime = 0;
 
-    function launchPattern(type) {
-      clearInterval(flasherInterval);
-      fullscreenLayer.innerHTML = `
-        <button id="exit-btn" onclick="exitFullscreenMode(event)">✕ Exit</button>
-        <div id="tip-banner">Pattern Mode: ${type.toUpperCase()} • Tap ✕ Exit to leave</div>
-      `;
-      if (type === 'moire') {
-        fullscreenLayer.style.background = 'repeating-linear-gradient(0deg, #000, #000 1px, #fff 1px, #fff 2px)';
-      } else if (type === 'gamma') {
-        fullscreenLayer.style.background = 'linear-gradient(to right, #000 0%, #111 6.25%, #222 12.5%, #333 18.75%, #444 25%, #555 31.25%, #666 37.5%, #777 43.75%, #888 50%, #999 56.25%, #aaa 62.5%, #bbb 68.75%, #ccc 75%, #ddd 81.25%, #eee 87.5%, #fff 100%)';
-      } else if (type === 'gradient') {
-        fullscreenLayer.style.background = 'linear-gradient(to right, #000, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #fff)';
+    // Routine Generators
+    const ROUTINES = {
+      // 1. Test Pattern (Geometry, Aspect Ratio, Circles, Crosshair)
+      pattern: {
+        title: "Test Pattern (Geometry & Scaling)",
+        render: () => {
+          const w = testCanvas.width;
+          const h = testCanvas.height;
+          ctx.fillStyle = "#1e293b";
+          ctx.fillRect(0, 0, w, h);
+
+          // Grid lines
+          ctx.strokeStyle = "#475569";
+          ctx.lineWidth = 1;
+          for (let x = 0; x < w; x += 50) {
+            ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
+          }
+          for (let y = 0; y < h; y += 50) {
+            ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
+          }
+
+          // Center crosshair & concentric circles
+          const cx = w / 2;
+          const cy = h / 2;
+          ctx.strokeStyle = "#38bdf8";
+          ctx.lineWidth = 2;
+          for (let r = 80; r <= Math.min(w, h) / 2; r += 80) {
+            ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.stroke();
+          }
+
+          ctx.strokeStyle = "#f43f5e";
+          ctx.beginPath(); ctx.moveTo(cx, 0); ctx.lineTo(cx, h); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(0, cy); ctx.lineTo(w, cy); ctx.stroke();
+
+          // Corner squares
+          ctx.fillStyle = "#ffffff";
+          ctx.fillRect(0, 0, 80, 80);
+          ctx.fillRect(w - 80, 0, 80, 80);
+          ctx.fillRect(0, h - 80, 80, 80);
+          ctx.fillRect(w - 80, h - 80, 80, 80);
+        }
+      },
+
+      // 2. Sharpness (Alternating 1px high-frequency lines)
+      sharpness: {
+        title: "Sharpness (1px Moiré Grid)",
+        render: () => {
+          const w = testCanvas.width;
+          const h = testCanvas.height;
+          ctx.fillStyle = "#000000";
+          ctx.fillRect(0, 0, w, h);
+
+          ctx.fillStyle = "#ffffff";
+          for (let y = 0; y < h; y += 2) {
+            ctx.fillRect(0, y, w, 1);
+          }
+        }
+      },
+
+      // 3. Defective Pixels: Red, Green, Blue, White, Black
+      defective_pixels: [
+        {
+          title: "Defective Pixels (Full Red)",
+          render: () => { ctx.fillStyle = "#ff0000"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }
+        },
+        {
+          title: "Defective Pixels (Full Green)",
+          render: () => { ctx.fillStyle = "#00ff00"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }
+        },
+        {
+          title: "Defective Pixels (Full Blue)",
+          render: () => { ctx.fillStyle = "#0000ff"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }
+        },
+        {
+          title: "Defective Pixels (Full White)",
+          render: () => { ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }
+        },
+        {
+          title: "Defective Pixels (Full Black)",
+          render: () => { ctx.fillStyle = "#000000"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }
+        }
+      ],
+
+      // 4. Viewing Angle (High Contrast Sub-pixel Inversion Text Blocks)
+      viewing_angle: {
+        title: "Viewing Angle & Contrast Shift",
+        render: () => {
+          const w = testCanvas.width;
+          const h = testCanvas.height;
+          ctx.fillStyle = "#000";
+          ctx.fillRect(0, 0, w, h);
+
+          // Color corners
+          const halfW = w / 2;
+          const halfH = h / 2;
+          ctx.fillStyle = "#b91c1c"; ctx.fillRect(0, 0, halfW, halfH);
+          ctx.fillStyle = "#15803d"; ctx.fillRect(halfW, 0, halfW, halfH);
+          ctx.fillStyle = "#1d4ed8"; ctx.fillRect(0, halfH, halfW, halfH);
+          ctx.fillStyle = "#ca8a04"; ctx.fillRect(halfW, halfH, halfW, halfH);
+
+          // Center target box
+          ctx.fillStyle = "#ffffff";
+          ctx.fillRect(w/2 - 120, h/2 - 120, 240, 240);
+          ctx.fillStyle = "#000000";
+          ctx.fillRect(w/2 - 60, h/2 - 60, 120, 120);
+        }
+      },
+
+      // 5. Uniformity (25%, 50%, 75% Gray)
+      uniformity: [
+        {
+          title: "Uniformity (10% Dark Gray - Backlight Bleed)",
+          render: () => { ctx.fillStyle = "#1a1a1a"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }
+        },
+        {
+          title: "Uniformity (50% Mid Gray - IPS Glow / Clouding)",
+          render: () => { ctx.fillStyle = "#808080"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }
+        }
+      ],
+
+      // 6. Gamma Calibration Step Wedge
+      gamma: {
+        title: "Gamma Calibration Wedge (2.2 Target)",
+        render: () => {
+          const w = testCanvas.width;
+          const h = testCanvas.height;
+          ctx.fillStyle = "#000";
+          ctx.fillRect(0, 0, w, h);
+
+          const steps = 16;
+          const stepW = w / steps;
+          for (let i = 0; i < steps; i++) {
+            const val = Math.round((i / (steps - 1)) * 255);
+            ctx.fillStyle = `rgb(${val}, ${val}, ${val})`;
+            ctx.fillRect(i * stepW, 0, stepW, h);
+          }
+        }
+      },
+
+      // 7. Color Distances
+      color_distances: {
+        title: "Color Distances & Saturation Stepping",
+        render: () => {
+          const w = testCanvas.width;
+          const h = testCanvas.height;
+          const bands = [
+            ["#000", "#f00", "#ff0", "#0f0", "#0ff", "#00f", "#f0f", "#fff"],
+            ["#222", "#c00", "#cc0", "#0c0", "#0cc", "#00c", "#c0c", "#ccc"],
+            ["#444", "#800", "#880", "#080", "#088", "#008", "#808", "#888"]
+          ];
+          const rowH = h / bands.length;
+          bands.forEach((row, rIdx) => {
+            const colW = w / row.length;
+            row.forEach((col, cIdx) => {
+              ctx.fillStyle = col;
+              ctx.fillRect(cIdx * colW, rIdx * rowH, colW, rowH);
+            });
+          });
+        }
+      },
+
+      // 8. Response Time (Moving UFO-Style Block Animation)
+      response_time: {
+        title: "Response Time & Ghosting (Moving Block)",
+        isAnimated: true,
+        render: () => {
+          let posX = 0;
+          let speed = 8;
+          function animate() {
+            const w = testCanvas.width;
+            const h = testCanvas.height;
+            ctx.fillStyle = "#1e293b";
+            ctx.fillRect(0, 0, w, h);
+
+            // Three tracks at different luminance transitions
+            // Track 1: Black on White
+            ctx.fillStyle = "#fff";
+            ctx.fillRect(0, h * 0.2, w, 80);
+            ctx.fillStyle = "#000";
+            ctx.fillRect(posX, h * 0.2, 80, 80);
+
+            // Track 2: Cyan on Dark Blue
+            ctx.fillStyle = "#0f172a";
+            ctx.fillRect(0, h * 0.45, w, 80);
+            ctx.fillStyle = "#06b6d4";
+            ctx.fillRect(w - posX - 80, h * 0.45, 80, 80);
+
+            // Track 3: Red on Gray
+            ctx.fillStyle = "#64748b";
+            ctx.fillRect(0, h * 0.7, w, 80);
+            ctx.fillStyle = "#ef4444";
+            ctx.fillRect(posX, h * 0.7, 80, 80);
+
+            posX += speed;
+            if (posX > w) posX = -80;
+            animFrameId = requestAnimationFrame(animate);
+          }
+          animate();
+        }
+      },
+
+      // 9. Gradients
+      gradients: {
+        title: "Gradients & Bit-Depth Dithering",
+        render: () => {
+          const w = testCanvas.width;
+          const h = testCanvas.height;
+          const grad = ctx.createLinearGradient(0, 0, w, 0);
+          grad.addColorStop(0, "#000000");
+          grad.addColorStop(0.16, "#ff0000");
+          grad.addColorStop(0.33, "#ffff00");
+          grad.addColorStop(0.5, "#00ff00");
+          grad.addColorStop(0.66, "#00ffff");
+          grad.addColorStop(0.83, "#0000ff");
+          grad.addColorStop(1, "#ffffff");
+          ctx.fillStyle = grad;
+          ctx.fillRect(0, 0, w, h);
+        }
       }
-      enterFullscreen();
-    }
+    };
 
-    document.getElementById("btnStartFlasher").addEventListener("click", () => {
-      enterFullscreen();
-      fullscreenLayer.innerHTML = `
-        <button id="exit-btn" onclick="exitFullscreenMode(event)">✕ Exit</button>
-        <div id="tip-banner">Stuck Pixel Flasher Active • Tap ✕ Exit to stop</div>
-      `;
-      const flashColors = ['#ff0000', '#00ff00', '#0000ff', '#ffffff', '#000000'];
-      let idx = 0;
-      flasherInterval = setInterval(() => {
-        fullscreenLayer.style.background = flashColors[idx];
-        idx = (idx + 1) % flashColors.length;
-      }, 45); // ~22Hz alternating flash cycle
+    function resizeTestCanvas() {
+      testCanvas.width = window.innerWidth;
+      testCanvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", () => {
+      if (fullscreenLayer.style.display === "block") {
+        resizeTestCanvas();
+        renderCurrentStep();
+      }
     });
 
-    function enterFullscreen() {
+    function toggleAll() {
+      const cbs = document.querySelectorAll(".eizo-checkbox");
+      const toggleBtn = document.getElementById("toggleAllCheckboxes");
+      const anyChecked = Array.from(cbs).some(cb => cb.checked);
+      cbs.forEach(cb => cb.checked = !anyChecked);
+      toggleBtn.textContent = anyChecked ? "Select all" : "Select none";
+    }
+
+    function buildSequence(keys) {
+      const seq = [];
+      keys.forEach(k => {
+        const item = ROUTINES[k];
+        if (Array.isArray(item)) {
+          seq.push(...item);
+        } else if (item) {
+          seq.push(item);
+        }
+      });
+      return seq;
+    }
+
+    function runSingleTest(testKey) {
+      activeSequence = buildSequence([testKey]);
+      currentStepIndex = 0;
+      openFullscreenRunner();
+    }
+
+    function startSelectedSequence() {
+      const selectedKeys = [];
+      document.querySelectorAll(".eizo-checkbox").forEach(cb => {
+        if (cb.checked) selectedKeys.push(cb.getAttribute("data-test"));
+      });
+      if (selectedKeys.length === 0) {
+        alert("Please select at least one test from the checklist.");
+        return;
+      }
+      activeSequence = buildSequence(selectedKeys);
+      currentStepIndex = 0;
+      openFullscreenRunner();
+    }
+
+    function openFullscreenRunner() {
+      resizeTestCanvas();
       fullscreenLayer.style.display = "block";
-      window.history.pushState({ fullTest: true }, "");
+      window.history.pushState({ runnerActive: true }, "");
+
       const root = document.documentElement;
       if (root.requestFullscreen) root.requestFullscreen().catch(() => {});
       else if (root.webkitRequestFullscreen) root.webkitRequestFullscreen().catch(() => {});
+
+      renderCurrentStep();
     }
 
-    function exitFullscreenMode(e) {
-      if (e) {
-        e.stopPropagation();
-        e.preventDefault();
-      }
+    function renderCurrentStep() {
+      if (animFrameId) cancelAnimationFrame(animFrameId);
       clearInterval(flasherInterval);
+
+      const step = activeSequence[currentStepIndex];
+      hudTitle.textContent = `${currentStepIndex + 1}/${activeSequence.length}: ${step.title}`;
+      step.render();
+    }
+
+    function nextScreen() {
+      if (currentStepIndex < activeSequence.length - 1) {
+        currentStepIndex++;
+        renderCurrentStep();
+      } else {
+        exitFullscreen();
+      }
+    }
+
+    function prevScreen() {
+      if (currentStepIndex > 0) {
+        currentStepIndex--;
+        renderCurrentStep();
+      }
+    }
+
+    function toggleAutoSequence() {
+      const btn = document.getElementById("btnToggleAuto");
+      if (autoActive) {
+        clearInterval(autoInterval);
+        autoActive = false;
+        btn.textContent = "Auto: Off";
+      } else {
+        autoActive = true;
+        btn.textContent = "Auto: On (3s)";
+        autoInterval = setInterval(nextScreen, 3000);
+      }
+    }
+
+    function exitFullscreen() {
+      if (animFrameId) cancelAnimationFrame(animFrameId);
+      clearInterval(autoInterval);
+      clearInterval(flasherInterval);
+      autoActive = false;
+      document.getElementById("btnToggleAuto").textContent = "Auto: Off";
+
       fullscreenLayer.style.display = "none";
-      if (window.history.state && window.history.state.fullTest) window.history.back();
+      if (window.history.state && window.history.state.runnerActive) {
+        window.history.back();
+      }
 
       if (document.fullscreenElement || document.webkitFullscreenElement) {
         if (document.exitFullscreen) document.exitFullscreen().catch(() => {});
@@ -778,35 +1356,43 @@
     }
 
     window.addEventListener("popstate", () => {
-      clearInterval(flasherInterval);
-      fullscreenLayer.style.display = "none";
+      exitFullscreen();
     });
 
     fullscreenLayer.addEventListener("click", (e) => {
-      if (e.target.id === "exit-btn") return;
-      if (flasherInterval) return; // Don't cycle manually if flasher is running
-
-      const now = new Date().getTime();
-      if (now - lastTap < 350 && now - lastTap > 0) {
-        exitFullscreenMode(e);
+      if (e.target.closest("#screen-hud")) return;
+      const now = Date.now();
+      if (now - lastTapTime < 350) {
+        exitFullscreen();
         return;
       }
-      lastTap = now;
-
-      // Cycle next color
-      currentColorIndex = (currentColorIndex + 1) % colorList.length;
-      fullscreenLayer.style.background = colorList[currentColorIndex];
+      lastTapTime = now;
+      nextScreen();
     });
 
     window.addEventListener("keydown", (e) => {
       if (fullscreenLayer.style.display === "block") {
-        if (e.key === "Escape") exitFullscreenMode(e);
-        if (!flasherInterval && (e.key === "ArrowRight" || e.key === " ")) {
-          currentColorIndex = (currentColorIndex + 1) % colorList.length;
-          fullscreenLayer.style.background = colorList[currentColorIndex];
-        }
+        if (e.key === "Escape") exitFullscreen();
+        if (e.key === "ArrowRight" || e.key === " ") nextScreen();
+        if (e.key === "ArrowLeft") prevScreen();
       }
     });
+
+    /* ==========================================================================
+       STUCK PIXEL RAPID FLASHER
+       ========================================================================== */
+    function launchFlasher() {
+      resizeTestCanvas();
+      fullscreenLayer.style.display = "block";
+      hudTitle.textContent = "Stuck Pixel Flasher (22Hz Alternating)";
+      const colors = ["#ff0000", "#00ff00", "#0000ff", "#ffffff", "#000000"];
+      let idx = 0;
+      flasherInterval = setInterval(() => {
+        ctx.fillStyle = colors[idx];
+        ctx.fillRect(0, 0, testCanvas.width, testCanvas.height);
+        idx = (idx + 1) % colors.length;
+      }, 45);
+    }
 
     /* ==========================================================================
        TOUCHSCREEN DIGITIZER ENGINE
@@ -880,10 +1466,10 @@
       touchPointsReadout.textContent = `Active Touch Points: ${e.touches.length}`;
     });
 
-    document.getElementById("btnClearTouch").addEventListener("click", () => {
+    function clearTouchGrid() {
       gridState = Array(gridRows).fill(null).map(() => Array(gridCols).fill(false));
       drawTouchGrid();
-    });
+    }
 
     /* ==========================================================================
        HARDWARE & GPU METROLOGY INSPECTOR
