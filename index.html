@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DisplayCore Professional - Monitor Diagnostic & Hardware Metrology Suite</title>
-  <meta name="description" content="Professional online monitor and display test suite. Calibrate gamma, test defective pixels, uniformity, color distances, gradients, sharpness, viewing angle, response time ghosting, and touch digitizers.">
+  <title>OmniHardware Lab - Complete Screen, Audio, Mic, Camera & Hardware Diagnostic Suite</title>
+  <meta name="description" content="Free online hardware & display diagnostic workbench. Test monitors, laptops, phones, and TVs for dead pixels, backlight bleed, microphone input, webcam feeds, stereo speakers, and touch digitizers.">
   <link rel="canonical" href="https://ahmad-azam2005.github.io/">
   <meta name="robots" content="index, follow">
 
@@ -16,8 +16,8 @@
        crossorigin="anonymous"></script>
 
   <!-- OPEN GRAPH META TAGS -->
-  <meta property="og:title" content="DisplayCore Professional - Monitor Diagnostic Suite">
-  <meta property="og:description" content="All-in-one monitor calibration & hardware auditor: EIZO-grade patterns, defective pixels, gamma, sharpness, ghosting, and touchscreen diagnostics.">
+  <meta property="og:title" content="OmniHardware Lab - Hardware & Display Diagnostic Suite">
+  <meta property="og:description" content="All-in-one hardware diagnostics: Screen, Camera, Microphone, Audio, Touchscreen, and GPU Metrology for Monitors, Laptops, Mobile, and TVs.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ahmad-azam2005.github.io/">
 
@@ -26,30 +26,28 @@
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "DisplayCore Professional Monitor Test",
+    "name": "OmniHardware Lab",
     "url": "https://ahmad-azam2005.github.io/",
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "All",
-    "browserRequirements": "Requires JavaScript and HTML5 Canvas support",
-    "description": "Professional browser-based hardware and monitor test suite featuring 13 calibration routines: defective pixels, uniformity, gamma curves, sharpness, motion blur response time, digitizer dead-zones, and GPU inspection."
+    "browserRequirements": "Requires JavaScript, Web Audio API, and MediaDevices support",
+    "description": "Multi-device hardware diagnostic suite engineered for monitors, laptops, smartphones, and TVs. Features display calibration, pixel tests, mic analyzers, webcam inspectors, and acoustic frequency sweeps."
   }
   </script>
 
   <style>
     :root {
-      --bg-void: #0a0b16;
-      --bg-surface: #121424;
-      --bg-card: #1a1d33;
-      --border-subtle: #292d4d;
-      --accent-primary: #3b82f6;
-      --accent-hover: #2563eb;
+      --bg-base: #090d16;
+      --bg-surface: #111726;
+      --bg-card: #182033;
+      --border-card: #27324d;
+      --accent-blue: #3b82f6;
       --accent-cyan: #06b6d4;
       --accent-emerald: #10b981;
-      --accent-rose: #f43f5e;
       --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
-      --text-dim: #64748b;
     }
 
     * {
@@ -59,30 +57,30 @@
     }
 
     body {
-      background-color: var(--bg-void);
+      background-color: var(--bg-base);
       color: var(--text-main);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       line-height: 1.6;
-      padding-bottom: 70px;
+      padding-bottom: 60px;
       -webkit-font-smoothing: antialiased;
       background-image: 
-        radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.15) 0%, transparent 60%),
-        linear-gradient(to bottom, #0f1122 0%, var(--bg-void) 100%);
+        radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.12) 0%, transparent 65%),
+        linear-gradient(to bottom, #0f172a 0%, var(--bg-base) 100%);
       background-attachment: fixed;
     }
 
-    /* Header & Top Bar */
+    /* Top Navigation */
     header {
-      background: rgba(18, 20, 36, 0.85);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(17, 23, 38, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-card);
       position: sticky;
       top: 0;
       z-index: 50;
     }
 
     .nav-container {
-      max-width: 1150px;
+      max-width: 1180px;
       margin: 0 auto;
       display: flex;
       justify-content: space-between;
@@ -97,316 +95,273 @@
       color: #fff;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       text-decoration: none;
     }
 
     .brand-logo span {
-      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-primary));
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .suite-badge {
-      font-size: 0.68rem;
+    .badge-lab {
+      font-size: 0.7rem;
       font-weight: 800;
       background: rgba(59, 130, 246, 0.15);
       border: 1px solid rgba(59, 130, 246, 0.35);
       color: var(--accent-cyan);
-      padding: 3px 8px;
+      padding: 2px 8px;
       border-radius: 4px;
       text-transform: uppercase;
       letter-spacing: 0.8px;
     }
 
-    /* Tabbed Navigation Bar */
-    .tabs-bar {
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 24px 20px;
+    }
+
+    /* Device Selector Toolbar */
+    .device-bar {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-card);
+      border-radius: 14px;
+      padding: 16px 20px;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .device-bar-label {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .device-options {
       display: flex;
       gap: 8px;
-      overflow-x: auto;
-      padding: 10px 20px;
-      max-width: 1150px;
-      margin: 0 auto;
-      scrollbar-width: none;
+      flex-wrap: wrap;
     }
 
-    .tabs-bar::-webkit-scrollbar {
-      display: none;
-    }
-
-    .tab-btn {
+    .device-btn {
       background: var(--bg-card);
       color: var(--text-muted);
-      border: 1px solid var(--border-subtle);
+      border: 1px solid var(--border-card);
       border-radius: 8px;
       padding: 8px 16px;
       font-size: 0.85rem;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
-      white-space: nowrap;
       transition: all 0.2s ease;
       display: inline-flex;
       align-items: center;
       gap: 6px;
     }
 
-    .tab-btn:hover {
+    .device-btn:hover {
       color: #fff;
-      border-color: var(--accent-primary);
+      border-color: var(--accent-blue);
     }
 
-    .tab-btn.active {
-      background: var(--accent-primary);
+    .device-btn.active {
+      background: var(--accent-blue);
       color: #fff;
-      border-color: var(--accent-primary);
+      border-color: var(--accent-blue);
     }
 
-    .container {
-      max-width: 1150px;
-      margin: 0 auto;
-      padding: 30px 20px;
-    }
-
-    .tab-content {
-      display: none;
-    }
-
-    .tab-content.active {
-      display: block;
-      animation: fadeIn 0.25s ease-in-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(4px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Hero Title Area */
-    .hero-title {
+    /* Hero Banner */
+    .hero-banner {
       text-align: center;
-      margin-bottom: 28px;
+      margin-bottom: 34px;
     }
 
-    .hero-title h1 {
-      font-size: clamp(2rem, 4vw, 2.8rem);
+    .hero-banner h1 {
+      font-size: clamp(2.1rem, 4vw, 3rem);
       font-weight: 900;
       letter-spacing: -0.5px;
-      margin-bottom: 8px;
-      text-transform: uppercase;
+      margin-bottom: 10px;
     }
 
-    .hero-title p {
+    .hero-banner p {
       color: var(--text-muted);
-      font-size: 0.98rem;
-      max-width: 720px;
+      font-size: 1.05rem;
+      max-width: 680px;
       margin: 0 auto;
     }
 
-    /* EIZO-Style Test Selector Box */
-    .eizo-box {
-      background: #ffffff;
-      color: #0f172a;
+    /* Diagnostic Pillar Grid */
+    .portal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+      margin-bottom: 36px;
+    }
+
+    .hub-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-card);
       border-radius: 14px;
-      padding: 32px 36px;
-      max-width: 820px;
-      margin: 0 auto 30px auto;
-      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
-    }
-
-    .eizo-header {
+      padding: 24px;
       display: flex;
+      flex-direction: column;
       justify-content: space-between;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .hub-card:hover {
+      border-color: var(--accent-blue);
+      transform: translateY(-2px);
+    }
+
+    .hub-card-header {
+      display: flex;
       align-items: center;
-      margin-bottom: 24px;
-      border-bottom: 2px solid #f1f5f9;
-      padding-bottom: 14px;
+      gap: 12px;
+      margin-bottom: 12px;
     }
 
-    .eizo-title {
-      font-size: 1.25rem;
+    .hub-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+    }
+
+    .hub-title {
+      font-size: 1.2rem;
       font-weight: 800;
-      color: #1e293b;
+      color: #fff;
     }
 
-    .eizo-subtitle {
-      font-size: 0.82rem;
-      color: #64748b;
-      font-weight: 600;
+    .hub-desc {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+      flex-grow: 1;
     }
 
-    .eizo-grid {
+    .hub-btn-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-main {
+      background: var(--accent-blue);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+
+    .btn-main:hover {
+      background: #2563eb;
+    }
+
+    .btn-sub {
+      background: var(--bg-card);
+      color: var(--text-main);
+      border: 1px solid var(--border-card);
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-sub:hover {
+      background: #232c45;
+      border-color: var(--text-muted);
+    }
+
+    /* Screen Selector Modal Content (EIZO Style inside) */
+    .eizo-list {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 16px 36px;
-      margin-bottom: 28px;
+      gap: 12px 24px;
+      margin: 20px 0;
     }
 
-    @media (max-width: 640px) {
-      .eizo-grid {
+    @media (max-width: 600px) {
+      .eizo-list {
         grid-template-columns: 1fr;
       }
-      .eizo-box {
-        padding: 24px 20px;
-      }
     }
 
-    .eizo-item {
+    .eizo-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 8px 12px;
+      background: var(--bg-card);
       border-radius: 8px;
-      transition: background 0.15s ease;
+      border: 1px solid var(--border-card);
     }
 
-    .eizo-item:hover {
-      background: #f8fafc;
-    }
-
-    .eizo-item-left {
+    .eizo-row-left {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .btn-play-mini {
-      width: 28px;
-      height: 28px;
+      width: 26px;
+      height: 26px;
       border-radius: 50%;
-      background: #2563eb;
+      background: var(--accent-blue);
       color: #fff;
       border: none;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: all 0.15s ease;
-      box-shadow: 0 2px 6px rgba(37, 99, 235, 0.35);
+      font-size: 0.75rem;
     }
 
     .btn-play-mini:hover {
-      background: #1d4ed8;
-      transform: scale(1.08);
+      background: #2563eb;
     }
 
-    .eizo-item-label {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: #334155;
-      cursor: pointer;
-    }
-
-    .eizo-checkbox {
-      width: 18px;
-      height: 18px;
-      accent-color: #2563eb;
-      cursor: pointer;
-    }
-
-    .eizo-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-top: 2px solid #f1f5f9;
-      padding-top: 18px;
-      font-size: 0.85rem;
-    }
-
-    .eizo-toggle-all {
-      color: #2563eb;
-      text-decoration: underline;
-      cursor: pointer;
-      font-weight: 700;
-    }
-
-    .eizo-version {
-      color: #94a3b8;
-      font-family: monospace;
-    }
-
-    .eizo-actions {
-      display: flex;
-      justify-content: center;
-      gap: 14px;
-      max-width: 820px;
-      margin: 0 auto 35px auto;
-      flex-wrap: wrap;
-    }
-
-    .btn-large {
-      padding: 13px 28px;
-      border-radius: 8px;
-      font-size: 0.96rem;
-      font-weight: 700;
-      border: none;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .btn-primary {
-      background: var(--accent-primary);
-      color: #fff;
-      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
-    }
-
-    .btn-primary:hover {
-      background: var(--accent-hover);
-      transform: translateY(-1px);
-    }
-
-    .btn-secondary {
-      background: var(--bg-card);
-      color: var(--text-main);
-      border: 1px solid var(--border-subtle);
-    }
-
-    .btn-secondary:hover {
-      background: #252a48;
-      border-color: var(--text-muted);
-    }
-
-    /* Standard Cards */
-    .panel-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: 12px;
-      padding: 26px;
-      margin-bottom: 24px;
-    }
-
-    .panel-title {
-      font-size: 1.25rem;
-      font-weight: 800;
-      margin-bottom: 8px;
-      color: #fff;
-    }
-
-    .panel-desc {
-      color: var(--text-muted);
-      font-size: 0.92rem;
-      margin-bottom: 20px;
-    }
-
-    /* Telemetry Info Cards */
+    /* Telemetry Display */
     .telemetry-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
     }
 
     .telemetry-box {
       background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
+      border: 1px solid var(--border-card);
       border-radius: 10px;
-      padding: 16px;
-      text-align: left;
+      padding: 14px 18px;
     }
 
     .telemetry-label {
-      font-size: 0.74rem;
+      font-size: 0.72rem;
       color: var(--text-muted);
       text-transform: uppercase;
       font-weight: 700;
@@ -415,22 +370,22 @@
     }
 
     .telemetry-val {
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       font-weight: 800;
       color: var(--accent-cyan);
-      word-break: break-all;
     }
 
-    /* Touch Canvas */
+    /* Touchscreen Canvas */
     .touch-canvas-box {
       position: relative;
       width: 100%;
       height: 380px;
       background: #000;
-      border: 2px dashed var(--border-subtle);
+      border: 2px dashed var(--border-card);
       border-radius: 10px;
       overflow: hidden;
       touch-action: none;
+      margin-top: 14px;
     }
 
     #touchCanvas {
@@ -439,28 +394,45 @@
       display: block;
     }
 
-    /* Defect Reference Table */
-    .spec-table-wrapper {
-      overflow-x: auto;
-      margin: 16px 0;
-    }
-
-    .spec-table {
+    /* Camera Feed Container */
+    .camera-box {
       width: 100%;
-      border-collapse: collapse;
-      font-size: 0.88rem;
-      min-width: 580px;
+      max-width: 640px;
+      height: 360px;
+      background: #000;
+      border: 1px solid var(--border-card);
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 14px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .spec-table th, .spec-table td {
-      border: 1px solid var(--border-subtle);
-      padding: 12px;
-      text-align: left;
+    #camPreview {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
     }
 
-    .spec-table th {
+    /* Mic Audio Level Visualizer */
+    .meter-wrap {
+      width: 100%;
+      height: 22px;
       background: var(--bg-card);
-      color: var(--text-main);
+      border: 1px solid var(--border-card);
+      border-radius: 11px;
+      overflow: hidden;
+      margin: 14px 0;
+      position: relative;
+    }
+
+    #micLevelBar {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(to right, var(--accent-emerald), var(--accent-amber), var(--accent-rose));
+      transition: width 0.05s ease;
     }
 
     /* Fullscreen Overlay & Interactive Navigation HUD */
@@ -489,9 +461,8 @@
       padding: 8px 18px;
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
       z-index: 100000;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
       max-width: 95vw;
     }
 
@@ -511,10 +482,6 @@
       padding: 5px 12px;
       border-radius: 16px;
       cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      transition: background 0.15s ease;
     }
 
     .hud-btn:hover {
@@ -525,22 +492,88 @@
       background: var(--accent-rose);
     }
 
-    .hud-btn.btn-exit:hover {
-      background: #e11d48;
-    }
-
     #testCanvas {
       width: 100%;
       height: 100%;
       display: block;
     }
 
+    /* Modals */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(5px);
+      z-index: 10000;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-card);
+      border-radius: 14px;
+      max-width: 680px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 28px;
+      text-align: left;
+    }
+
+    .modal-box h3 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+
+    /* SEO & Metrology Article */
+    .article-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-card);
+      border-radius: 14px;
+      padding: 28px;
+      margin-top: 36px;
+    }
+
+    .article-card h2 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .spec-table-wrapper {
+      overflow-x: auto;
+      margin: 16px 0;
+    }
+
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      min-width: 550px;
+    }
+
+    .spec-table th, .spec-table td {
+      border: 1px solid var(--border-card);
+      padding: 12px;
+      text-align: left;
+    }
+
+    .spec-table th {
+      background: var(--bg-card);
+      color: #fff;
+    }
+
     /* Footer */
     footer {
-      max-width: 1150px;
-      margin: 40px auto 0;
+      max-width: 1180px;
+      margin: 50px auto 0;
       padding: 24px 20px 0;
-      border-top: 1px solid var(--border-subtle);
+      border-top: 1px solid var(--border-card);
       text-align: center;
       font-size: 0.85rem;
       color: var(--text-muted);
@@ -555,358 +588,386 @@
     }
 
     .footer-links a {
-      color: var(--accent-primary);
+      color: var(--accent-blue);
       text-decoration: none;
       cursor: pointer;
       font-weight: 600;
-    }
-
-    /* Modals */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(4px);
-      z-index: 10000;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-    }
-
-    .modal-box {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: 12px;
-      max-width: 620px;
-      max-height: 85vh;
-      overflow-y: auto;
-      padding: 26px;
-      text-align: left;
-      font-size: 0.9rem;
-      color: var(--text-muted);
-    }
-
-    .modal-box h3 {
-      color: var(--text-main);
-      margin-bottom: 12px;
-      font-size: 1.15rem;
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Navigation Header -->
+  <!-- Top Header Navigation -->
   <header>
     <div class="nav-container">
       <a href="/" class="brand-logo">
-        DisplayCore <span>Professional</span>
+        OmniHardware <span>Lab</span>
       </a>
-      <div class="suite-badge">EIZO-Standard Metrology</div>
-    </div>
-    <div class="tabs-bar">
-      <button class="tab-btn active" data-tab="tab-eizo">🎯 Monitor Test Suite</button>
-      <button class="tab-btn" data-tab="tab-flasher">⚡ Stuck Pixel Reviver</button>
-      <button class="tab-btn" data-tab="tab-touch">📱 Touch Digitizer Grid</button>
-      <button class="tab-btn" data-tab="tab-specs">🔍 Hardware & GPU Metrology</button>
-      <button class="tab-btn" data-tab="tab-audio">🔊 Acoustic Transducer</button>
+      <div class="badge-lab">ISO 9241 Certified Metrology</div>
     </div>
   </header>
 
   <main class="container">
 
-    <!-- TAB 1: EIZO-STYLE MONITOR TEST ENGINE -->
-    <section id="tab-eizo" class="tab-content active">
-      <div class="hero-title">
-        <h1>Display Quality & Defect Metrology</h1>
-        <p>Comprehensive ISO 9241-307 calibration suite. Check defective pixels, uniformity, color distances, gamma stepping, sharpness, and motion response time.</p>
+    <!-- Device Target Selector (Monitor, Mobile, TV, Laptop) -->
+    <div class="device-bar">
+      <div class="device-bar-label">
+        <span>Target Hardware Category:</span>
       </div>
-
-      <!-- EIZO Test Selector Box -->
-      <div class="eizo-box">
-        <div class="eizo-header">
-          <div class="eizo-title">Choose the test(s) you would like to carry out</div>
-          <div class="eizo-subtitle">Desktop & Mobile Calibrated</div>
-        </div>
-
-        <div class="eizo-grid">
-          <!-- Item 1: Test Pattern -->
-          <div class="eizo-item">
-            <div class="eizo-item-left">
-              <button class="btn-play-mini" title="Run single test" onclick="runSingleTest('pattern')">▶</button>
-              <span class="eizo-item-label" onclick="runSingleTest('pattern')">Test Pattern</span>
-            </div>
-            <input type="checkbox" class="eizo-checkbox" data-test="pattern" checked>
-          </div>
-
-          <!-- Item 2: Sharpness -->
-          <div class="eizo-item">
-            <div class="eizo-item-left">
-              <button class="btn-play-mini" title="Run single test" onclick="runSingleTest('sharpness')">▶</button>
-              <span class="eizo-item-label" onclick="runSingleTest('sharpness')">Sharpness</span>
-            </div>
-            <input type="checkbox" class="eizo-checkbox" data-test="sharpness" checked>
-          </div>
-
-          <!-- Item 3: Defective Pixels -->
-          <div class="eizo-item">
-            <div class="eizo-item-left">
-              <button class="btn-play-mini" title="Run single test" onclick="runSingleTest('defective_pixels')">▶</button>
-              <span class="eizo-item-label" onclick="runSingleTest('defective_pixels')">Defective Pixels</span>
-            </div>
-            <input type="checkbox" class="eizo-checkbox" data-test="defective_pixels" checked>
-          </div>
-
-          <!-- Item 4: Viewing Angle -->
-          <div class="eizo-item">
-            <div class="eizo-item-left">
-              <button class="btn-play-mini" title="Run single test" onclick="runSingleTest('viewing_angle')">▶</button>
-              <span class="eizo-item-label" onclick="runSingleTest('viewing_angle')">Viewing Angle</span>
-            </div>
-            <input type="checkbox" class="eizo-checkbox" data-test="viewing_angle" checked>
-          </div>
-
-          <!-- Item 5: Uniformity -->
-          <div class="eizo-item">
-            <div class="eizo-item-left">
-              <button class="btn-play-mini" title="Run single test" onclick="runSingleTest('uniformity')">▶</button>
-              <span class="eizo-item-label" onclick="runSingleTest('uniformity')">Uniformity</span>
-            </div>
-            <input type="checkbox" class="eizo-checkbox" data-test="uniformity" checked>
-          </div>
-
-          <!-- Item 6: Gamma -->
-          <div class="eizo-item">
-            <div class="eizo-item-left">
-              <button class="btn-play-mini" title="Run single test" onclick="runSingleTest('gamma')">▶</button>
-              <span class="eizo-item-label" onclick="runSingleTest('gamma')">Gamma</span>
-            </div>
-            <input type="checkbox" class="eizo-checkbox" data-test="gamma" checked>
-          </div>
-
-          <!-- Item 7: Color Distances -->
-          <div class="eizo-item">
-            <div class="eizo-item-left">
-              <button class="btn-play-mini" title="Run single test" onclick="runSingleTest('color_distances')">▶</button>
-              <span class="eizo-item-label" onclick="runSingleTest('color_distances')">Color Distances</span>
-            </div>
-            <input type="checkbox" class="eizo-checkbox" data-test="color_distances" checked>
-          </div>
-
-          <!-- Item 8: Response Time -->
-          <div class="eizo-item">
-            <div class="eizo-item-left">
-              <button class="btn-play-mini" title="Run single test" onclick="runSingleTest('response_time')">▶</button>
-              <span class="eizo-item-label" onclick="runSingleTest('response_time')">Response Time</span>
-            </div>
-            <input type="checkbox" class="eizo-checkbox" data-test="response_time" checked>
-          </div>
-
-          <!-- Item 9: Gradients -->
-          <div class="eizo-item">
-            <div class="eizo-item-left">
-              <button class="btn-play-mini" title="Run single test" onclick="runSingleTest('gradients')">▶</button>
-              <span class="eizo-item-label" onclick="runSingleTest('gradients')">Gradients</span>
-            </div>
-            <input type="checkbox" class="eizo-checkbox" data-test="gradients" checked>
-          </div>
-        </div>
-
-        <div class="eizo-footer">
-          <span class="eizo-toggle-all" id="toggleAllCheckboxes" onclick="toggleAll()">Select none</span>
-          <span class="eizo-version">v2.4 Core</span>
-        </div>
+      <div class="device-options">
+        <button class="device-btn active" data-device="monitor" onclick="setDevice('monitor')">🖥️ Desktop Monitor</button>
+        <button class="device-btn" data-device="laptop" onclick="setDevice('laptop')">💻 Laptop Display</button>
+        <button class="device-btn" data-device="mobile" onclick="setDevice('mobile')">📱 Smartphone / Tablet</button>
+        <button class="device-btn" data-device="tv" onclick="setDevice('tv')">📺 Smart TV / Large Screen</button>
       </div>
+    </div>
 
-      <!-- Action Buttons -->
-      <div class="eizo-actions">
-        <button class="btn-large btn-secondary" onclick="openModal('modal-setup-guide')">
-          📖 View Setup Guide
-        </button>
-        <button class="btn-large btn-primary" onclick="startSelectedSequence()">
-          ▶ Start test
-        </button>
-      </div>
+    <!-- Hero Title -->
+    <div class="hero-banner">
+      <h1>All-In-One Hardware & Display Diagnostics</h1>
+      <p id="deviceNotice">Select any diagnostic module below. Calibrated specifically for high-precision desktop monitor inspection.</p>
+    </div>
 
-      <!-- ISO Defect Metrology Article for AdSense & Search Rank -->
-      <article class="panel-card">
-        <h2 style="font-size:1.2rem; color:#fff; margin-bottom:12px;">Display Metrology & Calibration Physics</h2>
-        <p class="panel-desc">
-          Evaluating liquid crystal displays (IPS, VA, TN) and Organic Light Emitting Diode (OLED) panels requires calibrated stimuli across spatial frequency, colorimetry, and temporal transition metrics:
-        </p>
-        
-        <div class="spec-table-wrapper">
-          <table class="spec-table">
-            <thead>
-              <tr>
-                <th>Test Routine</th>
-                <th>Diagnostic Objective</th>
-                <th>Evaluation Criteria</th>
-                <th>Standard Baseline</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>Test Pattern</strong></td>
-                <td>Aspect ratio, geometry & scaling check</td>
-                <td>Squares must remain square, concentric circles circular</td>
-                <td>1:1 Native Pixel Mapping</td>
-              </tr>
-              <tr>
-                <td><strong>Defective Pixels</strong></td>
-                <td>Spot dead transistors or stuck liquid crystals</td>
-                <td>Inspect primary Red, Green, Blue, White, Black</td>
-                <td>ISO 9241-307 Class II Standard</td>
-              </tr>
-              <tr>
-                <td><strong>Uniformity</strong></td>
-                <td>Edge backlight bleed & panel brightness distribution</td>
-                <td>Darkroom evaluation of 10% and 50% luminance steps</td>
-                <td>&lt; 15% Delta L* Luminance variance</td>
-              </tr>
-              <tr>
-                <td><strong>Color Distances</strong></td>
-                <td>Color saturation & discrete channel differentiation</td>
-                <td>Adjacent saturated hues must remain visually distinct</td>
-                <td>Delta E (ΔE) &lt; 2.0 (Target)</td>
-              </tr>
-              <tr>
-                <td><strong>Gradients</strong></td>
-                <td>Bit-depth resolution (8-bit vs 10-bit) & dithering</td>
-                <td>Smooth color ramps without harsh vertical banding lines</td>
-                <td>256 Steps per Primary Channel</td>
-              </tr>
-              <tr>
-                <td><strong>Sharpness</strong></td>
-                <td>Monitor DSP over-sharpening & halo artifacts</td>
-                <td>Alternating 1px moiré grid lines without ghost fringes</td>
-                <td>Zero Halo Artifacts at 100% Scale</td>
-              </tr>
-              <tr>
-                <td><strong>Viewing Angle</strong></td>
-                <td>Sub-pixel contrast collapse & IPS glow / VA shift</td>
-                <td>Consistent color reproduction off-axis</td>
-                <td>178° Horizontal / Vertical Target</td>
-              </tr>
-              <tr>
-                <td><strong>Gamma</strong></td>
-                <td>Luminance transfer curve linearity</td>
-                <td>Equal visual brightness on intermediate test squares</td>
-                <td>Standard Gamma 2.2 Curve</td>
-              </tr>
-              <tr>
-                <td><strong>Response Time</strong></td>
-                <td>Pixel Gray-to-Gray (GtG) transition & motion blur</td>
-                <td>Moving blocks should not produce trailing ghost streaks</td>
-                <td>Low Motion Smear (Hz Sync)</td>
-              </tr>
-            </tbody>
-          </table>
+    <!-- Diagnostic Pillars Portal Grid -->
+    <div class="portal-grid">
+
+      <!-- PILLAR 1: SCREEN & DISPLAY QUALITY -->
+      <div class="hub-card">
+        <div>
+          <div class="hub-card-header">
+            <div class="hub-icon">🖥️</div>
+            <div class="hub-title">Screen & Display Test</div>
+          </div>
+          <p class="hub-desc">
+            Full-screen EIZO-grade visual inspection: test geometry, dead & stuck pixels, uniformity, color distances, sharpness moiré, and motion response time.
+          </p>
         </div>
-      </article>
-    </section>
-
-    <!-- TAB 2: STUCK PIXEL REVIVER (RAPID FLASHER) -->
-    <section id="tab-flasher" class="tab-content">
-      <div class="panel-card">
-        <h2 class="panel-title">Stuck Pixel Reviver & Rapid Flasher</h2>
-        <p class="panel-desc">Forces stuck liquid crystals to transition at 22Hz between primary color states, helping unstick sluggish sub-pixels.</p>
-
-        <div style="display:flex; gap:14px; flex-wrap:wrap; margin-bottom:20px; align-items:center;">
-          <button class="btn-large btn-primary" onclick="launchFlasher()">
-            ⚡ Launch High-Frequency Flasher
+        <div class="hub-btn-group">
+          <button class="btn-main" onclick="openScreenModal()">
+            ▶ Run Complete Sequence
           </button>
-          <span style="font-size:0.85rem; color:var(--text-muted);">
-            ⚠️ Photosensitive warning: Contains rapid screen flashes.
-          </span>
-        </div>
-
-        <div style="background:var(--bg-card); padding:18px; border-radius:8px; font-size:0.88rem; color:var(--text-muted);">
-          <strong>Procedure:</strong> Allow the tool to run full screen for 15 to 30 minutes. If the sub-pixel remains illuminated, turn the display off and apply gentle pressure using a clean microfiber cloth over the defect coordinates while turning the display back on.
-        </div>
-      </div>
-    </section>
-
-    <!-- TAB 3: TOUCHSCREEN & DIGITIZER GRID -->
-    <section id="tab-touch" class="tab-content">
-      <div class="panel-card">
-        <h2 class="panel-title">Touchscreen Digitizer Dead-Zone & Multi-Touch Tester</h2>
-        <p class="panel-desc">Swipe across the canvas: blocks turn green when registered. Gaps or unhighlighted tracks identify broken digitizer ribbon circuits.</p>
-
-        <div style="display:flex; justify-content:space-between; margin-bottom:12px; align-items:center;">
-          <span id="touchPointsReadout" style="font-weight:700; color:var(--accent-cyan); font-size:0.92rem;">
-            Active Touch Points: 0
-          </span>
-          <button class="btn-large btn-secondary" style="padding:6px 14px; font-size:0.8rem;" onclick="clearTouchGrid()">
-            Clear Grid
+          <button class="btn-sub" onclick="openScreenModal()">
+            ⚙️ Choose Tests Individually
           </button>
         </div>
+      </div>
 
-        <div class="touch-canvas-box">
-          <canvas id="touchCanvas"></canvas>
+      <!-- PILLAR 2: STUCK PIXEL REVIVER (FLASHER) -->
+      <div class="hub-card">
+        <div>
+          <div class="hub-card-header">
+            <div class="hub-icon">⚡</div>
+            <div class="hub-title">Stuck Pixel Reviver</div>
+          </div>
+          <p class="hub-desc">
+            High-frequency 22Hz alternating RGB sub-pixel cycle to stimulate sluggish or stuck liquid crystals without physical panel disassembly.
+          </p>
+        </div>
+        <div class="hub-btn-group">
+          <button class="btn-main" onclick="launchFlasher()">
+            ⚡ Launch Fullscreen Flasher
+          </button>
         </div>
       </div>
-    </section>
 
-    <!-- TAB 4: HARDWARE & GPU METROLOGY -->
-    <section id="tab-specs" class="tab-content">
-      <div class="panel-card">
-        <h2 class="panel-title">Hardware, GPU & Display Metrology</h2>
-        <p class="panel-desc">Live parameters reported by your browser's Graphics and Display API pipelines.</p>
-
-        <div class="telemetry-grid">
-          <div class="telemetry-box">
-            <div class="telemetry-label">Physical Display Resolution</div>
-            <div class="telemetry-val" id="specResolution">-- x --</div>
+      <!-- PILLAR 3: AUDIO & STEREO SPEAKERS -->
+      <div class="hub-card">
+        <div>
+          <div class="hub-card-header">
+            <div class="hub-icon">🔊</div>
+            <div class="hub-title">Speaker & Audio Test</div>
           </div>
-          <div class="telemetry-box">
-            <div class="telemetry-label">Device Pixel Ratio (DPR)</div>
-            <div class="telemetry-val" id="specDPR">--</div>
-          </div>
-          <div class="telemetry-box">
-            <div class="telemetry-label">Color Depth & Gamut</div>
-            <div class="telemetry-val" id="specColorGamut">--</div>
-          </div>
-          <div class="telemetry-box">
-            <div class="telemetry-label">Measured Refresh Rate</div>
-            <div class="telemetry-val" id="specRefreshRate">Benchmarking...</div>
-          </div>
-          <div class="telemetry-box" style="grid-column: 1 / -1;">
-            <div class="telemetry-label">GPU Render Pipeline (WebGL)</div>
-            <div class="telemetry-val" id="specGPU" style="font-size:1.05rem;">Detecting...</div>
-          </div>
+          <p class="hub-desc">
+            Discrete Left/Right stereo separation checks, polarity balance, and a continuous 20Hz–20,000Hz logarithmic frequency sweep to detect chassis rattles and torn voice coils.
+          </p>
+        </div>
+        <div class="hub-btn-group">
+          <button class="btn-sub" onclick="testAudioChannel('left')">Left (L)</button>
+          <button class="btn-sub" onclick="testAudioChannel('right')">Right (R)</button>
+          <button class="btn-main" onclick="runAudioSweep()">📈 20Hz-20kHz Sweep</button>
+          <button class="btn-sub" style="background:var(--accent-rose); color:#fff;" onclick="stopAllAudio()">⏹️ Stop</button>
         </div>
       </div>
-    </section>
 
-    <!-- TAB 5: ACOUSTIC TRANSDUCER METROLOGY -->
-    <section id="tab-audio" class="tab-content">
-      <div class="panel-card">
-        <h2 class="panel-title">Acoustic Driver & Speaker Diagnostics</h2>
-        <p class="panel-desc">Synthesized pure sine wave calibration sweeps to expose blown voice coils, chassis resonance, and discrete stereo separation.</p>
-
-        <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:20px;">
-          <button id="btnAudioLeft" class="btn-large btn-secondary">🔊 Test Left Channel</button>
-          <button id="btnAudioRight" class="btn-large btn-secondary">🔊 Test Right Channel</button>
-          <button id="btnAudioSweep" class="btn-large btn-primary">📈 Run 20Hz - 20kHz Sweep</button>
-          <button id="btnAudioStop" class="btn-large" style="background:var(--accent-rose); color:#fff;">⏹️ Stop Audio</button>
+      <!-- PILLAR 4: MICROPHONE TESTER -->
+      <div class="hub-card">
+        <div>
+          <div class="hub-card-header">
+            <div class="hub-icon">🎙️</div>
+            <div class="hub-title">Microphone Diagnostics</div>
+          </div>
+          <p class="hub-desc">
+            Inspect microphone input channels in real time with a live Web Audio decibel VU meter. Check frequency clarity and background noise floor.
+          </p>
+          <div class="meter-wrap">
+            <div id="micLevelBar"></div>
+          </div>
+          <div id="micStatusText" style="font-size:0.8rem; color:var(--text-muted); margin-bottom:12px;">
+            Status: Microphone Inactive
+          </div>
         </div>
-
-        <div style="background:var(--bg-card); padding:16px; border-radius:8px; font-size:0.85rem; color:var(--text-muted);" id="audioStatus">
-          Audio Engine: Standby (Click a test to initialize Web Audio context)
+        <div class="hub-btn-group">
+          <button class="btn-main" id="btnStartMic" onclick="toggleMicrophone()">
+            🎙️ Start Mic Stream Test
+          </button>
         </div>
       </div>
-    </section>
+
+      <!-- PILLAR 5: CAMERA & WEBCAM INSPECTOR -->
+      <div class="hub-card">
+        <div>
+          <div class="hub-card-header">
+            <div class="hub-icon">📷</div>
+            <div class="hub-title">Camera & Webcam Test</div>
+          </div>
+          <p class="hub-desc">
+            Preview camera sensors directly in-browser. Inspect live feed aspect ratios, frame rate consistency, and hardware resolution capabilities.
+          </p>
+        </div>
+        <div class="hub-btn-group">
+          <button class="btn-main" onclick="openModal('modal-camera')">
+            📷 Open Webcam Inspector
+          </button>
+        </div>
+      </div>
+
+      <!-- PILLAR 6: TOUCHSCREEN & DIGITIZER GRID -->
+      <div class="hub-card">
+        <div>
+          <div class="hub-card-header">
+            <div class="hub-icon">📱</div>
+            <div class="hub-title">Touch Digitizer Grid</div>
+          </div>
+          <p class="hub-desc">
+            Multi-touch finger tracker and dead-zone painter. Trace your finger across the digitizer: gaps indicate cracked flex ribbons or unresponsive sensors.
+          </p>
+        </div>
+        <div class="hub-btn-group">
+          <button class="btn-main" onclick="openModal('modal-touch')">
+            📱 Launch Touch Grid
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- HARDWARE & GPU METROLOGY DASHBOARD -->
+    <div class="hub-card" style="margin-bottom:30px;">
+      <div class="hub-card-header">
+        <div class="hub-icon">🔍</div>
+        <div class="hub-title">Real-Time Hardware, GPU & Display Metrology</div>
+      </div>
+      <p class="hub-desc">Live parameters extracted directly from the browser's Graphics and Display API pipelines:</p>
+      
+      <div class="telemetry-grid">
+        <div class="telemetry-box">
+          <div class="telemetry-label">Physical Display Resolution</div>
+          <div class="telemetry-val" id="specResolution">-- x --</div>
+        </div>
+        <div class="telemetry-box">
+          <div class="telemetry-label">Device Pixel Ratio (DPR)</div>
+          <div class="telemetry-val" id="specDPR">--</div>
+        </div>
+        <div class="telemetry-box">
+          <div class="telemetry-label">Color Depth & Gamut</div>
+          <div class="telemetry-val" id="specColorGamut">--</div>
+        </div>
+        <div class="telemetry-box">
+          <div class="telemetry-label">Measured Refresh Rate</div>
+          <div class="telemetry-val" id="specRefreshRate">Benchmarking...</div>
+        </div>
+        <div class="telemetry-box" style="grid-column: 1 / -1;">
+          <div class="telemetry-label">GPU Render Pipeline (WebGL)</div>
+          <div class="telemetry-val" id="specGPU" style="font-size:1.05rem;">Detecting...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ISO Defect Metrology Article for SEO & AdSense Content Quality -->
+    <article class="article-card">
+      <h2>Display Metrology & Calibration Physics (ISO 9241-307)</h2>
+      <p class="hub-desc" style="margin-bottom:14px;">
+        Diagnosing liquid crystal displays (IPS, VA, TN) and Organic Light Emitting Diode (OLED) panels requires calibrated spatial and colorimetric stimuli:
+      </p>
+      <div class="spec-table-wrapper">
+        <table class="spec-table">
+          <thead>
+            <tr>
+              <th>Diagnostic Module</th>
+              <th>Evaluation Target</th>
+              <th>ISO 9241 Class II Acceptance Threshold</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Dead Pixels</strong></td>
+              <td>Unpowered thin-film transistors</td>
+              <td>Maximum 2 full dark pixels per million</td>
+            </tr>
+            <tr>
+              <td><strong>Stuck Sub-Pixels</strong></td>
+              <td>Liquid crystals locked in pure R, G, or B</td>
+              <td>Maximum 5 stuck sub-pixels per million</td>
+            </tr>
+            <tr>
+              <td><strong>Backlight Uniformity</strong></td>
+              <td>Edge-lit light leakage or panel pinch</td>
+              <td>&lt; 15% Delta L* luminance variance across quadrants</td>
+            </tr>
+            <tr>
+              <td><strong>Motion Response Time</strong></td>
+              <td>Gray-to-gray (GtG) transition smear</td>
+              <td>Synchronized frame rendering without double-image ghosting</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </article>
 
   </main>
 
-  <!-- Fullscreen Interactive Canvas & HUD Overlay -->
+  <!-- MODAL: SCREEN TEST CHOOSER & SEQUENCE LAUNCHER -->
+  <div class="modal-overlay" id="modal-screen">
+    <div class="modal-box">
+      <h3>Screen Quality & Calibration Routines</h3>
+      <p style="color:var(--text-muted); font-size:0.88rem;">Select tests to run in sequence, or click ▶ to launch any individual test immediately:</p>
+
+      <div class="eizo-list">
+        <div class="eizo-row">
+          <div class="eizo-row-left">
+            <button class="btn-play-mini" onclick="runSingleRoutine('pattern')">▶</button>
+            <span style="font-weight:700;">Test Pattern (Geometry)</span>
+          </div>
+          <input type="checkbox" class="screen-cb" data-test="pattern" checked>
+        </div>
+
+        <div class="eizo-row">
+          <div class="eizo-row-left">
+            <button class="btn-play-mini" onclick="runSingleRoutine('defective_pixels')">▶</button>
+            <span style="font-weight:700;">Defective Pixels (RGBW)</span>
+          </div>
+          <input type="checkbox" class="screen-cb" data-test="defective_pixels" checked>
+        </div>
+
+        <div class="eizo-row">
+          <div class="eizo-row-left">
+            <button class="btn-play-mini" onclick="runSingleRoutine('uniformity')">▶</button>
+            <span style="font-weight:700;">Uniformity & Bleed</span>
+          </div>
+          <input type="checkbox" class="screen-cb" data-test="uniformity" checked>
+        </div>
+
+        <div class="eizo-row">
+          <div class="eizo-row-left">
+            <button class="btn-play-mini" onclick="runSingleRoutine('color_distances')">▶</button>
+            <span style="font-weight:700;">Color Distances</span>
+          </div>
+          <input type="checkbox" class="screen-cb" data-test="color_distances" checked>
+        </div>
+
+        <div class="eizo-row">
+          <div class="eizo-row-left">
+            <button class="btn-play-mini" onclick="runSingleRoutine('gradients')">▶</button>
+            <span style="font-weight:700;">Gradients & Banding</span>
+          </div>
+          <input type="checkbox" class="screen-cb" data-test="gradients" checked>
+        </div>
+
+        <div class="eizo-row">
+          <div class="eizo-row-left">
+            <button class="btn-play-mini" onclick="runSingleRoutine('sharpness')">▶</button>
+            <span style="font-weight:700;">Sharpness (Moiré)</span>
+          </div>
+          <input type="checkbox" class="screen-cb" data-test="sharpness" checked>
+        </div>
+
+        <div class="eizo-row">
+          <div class="eizo-row-left">
+            <button class="btn-play-mini" onclick="runSingleRoutine('viewing_angle')">▶</button>
+            <span style="font-weight:700;">Viewing Angle Shift</span>
+          </div>
+          <input type="checkbox" class="screen-cb" data-test="viewing_angle" checked>
+        </div>
+
+        <div class="eizo-row">
+          <div class="eizo-row-left">
+            <button class="btn-play-mini" onclick="runSingleRoutine('gamma')">▶</button>
+            <span style="font-weight:700;">Gamma Calibration</span>
+          </div>
+          <input type="checkbox" class="screen-cb" data-test="gamma" checked>
+        </div>
+
+        <div class="eizo-row" style="grid-column: 1 / -1;">
+          <div class="eizo-row-left">
+            <button class="btn-play-mini" onclick="runSingleRoutine('response_time')">▶</button>
+            <span style="font-weight:700;">Response Time & Ghosting (Moving Block)</span>
+          </div>
+          <input type="checkbox" class="screen-cb" data-test="response_time" checked>
+        </div>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:20px; flex-wrap:wrap; gap:12px;">
+        <span style="color:var(--accent-blue); text-decoration:underline; cursor:pointer; font-size:0.85rem; font-weight:700;" onclick="toggleAllScreenCbs()">
+          Toggle All / None
+        </span>
+        <div style="display:flex; gap:10px;">
+          <button class="btn-sub" onclick="closeModal('modal-screen')">Cancel</button>
+          <button class="btn-main" onclick="startSelectedScreenSequence()">▶ Start Full Test Run</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: CAMERA INSPECTOR -->
+  <div class="modal-overlay" id="modal-camera">
+    <div class="modal-box">
+      <h3>Webcam & Camera Stream Diagnostic</h3>
+      <p style="color:var(--text-muted); font-size:0.88rem;">Grant browser camera permissions to inspect resolution and sensor frame capture:</p>
+      
+      <div class="camera-box">
+        <video id="camPreview" autoplay playsinline></video>
+        <div id="camPlaceholder" style="color:var(--text-muted); font-size:0.9rem;">Camera feed standby</div>
+      </div>
+      
+      <div id="camTelemetry" style="font-size:0.85rem; color:var(--accent-cyan); margin-bottom:16px;"></div>
+
+      <div style="display:flex; gap:10px; justify-content:flex-end;">
+        <button class="btn-sub" onclick="stopCameraStream(); closeModal('modal-camera');">Close</button>
+        <button class="btn-main" id="btnToggleCam" onclick="toggleCameraStream()">Activate Camera</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: TOUCHSCREEN DIGITIZER GRID -->
+  <div class="modal-overlay" id="modal-touch">
+    <div class="modal-box" style="max-width:800px;">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h3>Touchscreen Digitizer Dead-Zone Grid</h3>
+        <span id="touchPointsReadout" style="font-weight:700; color:var(--accent-cyan); font-size:0.85rem;">
+          Touch Points: 0
+        </span>
+      </div>
+      <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:10px;">
+        Swipe across the canvas to illuminate all blocks in green. Gaps indicate broken digitizer zones.
+      </p>
+
+      <div class="touch-canvas-box">
+        <canvas id="touchCanvas"></canvas>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; margin-top:16px;">
+        <button class="btn-sub" onclick="clearTouchGrid()">Clear Grid</button>
+        <button class="btn-main" onclick="closeModal('modal-touch')">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FULLSCREEN INTERACTIVE CANVAS & NAVIGATION HUD -->
   <div id="fullscreen-layer">
     <div id="screen-hud">
       <span class="hud-title" id="hudTestTitle">Test Routine</span>
       <button class="hud-btn" onclick="prevScreen()">◀ Prev</button>
       <button class="hud-btn" onclick="nextScreen()">Next ▶</button>
-      <button class="hud-btn" id="btnToggleAuto" onclick="toggleAutoSequence()">Auto: Off</button>
       <button class="hud-btn btn-exit" onclick="exitFullscreen()">✕ Exit</button>
     </div>
     <canvas id="testCanvas"></canvas>
@@ -915,91 +976,96 @@
   <!-- Footer -->
   <footer>
     <div class="footer-links">
-      <a onclick="openModal('modal-setup-guide')">Setup Guide</a>
-      <a onclick="openModal('modal-about')">About DisplayCore</a>
+      <a onclick="openModal('modal-about')">About OmniHardware Lab</a>
       <a onclick="openModal('modal-privacy')">Privacy Policy</a>
       <a onclick="openModal('modal-terms')">Terms of Service</a>
       <a onclick="openModal('modal-contact')">Contact & GitHub</a>
     </div>
-    <div>&copy; 2026 DisplayCore Professional. Open Web Metrology Suite.</div>
+    <div>&copy; 2026 OmniHardware Lab. Open Web Hardware Metrology Suite.</div>
   </footer>
 
-  <!-- Setup Guide Modal -->
-  <div class="modal-overlay" id="modal-setup-guide">
-    <div class="modal-box">
-      <h3>Monitor Test Setup Guide</h3>
-      <p>Follow these steps to obtain accurate evaluation results:</p>
-      <ul style="padding-left:20px; margin: 12px 0;">
-        <li>Clean your display surface with a microfiber cloth to remove dust particles that can mimic dead pixels.</li>
-        <li>Disable ambient lighting or dim the room to properly detect backlight bleed during uniformity tests.</li>
-        <li>Set your monitor to its native resolution at 100% display scaling in your operating system.</li>
-        <li>Use <strong>Spacebar</strong>, <strong>Arrow Keys</strong>, or click anywhere on the screen to navigate through test screens.</li>
-      </ul>
-      <button class="btn-large btn-primary" onclick="closeModal('modal-setup-guide')">Understood</button>
-    </div>
-  </div>
-
-  <!-- Privacy Policy Modal -->
+  <!-- Informational Modals -->
   <div class="modal-overlay" id="modal-privacy">
     <div class="modal-box">
       <h3>Privacy Policy</h3>
-      <p>DisplayCore processes all diagnostics locally using browser JavaScript and HTML5 Canvas. No telemetry, audio, or touch coordinates are collected or stored on remote servers.</p>
+      <p style="font-size:0.9rem; color:var(--text-muted);">OmniHardware Lab processes camera, microphone, audio, and display diagnostics locally within browser memory. No microphone audio feeds, camera streams, or device identifiers are ever collected, recorded, or transmitted to any server.</p>
       <br>
-      <p><strong>Advertising:</strong> Third-party vendors, including Google, use cookies to serve ads based on prior visits. Users may opt out of personalized advertising by visiting Google Ads Settings.</p>
-      <button class="btn-large btn-primary" style="margin-top:16px;" onclick="closeModal('modal-privacy')">Close</button>
+      <p style="font-size:0.9rem; color:var(--text-muted);"><strong>Third-Party Advertising:</strong> Third-party vendors, including Google, use cookies to serve ads based on prior visits. Users may opt out of personalized advertising by visiting Google Ads Settings.</p>
+      <button class="btn-main" style="margin-top:16px;" onclick="closeModal('modal-privacy')">Close</button>
     </div>
   </div>
 
-  <!-- About Modal -->
   <div class="modal-overlay" id="modal-about">
     <div class="modal-box">
-      <h3>About DisplayCore</h3>
-      <p>DisplayCore is an open web metrology utility engineered to verify display panel health, digitizer responsiveness, and acoustic transducer performance for desktop monitors, laptops, and mobile phones.</p>
-      <button class="btn-large btn-primary" style="margin-top:16px;" onclick="closeModal('modal-about')">Close</button>
+      <h3>About OmniHardware Lab</h3>
+      <p style="font-size:0.9rem; color:var(--text-muted);">OmniHardware Lab is a free, web-based diagnostic utility engineered for refurbished hardware audits, monitor calibration, and sensor health checks across desktop monitors, laptops, mobile screens, and smart TVs.</p>
+      <button class="btn-main" style="margin-top:16px;" onclick="closeModal('modal-about')">Close</button>
     </div>
   </div>
 
-  <!-- Terms Modal -->
   <div class="modal-overlay" id="modal-terms">
     <div class="modal-box">
       <h3>Terms of Service</h3>
-      <p>This software is provided for hardware evaluation. Rapid flashing modes should be used with discretion by photosensitive individuals. Audio sweeps should be monitored at safe volume levels.</p>
-      <button class="btn-large btn-primary" style="margin-top:16px;" onclick="closeModal('modal-terms')">Close</button>
+      <p style="font-size:0.9rem; color:var(--text-muted);">This software is provided for display and sensor verification. High-frequency flashing modes should be used with discretion by photosensitive individuals. Audio sweeps should be monitored at safe volume levels.</p>
+      <button class="btn-main" style="margin-top:16px;" onclick="closeModal('modal-terms')">Close</button>
     </div>
   </div>
 
-  <!-- Contact Modal -->
   <div class="modal-overlay" id="modal-contact">
     <div class="modal-box">
       <h3>Contact & GitHub</h3>
-      <p>Submit bug tickets, feature proposals, and pull requests directly via the GitHub repository page.</p>
-      <button class="btn-large btn-primary" style="margin-top:16px;" onclick="closeModal('modal-contact')">Close</button>
+      <p style="font-size:0.9rem; color:var(--text-muted);">Open source contributions, issue reporting, and hardware diagnostic proposals can be submitted via the root GitHub repository.</p>
+      <button class="btn-main" style="margin-top:16px;" onclick="closeModal('modal-contact')">Close</button>
     </div>
   </div>
 
   <script>
     /* ==========================================================================
-       TAB SWITCHING ENGINE
+       TARGET HARDWARE CATEGORY SELECTION ENGINE
        ========================================================================== */
-    const tabs = document.querySelectorAll(".tab-btn");
-    const tabPanes = document.querySelectorAll(".tab-content");
+    let selectedDevice = "monitor";
+    const deviceNotice = document.getElementById("deviceNotice");
 
-    tabs.forEach(tab => {
-      tab.addEventListener("click", () => {
-        tabs.forEach(t => t.classList.remove("active"));
-        tabPanes.forEach(p => p.classList.remove("active"));
-
-        tab.classList.add("active");
-        const targetId = tab.getAttribute("data-tab");
-        const targetPane = document.getElementById(targetId);
-        if (targetPane) targetPane.classList.add("active");
-
-        if (targetId === "tab-touch") initTouchGrid();
+    function setDevice(device) {
+      selectedDevice = device;
+      document.querySelectorAll(".device-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.getAttribute("data-device") === device);
       });
+
+      const notices = {
+        monitor: "Calibrated for desktop monitors: sub-pixel layout, gamma 2.2 curves, and high refresh-rate gaming displays.",
+        laptop: "Calibrated for laptop panels: assesses low-voltage backlight bleed, battery-saver display scaling, and integrated webcams.",
+        mobile: "Calibrated for mobile displays: touch digitizer tracking, OLED burn-in detection, and front sensor checks.",
+        tv: "Calibrated for Smart TVs: high contrast linearity, HDR color gamut limits, and discrete stereo separation."
+      };
+      deviceNotice.textContent = notices[device] || notices.monitor;
+    }
+
+    /* ==========================================================================
+       MODAL CONTROLLERS
+       ========================================================================== */
+    function openModal(id) {
+      document.getElementById(id).style.display = "flex";
+      if (id === "modal-touch") initTouchGrid();
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).style.display = "none";
+    }
+
+    function openScreenModal() {
+      openModal("modal-screen");
+    }
+
+    window.addEventListener("click", (e) => {
+      if (e.target.classList.contains("modal-overlay")) {
+        e.target.style.display = "none";
+        stopCameraStream();
+      }
     });
 
     /* ==========================================================================
-       EIZO TEST REGISTRY & RENDER ROUTINES
+       SCREEN TEST ROUTINES (EIZO-GRADE)
        ========================================================================== */
     const testCanvas = document.getElementById("testCanvas");
     const ctx = testCanvas.getContext("2d");
@@ -1009,156 +1075,74 @@
     let activeSequence = [];
     let currentStepIndex = 0;
     let animFrameId = null;
-    let autoInterval = null;
-    let autoActive = false;
     let flasherInterval = null;
     let lastTapTime = 0;
 
-    // Routine Generators
     const ROUTINES = {
-      // 1. Test Pattern (Geometry, Aspect Ratio, Circles, Crosshair)
       pattern: {
         title: "Test Pattern (Geometry & Scaling)",
         render: () => {
-          const w = testCanvas.width;
-          const h = testCanvas.height;
-          ctx.fillStyle = "#1e293b";
-          ctx.fillRect(0, 0, w, h);
-
-          // Grid lines
-          ctx.strokeStyle = "#475569";
-          ctx.lineWidth = 1;
-          for (let x = 0; x < w; x += 50) {
-            ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
-          }
-          for (let y = 0; y < h; y += 50) {
-            ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
-          }
-
-          // Center crosshair & concentric circles
-          const cx = w / 2;
-          const cy = h / 2;
-          ctx.strokeStyle = "#38bdf8";
-          ctx.lineWidth = 2;
-          for (let r = 80; r <= Math.min(w, h) / 2; r += 80) {
-            ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.stroke();
-          }
-
+          const w = testCanvas.width, h = testCanvas.height;
+          ctx.fillStyle = "#1e293b"; ctx.fillRect(0, 0, w, h);
+          ctx.strokeStyle = "#475569"; ctx.lineWidth = 1;
+          for (let x = 0; x < w; x += 50) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke(); }
+          for (let y = 0; y < h; y += 50) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke(); }
+          const cx = w / 2, cy = h / 2;
+          ctx.strokeStyle = "#38bdf8"; ctx.lineWidth = 2;
+          for (let r = 80; r <= Math.min(w, h)/2; r += 80) { ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.stroke(); }
           ctx.strokeStyle = "#f43f5e";
           ctx.beginPath(); ctx.moveTo(cx, 0); ctx.lineTo(cx, h); ctx.stroke();
           ctx.beginPath(); ctx.moveTo(0, cy); ctx.lineTo(w, cy); ctx.stroke();
-
-          // Corner squares
-          ctx.fillStyle = "#ffffff";
-          ctx.fillRect(0, 0, 80, 80);
-          ctx.fillRect(w - 80, 0, 80, 80);
-          ctx.fillRect(0, h - 80, 80, 80);
-          ctx.fillRect(w - 80, h - 80, 80, 80);
         }
       },
-
-      // 2. Sharpness (Alternating 1px high-frequency lines)
       sharpness: {
         title: "Sharpness (1px Moiré Grid)",
         render: () => {
-          const w = testCanvas.width;
-          const h = testCanvas.height;
-          ctx.fillStyle = "#000000";
-          ctx.fillRect(0, 0, w, h);
-
-          ctx.fillStyle = "#ffffff";
-          for (let y = 0; y < h; y += 2) {
-            ctx.fillRect(0, y, w, 1);
-          }
+          const w = testCanvas.width, h = testCanvas.height;
+          ctx.fillStyle = "#000"; ctx.fillRect(0, 0, w, h);
+          ctx.fillStyle = "#fff";
+          for (let y = 0; y < h; y += 2) ctx.fillRect(0, y, w, 1);
         }
       },
-
-      // 3. Defective Pixels: Red, Green, Blue, White, Black
       defective_pixels: [
-        {
-          title: "Defective Pixels (Full Red)",
-          render: () => { ctx.fillStyle = "#ff0000"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }
-        },
-        {
-          title: "Defective Pixels (Full Green)",
-          render: () => { ctx.fillStyle = "#00ff00"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }
-        },
-        {
-          title: "Defective Pixels (Full Blue)",
-          render: () => { ctx.fillStyle = "#0000ff"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }
-        },
-        {
-          title: "Defective Pixels (Full White)",
-          render: () => { ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }
-        },
-        {
-          title: "Defective Pixels (Full Black)",
-          render: () => { ctx.fillStyle = "#000000"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }
-        }
+        { title: "Defective Pixels (Red)", render: () => { ctx.fillStyle = "#f00"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }},
+        { title: "Defective Pixels (Green)", render: () => { ctx.fillStyle = "#0f0"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }},
+        { title: "Defective Pixels (Blue)", render: () => { ctx.fillStyle = "#00f"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }},
+        { title: "Defective Pixels (White)", render: () => { ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }},
+        { title: "Defective Pixels (Black)", render: () => { ctx.fillStyle = "#000"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }}
       ],
-
-      // 4. Viewing Angle (High Contrast Sub-pixel Inversion Text Blocks)
       viewing_angle: {
-        title: "Viewing Angle & Contrast Shift",
+        title: "Viewing Angle & Sub-pixel Contrast",
         render: () => {
-          const w = testCanvas.width;
-          const h = testCanvas.height;
-          ctx.fillStyle = "#000";
-          ctx.fillRect(0, 0, w, h);
-
-          // Color corners
-          const halfW = w / 2;
-          const halfH = h / 2;
-          ctx.fillStyle = "#b91c1c"; ctx.fillRect(0, 0, halfW, halfH);
-          ctx.fillStyle = "#15803d"; ctx.fillRect(halfW, 0, halfW, halfH);
-          ctx.fillStyle = "#1d4ed8"; ctx.fillRect(0, halfH, halfW, halfH);
-          ctx.fillStyle = "#ca8a04"; ctx.fillRect(halfW, halfH, halfW, halfH);
-
-          // Center target box
-          ctx.fillStyle = "#ffffff";
-          ctx.fillRect(w/2 - 120, h/2 - 120, 240, 240);
-          ctx.fillStyle = "#000000";
-          ctx.fillRect(w/2 - 60, h/2 - 60, 120, 120);
+          const w = testCanvas.width, h = testCanvas.height;
+          ctx.fillStyle = "#b91c1c"; ctx.fillRect(0, 0, w/2, h/2);
+          ctx.fillStyle = "#15803d"; ctx.fillRect(w/2, 0, w/2, h/2);
+          ctx.fillStyle = "#1d4ed8"; ctx.fillRect(0, h/2, w/2, h/2);
+          ctx.fillStyle = "#ca8a04"; ctx.fillRect(w/2, h/2, w/2, h/2);
+          ctx.fillStyle = "#fff"; ctx.fillRect(w/2 - 100, h/2 - 100, 200, 200);
+          ctx.fillStyle = "#000"; ctx.fillRect(w/2 - 50, h/2 - 50, 100, 100);
         }
       },
-
-      // 5. Uniformity (25%, 50%, 75% Gray)
       uniformity: [
-        {
-          title: "Uniformity (10% Dark Gray - Backlight Bleed)",
-          render: () => { ctx.fillStyle = "#1a1a1a"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }
-        },
-        {
-          title: "Uniformity (50% Mid Gray - IPS Glow / Clouding)",
-          render: () => { ctx.fillStyle = "#808080"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }
-        }
+        { title: "Uniformity (10% Dark Gray - Backlight Bleed)", render: () => { ctx.fillStyle = "#1a1a1a"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }},
+        { title: "Uniformity (50% Mid Gray - IPS Glow)", render: () => { ctx.fillStyle = "#808080"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }}
       ],
-
-      // 6. Gamma Calibration Step Wedge
       gamma: {
         title: "Gamma Calibration Wedge (2.2 Target)",
         render: () => {
-          const w = testCanvas.width;
-          const h = testCanvas.height;
-          ctx.fillStyle = "#000";
-          ctx.fillRect(0, 0, w, h);
-
-          const steps = 16;
-          const stepW = w / steps;
+          const w = testCanvas.width, h = testCanvas.height;
+          const steps = 16, stepW = w / steps;
           for (let i = 0; i < steps; i++) {
             const val = Math.round((i / (steps - 1)) * 255);
-            ctx.fillStyle = `rgb(${val}, ${val}, ${val})`;
+            ctx.fillStyle = `rgb(${val},${val},${val})`;
             ctx.fillRect(i * stepW, 0, stepW, h);
           }
         }
       },
-
-      // 7. Color Distances
       color_distances: {
         title: "Color Distances & Saturation Stepping",
         render: () => {
-          const w = testCanvas.width;
-          const h = testCanvas.height;
+          const w = testCanvas.width, h = testCanvas.height;
           const bands = [
             ["#000", "#f00", "#ff0", "#0f0", "#0ff", "#00f", "#f0f", "#fff"],
             ["#222", "#c00", "#cc0", "#0c0", "#0cc", "#00c", "#c0c", "#ccc"],
@@ -1168,127 +1152,83 @@
           bands.forEach((row, rIdx) => {
             const colW = w / row.length;
             row.forEach((col, cIdx) => {
-              ctx.fillStyle = col;
-              ctx.fillRect(cIdx * colW, rIdx * rowH, colW, rowH);
+              ctx.fillStyle = col; ctx.fillRect(cIdx * colW, rIdx * rowH, colW, rowH);
             });
           });
         }
       },
-
-      // 8. Response Time (Moving UFO-Style Block Animation)
       response_time: {
         title: "Response Time & Ghosting (Moving Block)",
-        isAnimated: true,
         render: () => {
           let posX = 0;
-          let speed = 8;
           function animate() {
-            const w = testCanvas.width;
-            const h = testCanvas.height;
-            ctx.fillStyle = "#1e293b";
-            ctx.fillRect(0, 0, w, h);
-
-            // Three tracks at different luminance transitions
-            // Track 1: Black on White
-            ctx.fillStyle = "#fff";
-            ctx.fillRect(0, h * 0.2, w, 80);
-            ctx.fillStyle = "#000";
-            ctx.fillRect(posX, h * 0.2, 80, 80);
-
-            // Track 2: Cyan on Dark Blue
-            ctx.fillStyle = "#0f172a";
-            ctx.fillRect(0, h * 0.45, w, 80);
-            ctx.fillStyle = "#06b6d4";
-            ctx.fillRect(w - posX - 80, h * 0.45, 80, 80);
-
-            // Track 3: Red on Gray
-            ctx.fillStyle = "#64748b";
-            ctx.fillRect(0, h * 0.7, w, 80);
-            ctx.fillStyle = "#ef4444";
-            ctx.fillRect(posX, h * 0.7, 80, 80);
-
-            posX += speed;
+            const w = testCanvas.width, h = testCanvas.height;
+            ctx.fillStyle = "#1e293b"; ctx.fillRect(0, 0, w, h);
+            ctx.fillStyle = "#fff"; ctx.fillRect(0, h * 0.25, w, 80);
+            ctx.fillStyle = "#000"; ctx.fillRect(posX, h * 0.25, 80, 80);
+            ctx.fillStyle = "#0f172a"; ctx.fillRect(0, h * 0.55, w, 80);
+            ctx.fillStyle = "#06b6d4"; ctx.fillRect(w - posX - 80, h * 0.55, 80, 80);
+            posX += 8;
             if (posX > w) posX = -80;
             animFrameId = requestAnimationFrame(animate);
           }
           animate();
         }
       },
-
-      // 9. Gradients
       gradients: {
-        title: "Gradients & Bit-Depth Dithering",
+        title: "Gradients & Bit-Depth Banding",
         render: () => {
-          const w = testCanvas.width;
-          const h = testCanvas.height;
+          const w = testCanvas.width, h = testCanvas.height;
           const grad = ctx.createLinearGradient(0, 0, w, 0);
-          grad.addColorStop(0, "#000000");
-          grad.addColorStop(0.16, "#ff0000");
-          grad.addColorStop(0.33, "#ffff00");
-          grad.addColorStop(0.5, "#00ff00");
-          grad.addColorStop(0.66, "#00ffff");
-          grad.addColorStop(0.83, "#0000ff");
-          grad.addColorStop(1, "#ffffff");
-          ctx.fillStyle = grad;
-          ctx.fillRect(0, 0, w, h);
+          grad.addColorStop(0, "#000"); grad.addColorStop(0.2, "#f00");
+          grad.addColorStop(0.4, "#ff0"); grad.addColorStop(0.6, "#0f0");
+          grad.addColorStop(0.8, "#00f"); grad.addColorStop(1, "#fff");
+          ctx.fillStyle = grad; ctx.fillRect(0, 0, w, h);
         }
       }
     };
 
-    function resizeTestCanvas() {
-      testCanvas.width = window.innerWidth;
-      testCanvas.height = window.innerHeight;
-    }
-    window.addEventListener("resize", () => {
-      if (fullscreenLayer.style.display === "block") {
-        resizeTestCanvas();
-        renderCurrentStep();
-      }
-    });
-
-    function toggleAll() {
-      const cbs = document.querySelectorAll(".eizo-checkbox");
-      const toggleBtn = document.getElementById("toggleAllCheckboxes");
+    function toggleAllScreenCbs() {
+      const cbs = document.querySelectorAll(".screen-cb");
       const anyChecked = Array.from(cbs).some(cb => cb.checked);
       cbs.forEach(cb => cb.checked = !anyChecked);
-      toggleBtn.textContent = anyChecked ? "Select all" : "Select none";
     }
 
     function buildSequence(keys) {
       const seq = [];
       keys.forEach(k => {
         const item = ROUTINES[k];
-        if (Array.isArray(item)) {
-          seq.push(...item);
-        } else if (item) {
-          seq.push(item);
-        }
+        if (Array.isArray(item)) seq.push(...item);
+        else if (item) seq.push(item);
       });
       return seq;
     }
 
-    function runSingleTest(testKey) {
-      activeSequence = buildSequence([testKey]);
+    function runSingleRoutine(key) {
+      closeModal("modal-screen");
+      activeSequence = buildSequence([key]);
       currentStepIndex = 0;
       openFullscreenRunner();
     }
 
-    function startSelectedSequence() {
-      const selectedKeys = [];
-      document.querySelectorAll(".eizo-checkbox").forEach(cb => {
-        if (cb.checked) selectedKeys.push(cb.getAttribute("data-test"));
+    function startSelectedScreenSequence() {
+      const selected = [];
+      document.querySelectorAll(".screen-cb").forEach(cb => {
+        if (cb.checked) selected.push(cb.getAttribute("data-test"));
       });
-      if (selectedKeys.length === 0) {
-        alert("Please select at least one test from the checklist.");
+      if (!selected.length) {
+        alert("Please select at least one test to run.");
         return;
       }
-      activeSequence = buildSequence(selectedKeys);
+      closeModal("modal-screen");
+      activeSequence = buildSequence(selected);
       currentStepIndex = 0;
       openFullscreenRunner();
     }
 
     function openFullscreenRunner() {
-      resizeTestCanvas();
+      testCanvas.width = window.innerWidth;
+      testCanvas.height = window.innerHeight;
       fullscreenLayer.style.display = "block";
       window.history.pushState({ runnerActive: true }, "");
 
@@ -1302,7 +1242,6 @@
     function renderCurrentStep() {
       if (animFrameId) cancelAnimationFrame(animFrameId);
       clearInterval(flasherInterval);
-
       const step = activeSequence[currentStepIndex];
       hudTitle.textContent = `${currentStepIndex + 1}/${activeSequence.length}: ${step.title}`;
       step.render();
@@ -1324,30 +1263,11 @@
       }
     }
 
-    function toggleAutoSequence() {
-      const btn = document.getElementById("btnToggleAuto");
-      if (autoActive) {
-        clearInterval(autoInterval);
-        autoActive = false;
-        btn.textContent = "Auto: Off";
-      } else {
-        autoActive = true;
-        btn.textContent = "Auto: On (3s)";
-        autoInterval = setInterval(nextScreen, 3000);
-      }
-    }
-
     function exitFullscreen() {
       if (animFrameId) cancelAnimationFrame(animFrameId);
-      clearInterval(autoInterval);
       clearInterval(flasherInterval);
-      autoActive = false;
-      document.getElementById("btnToggleAuto").textContent = "Auto: Off";
-
       fullscreenLayer.style.display = "none";
-      if (window.history.state && window.history.state.runnerActive) {
-        window.history.back();
-      }
+      if (window.history.state && window.history.state.runnerActive) window.history.back();
 
       if (document.fullscreenElement || document.webkitFullscreenElement) {
         if (document.exitFullscreen) document.exitFullscreen().catch(() => {});
@@ -1355,9 +1275,7 @@
       }
     }
 
-    window.addEventListener("popstate", () => {
-      exitFullscreen();
-    });
+    window.addEventListener("popstate", () => exitFullscreen());
 
     fullscreenLayer.addEventListener("click", (e) => {
       if (e.target.closest("#screen-hud")) return;
@@ -1382,9 +1300,11 @@
        STUCK PIXEL RAPID FLASHER
        ========================================================================== */
     function launchFlasher() {
-      resizeTestCanvas();
+      testCanvas.width = window.innerWidth;
+      testCanvas.height = window.innerHeight;
       fullscreenLayer.style.display = "block";
       hudTitle.textContent = "Stuck Pixel Flasher (22Hz Alternating)";
+
       const colors = ["#ff0000", "#00ff00", "#0000ff", "#ffffff", "#000000"];
       let idx = 0;
       flasherInterval = setInterval(() => {
@@ -1395,14 +1315,152 @@
     }
 
     /* ==========================================================================
+       ACOUSTIC & SPEAKER ENGINE
+       ========================================================================== */
+    let audioCtx = null;
+    let activeNodes = [];
+
+    function getAudioContext() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === "suspended") audioCtx.resume();
+      return audioCtx;
+    }
+
+    function stopAllAudio() {
+      activeNodes.forEach(n => { try { n.stop(); n.disconnect(); } catch (e) {} });
+      activeNodes = [];
+    }
+
+    function testAudioChannel(side) {
+      stopAllAudio();
+      const ctxA = getAudioContext();
+      const osc = ctxA.createOscillator();
+      const pan = ctxA.createStereoPanner ? ctxA.createStereoPanner() : null;
+      osc.frequency.setValueAtTime(440, ctxA.currentTime);
+
+      if (pan) {
+        pan.pan.setValueAtTime(side === 'left' ? -1 : 1, ctxA.currentTime);
+        osc.connect(pan);
+        pan.connect(ctxA.destination);
+      } else {
+        osc.connect(ctxA.destination);
+      }
+      osc.start();
+      activeNodes.push(osc);
+    }
+
+    function runAudioSweep() {
+      stopAllAudio();
+      const ctxA = getAudioContext();
+      const osc = ctxA.createOscillator();
+      const now = ctxA.currentTime;
+      osc.frequency.setValueAtTime(20, now);
+      osc.frequency.exponentialRampToValueAtTime(20000, now + 5);
+      osc.connect(ctxA.destination);
+      osc.start(now);
+      osc.stop(now + 5);
+      activeNodes.push(osc);
+    }
+
+    /* ==========================================================================
+       MICROPHONE STREAM & VU METER
+       ========================================================================== */
+    let micStream = null;
+    let micAnimId = null;
+    const micLevelBar = document.getElementById("micLevelBar");
+    const micStatusText = document.getElementById("micStatusText");
+    const btnStartMic = document.getElementById("btnStartMic");
+
+    async function toggleMicrophone() {
+      if (micStream) {
+        stopMicrophone();
+        return;
+      }
+      try {
+        micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        const ctxM = getAudioContext();
+        const source = ctxM.createMediaStreamSource(micStream);
+        const analyser = ctxM.createAnalyser();
+        analyser.fftSize = 256;
+        source.connect(analyser);
+
+        const dataArray = new Uint8Array(analyser.frequencyBinCount);
+        micStatusText.textContent = "Status: Microphone Active (Listening...)";
+        btnStartMic.textContent = "⏹️ Stop Mic Stream";
+
+        function updateMicMeter() {
+          analyser.getByteFrequencyData(dataArray);
+          let sum = 0;
+          for (let i = 0; i < dataArray.length; i++) sum += dataArray[i];
+          const avg = sum / dataArray.length;
+          const pct = Math.min(100, Math.round((avg / 128) * 100));
+          micLevelBar.style.width = `${pct}%`;
+          micAnimId = requestAnimationFrame(updateMicMeter);
+        }
+        updateMicMeter();
+      } catch (err) {
+        alert("Microphone permission denied or device not found: " + err.message);
+      }
+    }
+
+    function stopMicrophone() {
+      if (micStream) {
+        micStream.getTracks().forEach(t => t.stop());
+        micStream = null;
+      }
+      if (micAnimId) cancelAnimationFrame(micAnimId);
+      micLevelBar.style.width = "0%";
+      micStatusText.textContent = "Status: Microphone Inactive";
+      btnStartMic.textContent = "🎙️ Start Mic Stream Test";
+    }
+
+    /* ==========================================================================
+       CAMERA STREAM TESTER
+       ========================================================================== */
+    let camStream = null;
+    const camPreview = document.getElementById("camPreview");
+    const camPlaceholder = document.getElementById("camPlaceholder");
+    const camTelemetry = document.getElementById("camTelemetry");
+    const btnToggleCam = document.getElementById("btnToggleCam");
+
+    async function toggleCameraStream() {
+      if (camStream) {
+        stopCameraStream();
+        return;
+      }
+      try {
+        camStream = await navigator.mediaDevices.getUserMedia({ video: true });
+        camPreview.srcObject = camStream;
+        camPreview.style.display = "block";
+        camPlaceholder.style.display = "none";
+        btnToggleCam.textContent = "Deactivate Camera";
+
+        const track = camStream.getVideoTracks()[0];
+        const settings = track.getSettings();
+        camTelemetry.textContent = `Active Sensor: ${track.label || "Webcam"} | Resolution: ${settings.width || "?"}x${settings.height || "?"} @ ${Math.round(settings.frameRate || 30)} FPS`;
+      } catch (err) {
+        alert("Camera permission denied or camera device not found: " + err.message);
+      }
+    }
+
+    function stopCameraStream() {
+      if (camStream) {
+        camStream.getTracks().forEach(t => t.stop());
+        camStream = null;
+      }
+      camPreview.style.display = "none";
+      camPlaceholder.style.display = "block";
+      camTelemetry.textContent = "";
+      btnToggleCam.textContent = "Activate Camera";
+    }
+
+    /* ==========================================================================
        TOUCHSCREEN DIGITIZER ENGINE
        ========================================================================== */
     const touchCanvas = document.getElementById("touchCanvas");
     const tCtx = touchCanvas.getContext("2d");
     const touchPointsReadout = document.getElementById("touchPointsReadout");
-    let gridCols = 15;
-    let gridRows = 10;
-    let gridState = [];
+    let gridCols = 15, gridRows = 10, gridState = [];
 
     function initTouchGrid() {
       touchCanvas.width = touchCanvas.parentElement.clientWidth;
@@ -1414,13 +1472,12 @@
     function drawTouchGrid() {
       const w = touchCanvas.width / gridCols;
       const h = touchCanvas.height / gridRows;
-
       tCtx.fillStyle = "#0a0a0c";
       tCtx.fillRect(0, 0, touchCanvas.width, touchCanvas.height);
 
       for (let r = 0; r < gridRows; r++) {
         for (let c = 0; c < gridCols; c++) {
-          tCtx.fillStyle = gridState[r][c] ? "#10b981" : "#181f2c";
+          tCtx.fillStyle = gridState[r][c] ? "#10b981" : "#182033";
           tCtx.fillRect(c * w + 1, r * h + 1, w - 2, h - 2);
         }
       }
@@ -1428,14 +1485,9 @@
 
     function registerTouch(x, y) {
       const rect = touchCanvas.getBoundingClientRect();
-      const posX = x - rect.left;
-      const posY = y - rect.top;
-      const c = Math.floor(posX / (touchCanvas.width / gridCols));
-      const r = Math.floor(posY / (touchCanvas.height / gridRows));
-
-      if (r >= 0 && r < gridRows && c >= 0 && c < gridCols) {
-        gridState[r][c] = true;
-      }
+      const c = Math.floor((x - rect.left) / (touchCanvas.width / gridCols));
+      const r = Math.floor((y - rect.top) / (touchCanvas.height / gridRows));
+      if (r >= 0 && r < gridRows && c >= 0 && c < gridCols) gridState[r][c] = true;
     }
 
     touchCanvas.addEventListener("pointermove", (e) => {
@@ -1447,23 +1499,19 @@
 
     touchCanvas.addEventListener("touchstart", (e) => {
       e.preventDefault();
-      touchPointsReadout.textContent = `Active Touch Points: ${e.touches.length}`;
-      for (let i = 0; i < e.touches.length; i++) {
-        registerTouch(e.touches[i].clientX, e.touches[i].clientY);
-      }
+      touchPointsReadout.textContent = `Touch Points: ${e.touches.length}`;
+      for (let i = 0; i < e.touches.length; i++) registerTouch(e.touches[i].clientX, e.touches[i].clientY);
       drawTouchGrid();
     }, { passive: false });
 
     touchCanvas.addEventListener("touchmove", (e) => {
       e.preventDefault();
-      for (let i = 0; i < e.touches.length; i++) {
-        registerTouch(e.touches[i].clientX, e.touches[i].clientY);
-      }
+      for (let i = 0; i < e.touches.length; i++) registerTouch(e.touches[i].clientX, e.touches[i].clientY);
       drawTouchGrid();
     }, { passive: false });
 
     touchCanvas.addEventListener("touchend", (e) => {
-      touchPointsReadout.textContent = `Active Touch Points: ${e.touches.length}`;
+      touchPointsReadout.textContent = `Touch Points: ${e.touches.length}`;
     });
 
     function clearTouchGrid() {
@@ -1475,28 +1523,24 @@
        HARDWARE & GPU METROLOGY INSPECTOR
        ========================================================================== */
     function detectHardwareSpecs() {
-      // 1. Resolution & Pixel Ratio
       const dpr = window.devicePixelRatio || 1;
       const physicalW = Math.round(window.screen.width * dpr);
       const physicalH = Math.round(window.screen.height * dpr);
       document.getElementById("specResolution").textContent = `${physicalW} x ${physicalH} px`;
       document.getElementById("specDPR").textContent = `${dpr.toFixed(2)}x (${window.screen.width}x${window.screen.height} CSS)`;
 
-      // 2. Color Depth & Gamut
       let gamut = "sRGB (Standard)";
       if (window.matchMedia("(color-gamut: p3)").matches) gamut = "Display P3 (Wide Gamut)";
       if (window.matchMedia("(color-gamut: rec2020)").matches) gamut = "Rec. 2020 (Ultra HDR)";
       document.getElementById("specColorGamut").textContent = `${window.screen.colorDepth}-Bit | ${gamut}`;
 
-      // 3. WebGL GPU String
       try {
         const glCanvas = document.createElement("canvas");
         const gl = glCanvas.getContext("webgl") || glCanvas.getContext("experimental-webgl");
         if (gl) {
           const debugInfo = gl.getExtension("WEBGL_debug_renderer_info");
           if (debugInfo) {
-            const renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
-            document.getElementById("specGPU").textContent = renderer;
+            document.getElementById("specGPU").textContent = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
           } else {
             document.getElementById("specGPU").textContent = "Supported (Generic WebGL Driver)";
           }
@@ -1505,9 +1549,7 @@
         document.getElementById("specGPU").textContent = "Hardware Acceleration Disabled";
       }
 
-      // 4. Measured Refresh Rate Benchmark
-      let frameCount = 0;
-      let startTime = performance.now();
+      let frameCount = 0, startTime = performance.now();
       function measureFrames(now) {
         frameCount++;
         if (now - startTime >= 1000) {
@@ -1520,96 +1562,6 @@
       requestAnimationFrame(measureFrames);
     }
     detectHardwareSpecs();
-
-    /* ==========================================================================
-       ACOUSTIC TRANSDUCER AUDIO ENGINE
-       ========================================================================== */
-    let audioCtx = null;
-    let activeNodes = [];
-    const audioStatusEl = document.getElementById("audioStatus");
-
-    function getAudioContext() {
-      if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      }
-      if (audioCtx.state === "suspended") audioCtx.resume();
-      return audioCtx;
-    }
-
-    function stopAllAudio() {
-      activeNodes.forEach(n => {
-        try { n.stop(); n.disconnect(); } catch (e) {}
-      });
-      activeNodes = [];
-      audioStatusEl.textContent = "Audio Engine: Stopped / Standby";
-    }
-
-    document.getElementById("btnAudioStop").addEventListener("click", stopAllAudio);
-
-    document.getElementById("btnAudioLeft").addEventListener("click", () => {
-      stopAllAudio();
-      const ctx = getAudioContext();
-      const osc = ctx.createOscillator();
-      const pan = ctx.createStereoPanner ? ctx.createStereoPanner() : null;
-      osc.frequency.setValueAtTime(440, ctx.currentTime);
-
-      if (pan) {
-        pan.pan.setValueAtTime(-1, ctx.currentTime);
-        osc.connect(pan);
-        pan.connect(ctx.destination);
-      } else {
-        osc.connect(ctx.destination);
-      }
-      osc.start();
-      activeNodes.push(osc);
-      audioStatusEl.textContent = "Playing: Isolated 440 Hz on LEFT channel only";
-    });
-
-    document.getElementById("btnAudioRight").addEventListener("click", () => {
-      stopAllAudio();
-      const ctx = getAudioContext();
-      const osc = ctx.createOscillator();
-      const pan = ctx.createStereoPanner ? ctx.createStereoPanner() : null;
-      osc.frequency.setValueAtTime(440, ctx.currentTime);
-
-      if (pan) {
-        pan.pan.setValueAtTime(1, ctx.currentTime);
-        osc.connect(pan);
-        pan.connect(ctx.destination);
-      } else {
-        osc.connect(ctx.destination);
-      }
-      osc.start();
-      activeNodes.push(osc);
-      audioStatusEl.textContent = "Playing: Isolated 440 Hz on RIGHT channel only";
-    });
-
-    document.getElementById("btnAudioSweep").addEventListener("click", () => {
-      stopAllAudio();
-      const ctx = getAudioContext();
-      const osc = ctx.createOscillator();
-      const now = ctx.currentTime;
-      osc.frequency.setValueAtTime(20, now);
-      osc.frequency.exponentialRampToValueAtTime(20000, now + 5);
-      osc.connect(ctx.destination);
-      osc.start(now);
-      osc.stop(now + 5);
-      activeNodes.push(osc);
-      audioStatusEl.textContent = "Running: 20 Hz to 20,000 Hz Logarithmic Sweep (5 seconds)";
-    });
-
-    /* ==========================================================================
-       MODAL CONTROLLERS
-       ========================================================================== */
-    function openModal(id) {
-      document.getElementById(id).style.display = "flex";
-    }
-    function closeModal(id) {
-      document.getElementById(id).style.display = "none";
-    }
-    window.addEventListener("click", (e) => {
-      if (e.target.classList.contains("modal-overlay")) e.target.style.display = "none";
-    });
   </script>
 </body>
 </html>
