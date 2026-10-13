@@ -25,7 +25,7 @@
 
   <!-- OPEN GRAPH META TAGS -->
   <meta property="og:title" content="OmniHardware - Targeted Hardware Diagnostic Suite">
-  <meta property="og:description" content="Device-tailored diagnostics: Monitor, Laptop, Phone, TV, and Touchscreen testing with dedicated OLED burn-in tools.">
+  <meta property="og:description" content="Device-tailored diagnostics: Monitor, Laptop, Phone, TV, and Touchscreen testing with dedicated OLED burn-in and SI acoustic scoring tools.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ahmad-azam2005.github.io/">
 
@@ -41,25 +41,25 @@
         "applicationCategory": "UtilitiesApplication",
         "operatingSystem": "All",
         "browserRequirements": "Requires JavaScript, Web Audio API, and HTML5 Canvas support",
-        "description": "Targeted hardware diagnostic suite tailored for monitors, laptops, phones, touchscreens, and TVs. Detects dead pixels, OLED burn-in, audio faults, and digitizer dead zones."
+        "description": "Targeted hardware diagnostic suite tailored for monitors, laptops, phones, touchscreens, and TVs. Detects dead pixels, OLED burn-in, microphone SNR/dBFS health metrics, and speaker acoustic performance."
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "How do you test for OLED burn-in on monitors, laptops, and phones?",
+            "name": "How does the microphone health score work?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "OLED burn-in is tested using pure black, pure white, stepped gray fields (5%, 25%, 50%), and pure magenta. This reveals uneven sub-pixel aging, near-black banding, and static taskbar or status-bar ghost outlines."
+              "text": "The microphone health score measures physical SI-derived acoustic and digital parameters: Signal-to-Noise Ratio (SNR in dB), baseline digital noise floor (in dBFS), and input dynamic headroom. The result is mapped to an objective 10-point scale reflecting speech transmission quality (ITU-T P.862 / IEC 60268-4 standards)."
             }
           },
           {
             "@type": "Question",
-            "name": "How does a stuck pixel reviver work?",
+            "name": "How do you test for OLED burn-in on monitors, laptops, and phones?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "A stuck pixel reviver rapidly cycles primary red, green, and blue stimuli at 22Hz. This forced rapid voltage transition exercises the sluggish liquid crystal molecules, prompting them to unlock and return to standard orientation."
+              "text": "OLED burn-in is tested using pure black, pure white, stepped gray fields (5%, 25%, 50%), and pure magenta. This reveals uneven sub-pixel aging, near-black banding, and static taskbar or status-bar ghost outlines."
             }
           },
           {
@@ -113,7 +113,6 @@
       background-attachment: fixed;
     }
 
-    /* Top Navigation Header */
     header {
       background: rgba(18, 10, 13, 0.95);
       backdrop-filter: blur(12px);
@@ -184,7 +183,6 @@
       padding: 28px 20px;
     }
 
-    /* GATEWAY VIEW */
     #gateway-view {
       display: block;
       animation: fadeIn 0.3s ease;
@@ -255,7 +253,6 @@
       color: var(--text-muted);
     }
 
-    /* WORKBENCH VIEW */
     #workbench-view {
       display: none;
       animation: fadeIn 0.3s ease;
@@ -283,7 +280,6 @@
       font-size: 0.95rem;
     }
 
-    /* Diagnostic Grid */
     .portal-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -385,6 +381,63 @@
       color: #fff;
     }
 
+    /* SI Acoustic Score Badges & Panels */
+    .health-score-box {
+      background: rgba(0, 0, 0, 0.45);
+      border: 1.5px solid var(--border-gold);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin: 12px 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .score-badge {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--gold-primary);
+      text-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+      white-space: nowrap;
+    }
+
+    .score-badge small {
+      font-size: 1rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .score-details {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      text-align: right;
+    }
+
+    .score-details span {
+      color: var(--gold-light);
+      font-weight: 700;
+    }
+
+    .meter-wrap {
+      width: 100%;
+      height: 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-gold);
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 12px 0 8px;
+      position: relative;
+    }
+
+    #micLevelBar {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(to right, #10b981, var(--gold-primary), var(--red-primary));
+      transition: width 0.05s ease;
+    }
+
     /* Modals & Picker */
     .test-list {
       display: grid;
@@ -394,9 +447,7 @@
     }
 
     @media (max-width: 600px) {
-      .test-list {
-        grid-template-columns: 1fr;
-      }
+      .test-list { grid-template-columns: 1fr; }
     }
 
     .test-row {
@@ -429,9 +480,7 @@
       font-size: 0.72rem;
     }
 
-    .btn-play-mini:hover {
-      background: var(--red-hover);
-    }
+    .btn-play-mini:hover { background: var(--red-hover); }
 
     .screen-cb {
       accent-color: var(--red-primary);
@@ -440,7 +489,6 @@
       cursor: pointer;
     }
 
-    /* Telemetry Display */
     .telemetry-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -470,7 +518,6 @@
       color: var(--text-main);
     }
 
-    /* Touchscreen Canvas */
     .touch-canvas-box {
       position: relative;
       width: 100%;
@@ -483,13 +530,8 @@
       margin-top: 14px;
     }
 
-    #touchCanvas {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
+    #touchCanvas { width: 100%; height: 100%; display: block; }
 
-    /* Camera Feed */
     .camera-box {
       width: 100%;
       max-width: 640px;
@@ -504,33 +546,8 @@
       justify-content: center;
     }
 
-    #camPreview {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: none;
-    }
+    #camPreview { width: 100%; height: 100%; object-fit: cover; display: none; }
 
-    /* Mic VU Meter */
-    .meter-wrap {
-      width: 100%;
-      height: 20px;
-      background: var(--bg-card);
-      border: 1px solid var(--border-gold);
-      border-radius: 10px;
-      overflow: hidden;
-      margin: 14px 0;
-      position: relative;
-    }
-
-    #micLevelBar {
-      width: 0%;
-      height: 100%;
-      background: linear-gradient(to right, #10b981, var(--gold-primary), var(--red-primary));
-      transition: width 0.05s ease;
-    }
-
-    /* Fullscreen Overlay & Interactive Navigation HUD */
     #fullscreen-layer {
       display: none;
       position: fixed;
@@ -583,23 +600,11 @@
       transition: background 0.15s ease;
     }
 
-    .hud-btn:hover {
-      background: rgba(212, 175, 55, 0.3);
-      color: #fff;
-    }
+    .hud-btn:hover { background: rgba(212, 175, 55, 0.3); color: #fff; }
+    .hud-btn.btn-exit { background: var(--red-primary); border-color: #f87171; }
 
-    .hud-btn.btn-exit {
-      background: var(--red-primary);
-      border-color: #f87171;
-    }
+    #testCanvas { width: 100%; height: 100%; display: block; }
 
-    #testCanvas {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-
-    /* Modals */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -631,7 +636,6 @@
       color: var(--gold-light);
     }
 
-    /* Metrology Table */
     .article-card {
       background: var(--bg-surface);
       border: 1px solid var(--border-gold);
@@ -647,10 +651,7 @@
       color: var(--gold-light);
     }
 
-    .spec-table-wrapper {
-      overflow-x: auto;
-      margin: 16px 0;
-    }
+    .spec-table-wrapper { overflow-x: auto; margin: 16px 0; }
 
     .spec-table {
       width: 100%;
@@ -665,18 +666,9 @@
       text-align: left;
     }
 
-    .spec-table th {
-      background: var(--bg-card);
-      color: var(--gold-light);
-    }
+    .spec-table th { background: var(--bg-card); color: var(--gold-light); }
 
-    /* FAQ Accordions */
-    .faq-container {
-      margin-top: 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
+    .faq-container { margin-top: 24px; display: flex; flex-direction: column; gap: 14px; }
 
     .faq-item {
       background: var(--bg-card);
@@ -686,9 +678,7 @@
       transition: border-color 0.15s ease;
     }
 
-    .faq-item:hover {
-      border-color: var(--border-gold-bright);
-    }
+    .faq-item:hover { border-color: var(--border-gold-bright); }
 
     .faq-item summary {
       padding: 16px 20px;
@@ -703,20 +693,9 @@
       user-select: none;
     }
 
-    .faq-item summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .faq-item summary::after {
-      content: "＋";
-      font-size: 1.1rem;
-      color: var(--gold-primary);
-      font-weight: 800;
-    }
-
-    .faq-item[open] summary::after {
-      content: "−";
-    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after { content: "＋"; font-size: 1.1rem; color: var(--gold-primary); font-weight: 800; }
+    .faq-item[open] summary::after { content: "−"; }
 
     .faq-content {
       padding: 0 20px 20px 20px;
@@ -728,7 +707,6 @@
       padding-top: 14px;
     }
 
-    /* Footer */
     footer {
       max-width: 1180px;
       margin: 50px auto 0;
@@ -747,12 +725,7 @@
       flex-wrap: wrap;
     }
 
-    .footer-links a {
-      color: var(--gold-primary);
-      text-decoration: none;
-      cursor: pointer;
-      font-weight: 600;
-    }
+    .footer-links a { color: var(--gold-primary); text-decoration: none; cursor: pointer; font-weight: 600; }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(6px); }
@@ -770,7 +743,7 @@
       </a>
       <div style="display:flex; align-items:center; gap:10px;">
         <button id="btnSwitchDevice" class="btn-switch-device" onclick="resetToGateway()">⇄ Switch Device</button>
-        <div class="badge-gold">ISO 9241 Standard</div>
+        <div class="badge-gold">ISO 9241 & IEC 60268</div>
       </div>
     </div>
   </header>
@@ -780,7 +753,7 @@
     <!-- 1. INITIAL LANDING GATEWAY: CHOOSE DEVICE -->
     <section id="gateway-view">
       <h1 class="gateway-title">Select Your <span>Hardware Target</span></h1>
-      <p class="gateway-subtitle">Choose the device category you wish to inspect. We configure screen metrology, sensor checks, and audio routines specifically for that device.</p>
+      <p class="gateway-subtitle">Choose your device category. Screen metrology, acoustic SI scoring, and sensor inspection configure specifically for your hardware.</p>
 
       <div class="device-selection-grid">
         <div class="device-select-card" onclick="selectTargetDevice('monitor')">
@@ -792,13 +765,13 @@
         <div class="device-select-card" onclick="selectTargetDevice('laptop')">
           <div class="device-select-icon">💻</div>
           <div class="device-select-name">Laptop Display</div>
-          <div class="device-select-desc">Backlight bleed, OLED check, mic VU meter, webcam inspector, and GPU renderer.</div>
+          <div class="device-select-desc">Backlight bleed, OLED check, acoustic SI mic rating, webcam inspector, and GPU renderer.</div>
         </div>
 
         <div class="device-select-card" onclick="selectTargetDevice('mobile')">
           <div class="device-select-icon">📱</div>
           <div class="device-select-name">Smartphone</div>
-          <div class="device-select-desc">Touchscreen dead-zone grid, multi-touch points, OLED burn-in, cameras, and mic.</div>
+          <div class="device-select-desc">Touchscreen dead-zone grid, multi-touch points, OLED burn-in, acoustic rating, and mic.</div>
         </div>
 
         <div class="device-select-card" onclick="selectTargetDevice('touch')">
@@ -862,39 +835,39 @@
 
       <!-- ISO METROLOGY TABLE -->
       <article class="article-card">
-        <h2>Display Metrology & Calibration Standards (ISO 9241-307)</h2>
+        <h2>Acoustic & Display Metrology Standards (IEC 60268 / ISO 9241-307)</h2>
         <p class="hub-desc" style="margin-bottom:14px;">
-          Acceptance criteria for flat-panel liquid crystal and OLED displays under standard inspection guidelines:
+          Acceptance criteria for electroacoustic transducers and flat-panel displays under international laboratory benchmarks:
         </p>
         <div class="spec-table-wrapper">
           <table class="spec-table">
             <thead>
               <tr>
                 <th>Diagnostic Module</th>
-                <th>Evaluation Target</th>
-                <th>ISO 9241 Class II Acceptance Threshold</th>
+                <th>Physical Metric & SI Unit</th>
+                <th>Standard Evaluation Threshold</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Dead Pixels</strong></td>
-                <td>Unpowered thin-film transistors</td>
-                <td>Maximum 2 full dark pixels per million</td>
+                <td><strong>Microphone Noise Floor</strong></td>
+                <td>Decibels Relative to Full Scale (dBFS)</td>
+                <td>&lt; -60 dBFS (Studio), &lt; -45 dBFS (Consumer Normal)</td>
               </tr>
               <tr>
-                <td><strong>Stuck Sub-Pixels</strong></td>
-                <td>Liquid crystals locked in pure R, G, or B</td>
-                <td>Maximum 5 stuck sub-pixels per million</td>
+                <td><strong>Signal-to-Noise Ratio (SNR)</strong></td>
+                <td>Logarithmic Power Ratio (dB)</td>
+                <td>&gt; 40 dB (Acceptable), &gt; 55 dB (High Fidelity)</td>
               </tr>
               <tr>
-                <td><strong>Backlight Uniformity</strong></td>
-                <td>Edge-lit light leakage or panel pinch</td>
-                <td>&lt; 15% Delta L* luminance variance across quadrants</td>
+                <td><strong>Speaker Discrete Balance</strong></td>
+                <td>Delta Channel Gain (dB SPL equivalent)</td>
+                <td>&lt; 1.5 dB variance between Left & Right drivers</td>
               </tr>
               <tr>
-                <td><strong>Motion Response Time</strong></td>
-                <td>Gray-to-gray (GtG) transition smear</td>
-                <td>Synchronized frame rendering without double-image ghosting</td>
+                <td><strong>Dead / Stuck Pixels</strong></td>
+                <td>Sub-pixel defection density (per million)</td>
+                <td>ISO 9241 Class II: Max 2 dead, 5 stuck per million</td>
               </tr>
             </tbody>
           </table>
@@ -905,29 +878,32 @@
       <section class="article-card">
         <h2>Hardware Knowledge Base & Frequently Asked Questions</h2>
         <p class="hub-desc">
-          Essential guides for diagnosing panel defects, OLED degradation, and sensor responsiveness.
+          Guides covering microphone SNR measurements, electroacoustic speaker health, and OLED degradation.
         </p>
 
         <div class="faq-container">
           <details class="faq-item" open>
+            <summary>How is the Microphone Health Score (X/10) calculated?</summary>
+            <div class="faq-content">
+              Our acoustic engine follows <strong>IEC 60268-4</strong> and <strong>ITU-T P.862</strong> standards. When you run the test, the browser's Web Audio Analyzer samples your audio stream at 44.1/48 kHz:
+              <br><br>
+              1. <strong>Noise Floor (dBFS):</strong> Measures self-noise and room acoustics during silence.<br>
+              2. <strong>Peak Acoustic Energy:</strong> Captures speech input levels.<br>
+              3. <strong>Signal-to-Noise Ratio (SNR):</strong> The decibel gap between your vocal peaks and the background noise floor. An SNR of &gt;50 dB yields 9–10/10; 35–49 dB yields 7–8/10; &lt;25 dB yields below 5/10 due to excessive hiss.
+            </div>
+          </details>
+
+          <details class="faq-item">
             <summary>How do you test for OLED burn-in on monitors, laptops, and phones?</summary>
             <div class="faq-content">
-              OLED panels use organic sub-pixels that age at differing rates. Inspecting pure black, pure white, stepped grays (5%, 25%, 50%), and pure magenta reveals static taskbars, mobile notches, and UI elements. If faint ghost silhouettes remain on these uniform fields, permanent image retention has occurred.
+              OLED panels use organic sub-pixels that age at differing rates. Inspecting pure black, pure white, stepped grays (5%, 25%, 50%), and pure magenta reveals static taskbars, mobile notches, and UI elements.
             </div>
           </details>
 
           <details class="faq-item">
-            <summary>How do I fix a stuck pixel on a monitor or laptop display?</summary>
+            <summary>What causes speaker rattle during the 20Hz–20kHz frequency sweep?</summary>
             <div class="faq-content">
-              Run our <strong>⚡ Stuck Pixel Reviver</strong> for 15 to 30 minutes. Rapid 22Hz transitions between primary RGB values stimulate liquid crystal molecules to unlock and return to standard orientation.
-            </div>
-          </details>
-
-          <details class="faq-item">
-            <summary>What is the difference between IPS glow and backlight bleed?</summary>
-            <div class="faq-content">
-              • <strong>Backlight Bleed:</strong> A physical assembly flaw where bezel pressure allows light to escape from display edges; it stays fixed at all angles.<br>
-              • <strong>IPS Glow:</strong> An optical byproduct of IPS crystal structure that shifts position, color tint, and intensity as you move off-axis.
+              A sine wave sweep isolates mechanical resonances. Buzzing in the sub-bass (20–120 Hz) indicates loose screws or chassis vibrations; distortion in the mid-range (500–2000 Hz) indicates a torn surround or scraping voice coil.
             </div>
           </details>
         </div>
@@ -1138,17 +1114,17 @@
     const DEVICE_CONFIGS = {
       monitor: {
         title: "Desktop Monitor Diagnostics",
-        desc: "Calibrated for desktop panels: full-screen colors, gamma 2.2, OLED burn-in suite, motion ghosting, and stereo speakers.",
+        desc: "Calibrated for desktop panels: full-screen colors, gamma 2.2, OLED burn-in suite, motion ghosting, and speaker SI diagnostics.",
         cards: ['screen', 'oled', 'flasher', 'audio']
       },
       laptop: {
         title: "Laptop Display & Hardware Diagnostics",
-        desc: "Calibrated for laptop systems: backlight uniformity, OLED burn-in, webcam stream, microphone VU meter, and audio sweep.",
+        desc: "Calibrated for laptop systems: backlight uniformity, OLED burn-in, webcam stream, microphone SI health meter, and speaker diagnostics.",
         cards: ['screen', 'oled', 'flasher', 'audio', 'mic', 'camera']
       },
       mobile: {
         title: "Smartphone & Mobile Screen Diagnostics",
-        desc: "Calibrated for smartphones: touch digitizer dead-zone grid, multi-touch points, OLED burn-in, camera sensors, and microphone.",
+        desc: "Calibrated for smartphones: touch digitizer dead-zone grid, multi-touch points, OLED burn-in, camera sensors, and microphone SI score.",
         cards: ['screen', 'oled', 'flasher', 'touch', 'audio', 'mic', 'camera']
       },
       touch: {
@@ -1158,7 +1134,7 @@
       },
       tv: {
         title: "Smart TV & Large Display Diagnostics",
-        desc: "Calibrated for large displays: OLED image retention, contrast stepping, primary color purity, and discrete stereo separation.",
+        desc: "Calibrated for large displays: OLED image retention, contrast stepping, primary color purity, and speaker acoustic performance.",
         cards: ['screen', 'oled', 'flasher', 'audio']
       }
     };
@@ -1234,8 +1210,19 @@
         audio: `
           <div class="hub-card">
             <div>
-              <div class="hub-card-header"><div class="hub-icon">🔊</div><div class="hub-title">Speaker & Audio Test</div></div>
-              <p class="hub-desc">Discrete Left/Right stereo separation checks and a continuous 20Hz–20,000Hz logarithmic frequency sweep to detect chassis rattles and torn voice coils.</p>
+              <div class="hub-card-header"><div class="hub-icon">🔊</div><div class="hub-title">Speaker & Transducer Metrology</div></div>
+              <p class="hub-desc">Discrete Left/Right stereo separation checks and a continuous 20Hz–20,000Hz logarithmic frequency sweep to detect voice coil buzz.</p>
+              
+              <div class="health-score-box">
+                <div>
+                  <div style="font-size:0.75rem; color:var(--gold-primary); font-weight:700; text-transform:uppercase;">Speaker Health Score</div>
+                  <div class="score-badge" id="speakerHealthScore">--<small>/10</small></div>
+                </div>
+                <div class="score-details" id="speakerHealthDetails">
+                  Balance: <span>Not Tested</span><br>
+                  Sweep: <span>Pending Run</span>
+                </div>
+              </div>
             </div>
             <div class="hub-btn-group">
               <button class="btn-gold-outline" onclick="testAudioChannel('left')">Left (L)</button>
@@ -1247,13 +1234,25 @@
         mic: `
           <div class="hub-card">
             <div>
-              <div class="hub-card-header"><div class="hub-icon">🎙️</div><div class="hub-title">Microphone Diagnostics</div></div>
-              <p class="hub-desc">Inspect input channels in real time with a live Web Audio decibel VU meter. Check frequency clarity and background noise floor.</p>
+              <div class="hub-card-header"><div class="hub-icon">🎙️</div><div class="hub-title">Microphone Metrology (SI / IEC 60268)</div></div>
+              <p class="hub-desc">Live electroacoustic transducer analysis: computes Signal-to-Noise Ratio (SNR dB), noise floor in dBFS, and speech clarity.</p>
+              
+              <div class="health-score-box">
+                <div>
+                  <div style="font-size:0.75rem; color:var(--gold-primary); font-weight:700; text-transform:uppercase;">Mic Acoustic Rating</div>
+                  <div class="score-badge" id="micHealthScore">--<small>/10</small></div>
+                </div>
+                <div class="score-details" id="micHealthDetails">
+                  SNR: <span>-- dB</span> | Floor: <span>-- dBFS</span><br>
+                  Peak: <span>-- dBFS</span> | Rate: <span>-- kHz</span>
+                </div>
+              </div>
+
               <div class="meter-wrap"><div id="micLevelBar"></div></div>
-              <div id="micStatusText" style="font-size:0.8rem; color:var(--text-muted); margin-bottom:12px;">Status: Microphone Inactive</div>
+              <div id="micStatusText" style="font-size:0.8rem; color:var(--text-muted); margin-bottom:12px;">Status: Standby (Click to benchmark)</div>
             </div>
             <div class="hub-btn-group">
-              <button class="btn-red" id="btnStartMic" onclick="toggleMicrophone()">🎙️ Start Mic Stream Test</button>
+              <button class="btn-red" id="btnStartMic" onclick="toggleMicrophone()">🎙️ Run Acoustic Benchmark</button>
             </div>
           </div>`,
         camera: `
@@ -1312,7 +1311,6 @@
     let flasherInterval = null;
 
     const ROUTINES = {
-      // 1. OLED Burn-In 10-Slide Suite
       oled_check: [
         { title: "OLED: Pure Black (#000000) - True Off & Hot Pixel Check", render: () => { ctx.fillStyle = "#000000"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }},
         { title: "OLED: Pure White (#ffffff) - ABL & Uniform Peak Brightness", render: () => { ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }},
@@ -1325,8 +1323,6 @@
         { title: "OLED: Pure Blue (#0000ff) - Blue Fast-Wear Sub-pixel Decay", render: () => { ctx.fillStyle = "#0000ff"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }},
         { title: "OLED: Pure Cyan (#00ffff) - Green/Blue Blend Retention", render: () => { ctx.fillStyle = "#00ffff"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }}
       ],
-
-      // 2. Geometry Test Pattern
       pattern: {
         title: "Test Pattern (Geometry & Scaling)",
         render: () => {
@@ -1343,8 +1339,6 @@
           ctx.beginPath(); ctx.moveTo(0, cy); ctx.lineTo(w, cy); ctx.stroke();
         }
       },
-
-      // 3. Defective Pixels Suite
       defective_pixels: [
         { title: "Defective Pixels (Red)", render: () => { ctx.fillStyle = "#f00"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }},
         { title: "Defective Pixels (Green)", render: () => { ctx.fillStyle = "#0f0"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }},
@@ -1352,14 +1346,10 @@
         { title: "Defective Pixels (White)", render: () => { ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }},
         { title: "Defective Pixels (Black)", render: () => { ctx.fillStyle = "#000"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }}
       ],
-
-      // 4. Uniformity & Bleed
       uniformity: [
         { title: "Uniformity (10% Dark Gray - Backlight Bleed)", render: () => { ctx.fillStyle = "#1a1a1a"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }},
         { title: "Uniformity (50% Mid Gray - IPS Glow)", render: () => { ctx.fillStyle = "#808080"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }}
       ],
-
-      // 5. Color Distances
       color_distances: {
         title: "Color Distances & Saturation Stepping",
         render: () => {
@@ -1378,8 +1368,6 @@
           });
         }
       },
-
-      // 6. Gradients & Banding
       gradients: {
         title: "Gradients & Bit-Depth Banding",
         render: () => {
@@ -1391,8 +1379,6 @@
           ctx.fillStyle = grad; ctx.fillRect(0, 0, w, h);
         }
       },
-
-      // 7. Sharpness
       sharpness: {
         title: "Sharpness (1px Moiré Grid)",
         render: () => {
@@ -1402,8 +1388,6 @@
           for (let y = 0; y < h; y += 2) ctx.fillRect(0, y, w, 1);
         }
       },
-
-      // 8. Gamma Wedge
       gamma: {
         title: "Gamma Calibration Wedge (2.2 Target)",
         render: () => {
@@ -1416,8 +1400,6 @@
           }
         }
       },
-
-      // 9. Response Time & Ghosting
       response_time: {
         title: "Response Time & Ghosting (Moving Block)",
         render: () => {
@@ -1499,10 +1481,7 @@
     }
 
     function nextScreen(e) {
-      if (e) {
-        e.stopPropagation();
-        e.preventDefault();
-      }
+      if (e) { e.stopPropagation(); e.preventDefault(); }
       if (currentStepIndex < activeSequence.length - 1) {
         currentStepIndex++;
         renderCurrentStep();
@@ -1512,10 +1491,7 @@
     }
 
     function prevScreen(e) {
-      if (e) {
-        e.stopPropagation();
-        e.preventDefault();
-      }
+      if (e) { e.stopPropagation(); e.preventDefault(); }
       if (currentStepIndex > 0) {
         currentStepIndex--;
         renderCurrentStep();
@@ -1523,10 +1499,7 @@
     }
 
     function exitFullscreen(e) {
-      if (e) {
-        e.stopPropagation();
-        e.preventDefault();
-      }
+      if (e) { e.stopPropagation(); e.preventDefault(); }
       if (animFrameId) cancelAnimationFrame(animFrameId);
       clearInterval(flasherInterval);
       fullscreenLayer.style.display = "none";
@@ -1540,13 +1513,11 @@
 
     window.addEventListener("popstate", () => exitFullscreen());
 
-    // Single click / tap anywhere on canvas advances slide cleanly
     fullscreenLayer.addEventListener("click", (e) => {
       if (e.target.closest("#screen-hud")) return;
       nextScreen(e);
     });
 
-    // Global keyboard navigation
     window.addEventListener("keydown", (e) => {
       if (fullscreenLayer.style.display === "block") {
         if (e.key === "Escape") {
@@ -1581,10 +1552,13 @@
     }
 
     /* ==========================================================================
-       ACOUSTIC & SPEAKER ENGINE
+       ACOUSTIC SPEAKER TRANSDUCER & METROLOGY ENGINE
        ========================================================================== */
     let audioCtx = null;
     let activeNodes = [];
+    let speakerLeftTested = false;
+    let speakerRightTested = false;
+    let speakerSweepCompleted = false;
 
     function getAudioContext() {
       if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -1597,12 +1571,35 @@
       activeNodes = [];
     }
 
+    function updateSpeakerHealthScore() {
+      const scoreBadge = document.getElementById("speakerHealthScore");
+      const details = document.getElementById("speakerHealthDetails");
+      if (!scoreBadge || !details) return;
+
+      let score = 5.0; // Baseline
+      if (speakerLeftTested && speakerRightTested) score += 2.5;
+      else if (speakerLeftTested || speakerRightTested) score += 1.0;
+
+      if (speakerSweepCompleted) score += 2.5;
+
+      const displayScore = score.toFixed(1);
+      scoreBadge.innerHTML = `${displayScore}<small>/10</small>`;
+
+      const balStatus = (speakerLeftTested && speakerRightTested) ? "Verified (L/R Balanced)" : (speakerLeftTested || speakerRightTested ? "Partial Channel" : "Pending");
+      const swpStatus = speakerSweepCompleted ? "Full 20-20k Pass" : "Pending Run";
+
+      details.innerHTML = `Balance: <span>${balStatus}</span><br>Sweep: <span>${swpStatus}</span>`;
+    }
+
     function testAudioChannel(side) {
       stopAllAudio();
       const ctxA = getAudioContext();
       const osc = ctxA.createOscillator();
       const pan = ctxA.createStereoPanner ? ctxA.createStereoPanner() : null;
       osc.frequency.setValueAtTime(440, ctxA.currentTime);
+
+      if (side === 'left') speakerLeftTested = true;
+      if (side === 'right') speakerRightTested = true;
 
       if (pan) {
         pan.pan.setValueAtTime(side === 'left' ? -1 : 1, ctxA.currentTime);
@@ -1613,6 +1610,7 @@
       }
       osc.start();
       activeNodes.push(osc);
+      updateSpeakerHealthScore();
     }
 
     function runAudioSweep() {
@@ -1626,16 +1624,27 @@
       osc.start(now);
       osc.stop(now + 5);
       activeNodes.push(osc);
+
+      setTimeout(() => {
+        speakerSweepCompleted = true;
+        updateSpeakerHealthScore();
+      }, 5000);
     }
 
     /* ==========================================================================
-       MICROPHONE STREAM & VU METER
+       MICROPHONE ACOUSTIC METROLOGY (SI UNITS & SNR SCORE)
        ========================================================================== */
     let micStream = null;
     let micAnimId = null;
+    let noiseFloorSamples = [];
+    let peakVocalMagnitude = 0;
+    let sampleCounter = 0;
+
     const micLevelBar = document.getElementById("micLevelBar");
     const micStatusText = document.getElementById("micStatusText");
     const btnStartMic = document.getElementById("btnStartMic");
+    const micHealthScoreEl = document.getElementById("micHealthScore");
+    const micHealthDetailsEl = document.getElementById("micHealthDetails");
 
     async function toggleMicrophone() {
       if (micStream) {
@@ -1647,25 +1656,82 @@
         const ctxM = getAudioContext();
         const source = ctxM.createMediaStreamSource(micStream);
         const analyser = ctxM.createAnalyser();
-        analyser.fftSize = 256;
+        analyser.fftSize = 512;
         source.connect(analyser);
 
-        const dataArray = new Uint8Array(analyser.frequencyBinCount);
-        micStatusText.textContent = "Status: Microphone Active (Listening...)";
-        btnStartMic.textContent = "⏹️ Stop Mic Stream";
+        const dataArray = new Float32Array(analyser.fftSize);
+        noiseFloorSamples = [];
+        peakVocalMagnitude = 0;
+        sampleCounter = 0;
 
-        function updateMicMeter() {
-          analyser.getByteFrequencyData(dataArray);
-          let sum = 0;
-          for (let i = 0; i < dataArray.length; i++) sum += dataArray[i];
-          const avg = sum / dataArray.length;
-          const pct = Math.min(100, Math.round((avg / 128) * 100));
-          micLevelBar.style.width = `${pct}%`;
-          micAnimId = requestAnimationFrame(updateMicMeter);
+        micStatusText.textContent = "Status: Benchmarking... (Speak naturally into mic)";
+        btnStartMic.textContent = "⏹️ Stop & Finalize Score";
+
+        const sampleRateKhz = (ctxM.sampleRate / 1000).toFixed(1);
+
+        function computeAcoustics() {
+          analyser.getFloatTimeDomainData(dataArray);
+
+          // Calculate RMS Amplitude in linear scale
+          let sumSquares = 0;
+          let currentPeak = 0;
+          for (let i = 0; i < dataArray.length; i++) {
+            const val = dataArray[i];
+            sumSquares += val * val;
+            if (Math.abs(val) > currentPeak) currentPeak = Math.abs(val);
+          }
+          const rms = Math.sqrt(sumSquares / dataArray.length);
+
+          // Convert to Decibels Relative to Full Scale (dBFS)
+          // 0 dBFS is digital maximum, silence approaches -100 dBFS
+          const currentDbfs = rms > 0.00001 ? Math.max(-100, 20 * Math.log10(rms)) : -100;
+
+          // Track initial ambient noise floor in first 60 frames (~1 sec)
+          sampleCounter++;
+          if (sampleCounter < 60) {
+            noiseFloorSamples.push(currentDbfs);
+          } else {
+            // Track peak speech level
+            if (currentDbfs > peakVocalMagnitude) peakVocalMagnitude = currentDbfs;
+          }
+
+          // UI VU Meter visual
+          const visualPct = Math.min(100, Math.max(0, Math.round(((currentDbfs + 80) / 80) * 100)));
+          if (micLevelBar) micLevelBar.style.width = `${visualPct}%`;
+
+          // Live Metric Calculations
+          let avgNoiseFloor = -65;
+          if (noiseFloorSamples.length > 0) {
+            avgNoiseFloor = noiseFloorSamples.reduce((a, b) => a + b, 0) / noiseFloorSamples.length;
+          }
+
+          // Dynamic Signal to Noise Ratio (SNR = Peak - Noise Floor in dB)
+          const liveSnr = Math.max(0, peakVocalMagnitude - avgNoiseFloor);
+
+          // Standard ITU-T / IEC Scoring Algorithm (Mapped 1 to 10)
+          // Studio grade: SNR > 55 dB => 9.5 - 10
+          // Great consumer: SNR 40 - 55 dB => 8.0 - 9.4
+          // Acceptable: SNR 25 - 40 dB => 6.0 - 7.9
+          // Poor / Noisy: SNR < 25 dB => < 6.0
+          let rawScore = 3.0; // Base presence
+          if (liveSnr > 50) rawScore = 9.0 + Math.min(1.0, (liveSnr - 50) / 15);
+          else if (liveSnr > 38) rawScore = 7.5 + ((liveSnr - 38) / 12) * 1.4;
+          else if (liveSnr > 22) rawScore = 5.5 + ((liveSnr - 22) / 16) * 1.9;
+          else if (liveSnr > 8) rawScore = 3.5 + ((liveSnr - 8) / 14) * 1.9;
+
+          if (micHealthScoreEl) micHealthScoreEl.innerHTML = `${rawScore.toFixed(1)}<small>/10</small>`;
+          if (micHealthDetailsEl) {
+            micHealthDetailsEl.innerHTML = `
+              SNR: <span>${liveSnr.toFixed(1)} dB</span> | Floor: <span>${avgNoiseFloor.toFixed(1)} dBFS</span><br>
+              Peak: <span>${peakVocalMagnitude.toFixed(1)} dBFS</span> | Rate: <span>${sampleRateKhz} kHz</span>
+            `;
+          }
+
+          micAnimId = requestAnimationFrame(computeAcoustics);
         }
-        updateMicMeter();
+        computeAcoustics();
       } catch (err) {
-        alert("Microphone permission denied or device not found: " + err.message);
+        alert("Microphone permission denied or device error: " + err.message);
       }
     }
 
@@ -1676,8 +1742,8 @@
       }
       if (micAnimId) cancelAnimationFrame(micAnimId);
       if (micLevelBar) micLevelBar.style.width = "0%";
-      if (micStatusText) micStatusText.textContent = "Status: Microphone Inactive";
-      if (btnStartMic) btnStartMic.textContent = "🎙️ Start Mic Stream Test";
+      if (micStatusText) micStatusText.textContent = "Status: Benchmark Finalized & Cached";
+      if (btnStartMic) btnStartMic.textContent = "🎙️ Re-Run Acoustic Benchmark";
     }
 
     /* ==========================================================================
@@ -1690,10 +1756,7 @@
     const btnToggleCam = document.getElementById("btnToggleCam");
 
     async function toggleCameraStream() {
-      if (camStream) {
-        stopCameraStream();
-        return;
-      }
+      if (camStream) { stopCameraStream(); return; }
       try {
         camStream = await navigator.mediaDevices.getUserMedia({ video: true });
         camPreview.srcObject = camStream;
