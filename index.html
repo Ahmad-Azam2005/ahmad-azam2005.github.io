@@ -6,7 +6,11 @@
   <title>OmniHardware - Targeted Display, Audio & Hardware Diagnostic Suite</title>
   <meta name="description" content="Free multi-device hardware and screen diagnostic suite. Test monitors, laptops, mobile phones, touchscreens, and TVs for dead pixels, OLED burn-in, audio, and sensors.">
   <link rel="canonical" href="https://ahmad-azam2005.github.io/">
-  <meta name="robots" content="index, follow">
+
+  <!-- IN-CODE CRAWLER DIRECTIVES & ROBOTS TAGS -->
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="https://ahmad-azam2005.github.io/sitemap.xml">
 
   <!-- GOOGLE SEARCH CONSOLE VERIFICATION TAG -->
   <meta name="google-site-verification" content="3BiPZc_B7nd0BGUUiGIdeHRL7E5BB2NDdzZHW156C20" />
@@ -21,7 +25,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ahmad-azam2005.github.io/">
 
-  <!-- SCHEMA.ORG DUAL STRUCTURED DATA -->
+  <!-- SCHEMA.ORG DUAL STRUCTURED DATA: WEBAPPLICATION + FAQPAGE -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -43,7 +47,7 @@
             "name": "How do you test for OLED burn-in on monitors, laptops, and phones?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "OLED burn-in is tested using pure black, pure white, multiple stepped gray fields (5%, 25%, 50%), and primary/secondary colors like magenta and cyan. This reveals uneven sub-pixel aging, near-black banding, and static taskbar or status-bar ghost outlines."
+              "text": "OLED burn-in is tested using pure black, pure white, stepped gray fields (5%, 25%, 50%), and pure magenta. This reveals uneven sub-pixel aging, near-black banding, and static taskbar or status-bar ghost outlines."
             }
           },
           {
@@ -52,6 +56,14 @@
             "acceptedAnswer": {
               "@type": "Answer",
               "text": "A stuck pixel reviver rapidly cycles primary red, green, and blue stimuli at 22Hz. This forced rapid voltage transition exercises the sluggish liquid crystal molecules, prompting them to unlock and return to standard orientation."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the difference between IPS glow and backlight bleed?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Backlight bleed is a hardware assembly flaw where light leaks from display edges and remains fixed regardless of head position. IPS glow is an optical byproduct of IPS crystal structure that shifts position and color tint when viewing off-axis."
             }
           }
         ]
@@ -154,6 +166,7 @@
       font-weight: 700;
       cursor: pointer;
       display: none;
+      transition: all 0.15s ease;
     }
 
     .btn-switch-device:hover {
@@ -544,6 +557,7 @@
       z-index: 100000;
       max-width: 95vw;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
+      pointer-events: auto;
     }
 
     .hud-title {
@@ -562,6 +576,7 @@
       padding: 5px 12px;
       border-radius: 16px;
       cursor: pointer;
+      transition: background 0.15s ease;
     }
 
     .hud-btn:hover {
@@ -767,7 +782,7 @@
         <div class="device-select-card" onclick="selectTargetDevice('monitor')">
           <div class="device-select-icon">🖥️</div>
           <div class="device-select-name">Desktop Monitor</div>
-          <div class="device-select-desc">Full screen colors, gamma 2.2, OLED burn-in, motion ghosting, and audio sweep. (No mic/touch)</div>
+          <div class="device-select-desc">Full screen colors, gamma 2.2, OLED burn-in suite, motion ghosting, and audio sweep. (No mic/touch)</div>
         </div>
 
         <div class="device-select-card" onclick="selectTargetDevice('laptop')">
@@ -1057,9 +1072,9 @@
   <div id="fullscreen-layer" tabindex="0">
     <div id="screen-hud">
       <span class="hud-title" id="hudTestTitle">Test Routine</span>
-      <button class="hud-btn" onclick="prevScreen(event)">◀ Prev</button>
-      <button class="hud-btn" onclick="nextScreen(event)">Next ▶</button>
-      <button class="hud-btn btn-exit" onclick="exitFullscreen(event)">✕ Exit</button>
+      <button class="hud-btn" id="btnHudPrev" onclick="prevScreen(event)">◀ Prev</button>
+      <button class="hud-btn" id="btnHudNext" onclick="nextScreen(event)">Next ▶</button>
+      <button class="hud-btn btn-exit" id="btnHudExit" onclick="exitFullscreen(event)">✕ Exit</button>
     </div>
     <canvas id="testCanvas"></canvas>
   </div>
@@ -1119,7 +1134,7 @@
     const DEVICE_CONFIGS = {
       monitor: {
         title: "Desktop Monitor Diagnostics",
-        desc: "Calibrated for desktop panels: full-screen colors, gamma 2.2, OLED burn-in, motion ghosting, and stereo speakers.",
+        desc: "Calibrated for desktop panels: full-screen colors, gamma 2.2, OLED burn-in suite, motion ghosting, and stereo speakers.",
         cards: ['screen', 'oled', 'flasher', 'audio']
       },
       laptop: {
@@ -1280,7 +1295,7 @@
     });
 
     /* ==========================================================================
-       ROUTINES REGISTRY (EXPANDED OLED SUITE & SCREEN TESTS)
+       EXPANDED TEST ROUTINES
        ========================================================================== */
     const testCanvas = document.getElementById("testCanvas");
     const ctx = testCanvas.getContext("2d");
@@ -1291,10 +1306,9 @@
     let currentStepIndex = 0;
     let animFrameId = null;
     let flasherInterval = null;
-    let lastTapTime = 0;
 
     const ROUTINES = {
-      // 1. Full OLED Suite
+      // 1. OLED Burn-In 10-Slide Suite
       oled_check: [
         { title: "OLED: Pure Black (#000000) - True Off & Hot Pixel Check", render: () => { ctx.fillStyle = "#000000"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }},
         { title: "OLED: Pure White (#ffffff) - ABL & Uniform Peak Brightness", render: () => { ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }},
@@ -1462,7 +1476,7 @@
       testCanvas.width = window.innerWidth;
       testCanvas.height = window.innerHeight;
       fullscreenLayer.style.display = "block";
-      fullscreenLayer.focus(); // Ensure fullscreen layer catches keyboard strokes immediately
+      fullscreenLayer.focus();
       window.history.pushState({ runnerActive: true }, "");
 
       const root = document.documentElement;
@@ -1522,19 +1536,13 @@
 
     window.addEventListener("popstate", () => exitFullscreen());
 
-    // Single click / tap advances; rapid double-tap exits
+    // Single click / tap anywhere on canvas advances slide cleanly
     fullscreenLayer.addEventListener("click", (e) => {
       if (e.target.closest("#screen-hud")) return;
-      const now = Date.now();
-      if (now - lastTapTime < 350) {
-        exitFullscreen();
-        return;
-      }
-      lastTapTime = now;
-      nextScreen();
+      nextScreen(e);
     });
 
-    // Universal Keyboard Navigation Listener (Supports Spacebar, Enter, Arrow Keys, and Escape)
+    // Global keyboard navigation
     window.addEventListener("keydown", (e) => {
       if (fullscreenLayer.style.display === "block") {
         if (e.key === "Escape") {
