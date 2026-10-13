@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OmniHardware Lab - Complete Screen, Audio, Mic, Camera & Hardware Diagnostic Suite</title>
-  <meta name="description" content="Free online hardware & display diagnostic workbench. Test monitors, laptops, phones, and TVs for dead pixels, backlight bleed, microphone input, webcam feeds, stereo speakers, and touch digitizers.">
+  <title>OmniHardware - Targeted Display, Audio & Hardware Diagnostic Suite</title>
+  <meta name="description" content="Free multi-device hardware and screen diagnostic suite. Test monitors, laptops, mobile phones, touchscreens, and TVs for dead pixels, OLED burn-in, audio, and sensors.">
   <link rel="canonical" href="https://ahmad-azam2005.github.io/">
   <meta name="robots" content="index, follow">
 
@@ -16,66 +16,42 @@
        crossorigin="anonymous"></script>
 
   <!-- OPEN GRAPH META TAGS -->
-  <meta property="og:title" content="OmniHardware Lab - Hardware & Display Diagnostic Suite">
-  <meta property="og:description" content="All-in-one hardware diagnostics: Screen, Camera, Microphone, Audio, Touchscreen, and GPU Metrology for Monitors, Laptops, Mobile, and TVs.">
+  <meta property="og:title" content="OmniHardware - Targeted Hardware Diagnostic Suite">
+  <meta property="og:description" content="Device-tailored diagnostics: Monitor, Laptop, Phone, TV, and Touchscreen testing with dedicated OLED burn-in tools.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ahmad-azam2005.github.io/">
 
-  <!-- SCHEMA.ORG DUAL STRUCTURED DATA: WEBAPPLICATION & FAQPAGE -->
+  <!-- SCHEMA.ORG DUAL STRUCTURED DATA -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "WebApplication",
-        "name": "OmniHardware Lab",
+        "name": "OmniHardware",
         "url": "https://ahmad-azam2005.github.io/",
         "applicationCategory": "UtilitiesApplication",
         "operatingSystem": "All",
-        "browserRequirements": "Requires JavaScript, Web Audio API, and MediaDevices support",
-        "description": "Multi-device hardware diagnostic suite engineered for monitors, laptops, smartphones, and TVs. Features display calibration, pixel tests, mic analyzers, webcam inspectors, and acoustic frequency sweeps."
+        "browserRequirements": "Requires JavaScript, Web Audio API, and HTML5 Canvas support",
+        "description": "Targeted hardware diagnostic suite tailored for monitors, laptops, phones, touchscreens, and TVs. Detects dead pixels, OLED burn-in, audio faults, and digitizer dead zones."
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "How do you fix a stuck pixel on a computer monitor or phone screen?",
+            "name": "How do you test for OLED burn-in on monitors, laptops, and phones?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Stuck pixels can often be revived using high-frequency color cycling tools. The rapid alternation between pure red, green, and blue stimuli forces the sluggish liquid crystal to untangle and return to its normal state. Alternatively, applying gentle pressure with a microfiber cloth around the sub-pixel while cycling power can help resolve stubborn stuck crystals."
+              "text": "OLED burn-in is tested using pure black, pure white, multiple stepped gray fields (5%, 25%, 50%), and primary/secondary colors like magenta and cyan. This reveals uneven sub-pixel aging, near-black banding, and static taskbar or status-bar ghost outlines."
             }
           },
           {
             "@type": "Question",
-            "name": "What is the difference between IPS glow and backlight bleed?",
+            "name": "How does a stuck pixel reviver work?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Backlight bleed is a hardware assembly flaw where physical pressure or imperfect bezel seating allows light from the backlight to escape around the display edges; it stays visible from all viewing angles. IPS glow is an inherent optical characteristic of In-Plane Switching liquid crystals that shifts in intensity and color depending on your viewing angle."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How many dead pixels are allowed before a monitor can be returned under warranty?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Most consumer monitors fall under ISO 9241-307 Class II. Under this standard, manufacturers generally require more than 2 fully dead pixels or more than 5 stuck sub-pixels per million pixels before approving warranty repairs or replacements."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How do you test for touchscreen dead zones on mobile phones?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "A touch digitizer grid test fills the display with interactive grid tiles. By dragging your finger across the entire display area, responsive zones highlight in green. Any lines or blocks that remain unhighlighted indicate dead digitizer tracks, fractured flex ribbons, or localized controller sensor failure."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Why do laptop speakers crackle or buzz at high volumes?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Speaker crackling usually indicates either a torn driver surround, physical chassis vibration where loose screws or brackets rattle at specific resonant frequencies, or audio software clipping. Running a continuous 20Hz to 20kHz frequency sweep helps isolate the exact resonance frequency causing the rattle."
+              "text": "A stuck pixel reviver rapidly cycles primary red, green, and blue stimuli at 22Hz. This forced rapid voltage transition exercises the sluggish liquid crystal molecules, prompting them to unlock and return to standard orientation."
             }
           }
         ]
@@ -86,17 +62,19 @@
 
   <style>
     :root {
-      --bg-base: #090d16;
-      --bg-surface: #111726;
-      --bg-card: #182033;
-      --border-card: #27324d;
-      --accent-blue: #3b82f6;
-      --accent-cyan: #06b6d4;
-      --accent-emerald: #10b981;
-      --accent-amber: #f59e0b;
-      --accent-rose: #f43f5e;
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
+      --bg-black: #060405;
+      --bg-surface: #120a0d;
+      --bg-card: #1c1015;
+      --bg-card-hover: #26161d;
+      --border-gold: rgba(212, 175, 55, 0.28);
+      --border-gold-bright: #d4af37;
+      --gold-primary: #d4af37;
+      --gold-light: #f7e7a8;
+      --red-primary: #dc2626;
+      --red-hover: #b91c1c;
+      --red-glow: rgba(220, 38, 38, 0.35);
+      --text-main: #fbf7ee;
+      --text-muted: #bda89b;
     }
 
     * {
@@ -106,23 +84,24 @@
     }
 
     body {
-      background-color: var(--bg-base);
+      background-color: var(--bg-black);
       color: var(--text-main);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
       line-height: 1.6;
-      padding-bottom: 60px;
+      padding-bottom: 70px;
       -webkit-font-smoothing: antialiased;
       background-image: 
-        radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.12) 0%, transparent 65%),
-        linear-gradient(to bottom, #0f172a 0%, var(--bg-base) 100%);
+        radial-gradient(circle at 50% 0%, rgba(220, 38, 38, 0.16) 0%, transparent 60%),
+        radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.08) 0%, transparent 45%),
+        linear-gradient(to bottom, #11090c 0%, var(--bg-black) 100%);
       background-attachment: fixed;
     }
 
-    /* Top Navigation */
+    /* Top Navigation Header */
     header {
-      background: rgba(17, 23, 38, 0.9);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border-card);
+      background: rgba(18, 10, 13, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-gold);
       position: sticky;
       top: 0;
       z-index: 50;
@@ -138,10 +117,9 @@
     }
 
     .brand-logo {
-      font-size: 1.3rem;
+      font-size: 1.35rem;
       font-weight: 900;
-      letter-spacing: -0.5px;
-      color: #fff;
+      color: var(--text-main);
       display: flex;
       align-items: center;
       gap: 10px;
@@ -149,105 +127,146 @@
     }
 
     .brand-logo span {
-      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+      background: linear-gradient(135deg, var(--gold-light), var(--gold-primary));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .badge-lab {
-      font-size: 0.7rem;
+    .badge-gold {
+      font-size: 0.72rem;
       font-weight: 800;
-      background: rgba(59, 130, 246, 0.15);
-      border: 1px solid rgba(59, 130, 246, 0.35);
-      color: var(--accent-cyan);
-      padding: 2px 8px;
+      background: rgba(212, 175, 55, 0.12);
+      border: 1px solid var(--border-gold);
+      color: var(--gold-primary);
+      padding: 3px 10px;
       border-radius: 4px;
       text-transform: uppercase;
-      letter-spacing: 0.8px;
+      letter-spacing: 1px;
+    }
+
+    .btn-switch-device {
+      background: var(--bg-card);
+      border: 1px solid var(--border-gold);
+      color: var(--gold-light);
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: none;
+    }
+
+    .btn-switch-device:hover {
+      border-color: var(--gold-primary);
+      background: var(--bg-card-hover);
     }
 
     .container {
       max-width: 1180px;
       margin: 0 auto;
-      padding: 24px 20px;
+      padding: 28px 20px;
     }
 
-    /* Device Selector Toolbar */
-    .device-bar {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-card);
-      border-radius: 14px;
-      padding: 16px 20px;
-      margin-bottom: 28px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 14px;
-    }
-
-    .device-bar-label {
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .device-options {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .device-btn {
-      background: var(--bg-card);
-      color: var(--text-muted);
-      border: 1px solid var(--border-card);
-      border-radius: 8px;
-      padding: 8px 16px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .device-btn:hover {
-      color: #fff;
-      border-color: var(--accent-blue);
-    }
-
-    .device-btn.active {
-      background: var(--accent-blue);
-      color: #fff;
-      border-color: var(--accent-blue);
-    }
-
-    /* Hero Banner */
-    .hero-banner {
+    /* GATEWAY VIEW */
+    #gateway-view {
+      display: block;
+      animation: fadeIn 0.3s ease;
       text-align: center;
-      margin-bottom: 34px;
+      padding: 20px 0 40px;
     }
 
-    .hero-banner h1 {
-      font-size: clamp(2.1rem, 4vw, 3rem);
+    .gateway-title {
+      font-size: clamp(2rem, 4vw, 3rem);
       font-weight: 900;
-      letter-spacing: -0.5px;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
+      color: var(--text-main);
     }
 
-    .hero-banner p {
+    .gateway-title span {
+      color: var(--gold-primary);
+    }
+
+    .gateway-subtitle {
       color: var(--text-muted);
-      font-size: 1.05rem;
-      max-width: 680px;
+      font-size: 1.1rem;
+      max-width: 650px;
+      margin: 0 auto 36px;
+    }
+
+    .device-selection-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      max-width: 1050px;
       margin: 0 auto;
     }
 
-    /* Diagnostic Pillar Grid */
+    .device-select-card {
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-gold);
+      border-radius: 14px;
+      padding: 28px 20px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .device-select-card:hover {
+      border-color: var(--gold-primary);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(220, 38, 38, 0.25);
+      background: var(--bg-card);
+    }
+
+    .device-select-icon {
+      font-size: 3rem;
+      margin-bottom: 14px;
+    }
+
+    .device-select-name {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--gold-light);
+      margin-bottom: 6px;
+    }
+
+    .device-select-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* WORKBENCH VIEW */
+    #workbench-view {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .workbench-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-gold);
+      padding-bottom: 16px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .workbench-title-box h2 {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--text-main);
+    }
+
+    .workbench-title-box p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Diagnostic Grid */
     .portal-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -257,17 +276,18 @@
 
     .hub-card {
       background: var(--bg-surface);
-      border: 1px solid var(--border-card);
+      border: 1px solid var(--border-gold);
       border-radius: 14px;
       padding: 24px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: transform 0.2s ease, border-color 0.2s ease;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     }
 
     .hub-card:hover {
-      border-color: var(--accent-blue);
+      border-color: var(--border-gold-bright);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
       transform: translateY(-2px);
     }
 
@@ -282,18 +302,19 @@
       width: 44px;
       height: 44px;
       border-radius: 10px;
-      background: rgba(59, 130, 246, 0.15);
-      border: 1px solid rgba(59, 130, 246, 0.3);
+      background: rgba(220, 38, 38, 0.15);
+      border: 1px solid rgba(212, 175, 55, 0.35);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 1.4rem;
+      color: var(--gold-primary);
     }
 
     .hub-title {
       font-size: 1.2rem;
       font-weight: 800;
-      color: #fff;
+      color: var(--gold-light);
     }
 
     .hub-desc {
@@ -309,30 +330,30 @@
       flex-wrap: wrap;
     }
 
-    .btn-main {
-      background: var(--accent-blue);
+    .btn-red {
+      background: linear-gradient(135deg, var(--red-primary), #991b1b);
       color: #fff;
-      border: none;
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 8px;
       padding: 10px 18px;
       font-size: 0.88rem;
       font-weight: 700;
       cursor: pointer;
-      transition: background 0.15s ease;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      text-decoration: none;
+      transition: all 0.15s ease;
     }
 
-    .btn-main:hover {
-      background: #2563eb;
+    .btn-red:hover {
+      background: linear-gradient(135deg, var(--red-hover), #7f1d1d);
+      box-shadow: 0 4px 14px var(--red-glow);
     }
 
-    .btn-sub {
+    .btn-gold-outline {
       background: var(--bg-card);
-      color: var(--text-main);
-      border: 1px solid var(--border-card);
+      color: var(--gold-light);
+      border: 1px solid var(--border-gold);
       border-radius: 8px;
       padding: 10px 16px;
       font-size: 0.88rem;
@@ -341,36 +362,37 @@
       transition: all 0.15s ease;
     }
 
-    .btn-sub:hover {
-      background: #232c45;
-      border-color: var(--text-muted);
+    .btn-gold-outline:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-gold-bright);
+      color: #fff;
     }
 
-    /* Screen Selector Modal Content */
-    .eizo-list {
+    /* Modals & Picker */
+    .test-list {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 12px 24px;
+      gap: 12px 20px;
       margin: 20px 0;
     }
 
     @media (max-width: 600px) {
-      .eizo-list {
+      .test-list {
         grid-template-columns: 1fr;
       }
     }
 
-    .eizo-row {
+    .test-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 8px 12px;
+      padding: 10px 14px;
       background: var(--bg-card);
       border-radius: 8px;
-      border: 1px solid var(--border-card);
+      border: 1px solid var(--border-gold);
     }
 
-    .eizo-row-left {
+    .test-row-left {
       display: flex;
       align-items: center;
       gap: 10px;
@@ -380,18 +402,25 @@
       width: 26px;
       height: 26px;
       border-radius: 50%;
-      background: var(--accent-blue);
+      background: var(--red-primary);
       color: #fff;
-      border: none;
+      border: 1px solid var(--gold-primary);
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
     }
 
     .btn-play-mini:hover {
-      background: #2563eb;
+      background: var(--red-hover);
+    }
+
+    .screen-cb {
+      accent-color: var(--red-primary);
+      width: 17px;
+      height: 17px;
+      cursor: pointer;
     }
 
     /* Telemetry Display */
@@ -404,24 +433,24 @@
 
     .telemetry-box {
       background: var(--bg-card);
-      border: 1px solid var(--border-card);
+      border: 1px solid var(--border-gold);
       border-radius: 10px;
       padding: 14px 18px;
     }
 
     .telemetry-label {
       font-size: 0.72rem;
-      color: var(--text-muted);
+      color: var(--gold-primary);
       text-transform: uppercase;
       font-weight: 700;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.8px;
       margin-bottom: 4px;
     }
 
     .telemetry-val {
       font-size: 1.2rem;
       font-weight: 800;
-      color: var(--accent-cyan);
+      color: var(--text-main);
     }
 
     /* Touchscreen Canvas */
@@ -430,7 +459,7 @@
       width: 100%;
       height: 380px;
       background: #000;
-      border: 2px dashed var(--border-card);
+      border: 2px dashed var(--border-gold);
       border-radius: 10px;
       overflow: hidden;
       touch-action: none;
@@ -443,13 +472,13 @@
       display: block;
     }
 
-    /* Camera Feed Container */
+    /* Camera Feed */
     .camera-box {
       width: 100%;
       max-width: 640px;
       height: 360px;
       background: #000;
-      border: 1px solid var(--border-card);
+      border: 1px solid var(--border-gold);
       border-radius: 10px;
       overflow: hidden;
       margin: 14px auto;
@@ -465,13 +494,13 @@
       display: none;
     }
 
-    /* Mic Audio Level Visualizer */
+    /* Mic VU Meter */
     .meter-wrap {
       width: 100%;
-      height: 22px;
+      height: 20px;
       background: var(--bg-card);
-      border: 1px solid var(--border-card);
-      border-radius: 11px;
+      border: 1px solid var(--border-gold);
+      border-radius: 10px;
       overflow: hidden;
       margin: 14px 0;
       position: relative;
@@ -480,7 +509,7 @@
     #micLevelBar {
       width: 0%;
       height: 100%;
-      background: linear-gradient(to right, var(--accent-emerald), var(--accent-amber), var(--accent-rose));
+      background: linear-gradient(to right, #10b981, var(--gold-primary), var(--red-primary));
       transition: width 0.05s ease;
     }
 
@@ -496,6 +525,7 @@
       user-select: none;
       overflow: hidden;
       background: #000;
+      outline: none;
     }
 
     #screen-hud {
@@ -503,9 +533,9 @@
       top: 16px;
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(15, 23, 42, 0.9);
+      background: rgba(18, 10, 13, 0.95);
       backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid var(--border-gold-bright);
       border-radius: 30px;
       padding: 8px 18px;
       display: flex;
@@ -513,19 +543,20 @@
       gap: 12px;
       z-index: 100000;
       max-width: 95vw;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
     }
 
     .hud-title {
       font-size: 0.85rem;
       font-weight: 800;
-      color: #fff;
+      color: var(--gold-light);
       white-space: nowrap;
     }
 
     .hud-btn {
-      background: rgba(255, 255, 255, 0.15);
-      border: none;
-      color: #fff;
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid var(--border-gold);
+      color: var(--text-main);
       font-size: 0.78rem;
       font-weight: 700;
       padding: 5px 12px;
@@ -534,11 +565,13 @@
     }
 
     .hud-btn:hover {
-      background: rgba(255, 255, 255, 0.3);
+      background: rgba(212, 175, 55, 0.3);
+      color: #fff;
     }
 
     .hud-btn.btn-exit {
-      background: var(--accent-rose);
+      background: var(--red-primary);
+      border-color: #f87171;
     }
 
     #testCanvas {
@@ -552,8 +585,8 @@
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(5px);
+      background: rgba(0, 0, 0, 0.88);
+      backdrop-filter: blur(6px);
       z-index: 10000;
       align-items: center;
       justify-content: center;
@@ -562,7 +595,7 @@
 
     .modal-box {
       background: var(--bg-surface);
-      border: 1px solid var(--border-card);
+      border: 1px solid var(--border-gold-bright);
       border-radius: 14px;
       max-width: 680px;
       width: 100%;
@@ -576,13 +609,13 @@
       font-size: 1.25rem;
       font-weight: 800;
       margin-bottom: 8px;
-      color: #fff;
+      color: var(--gold-light);
     }
 
-    /* SEO & Metrology Article */
+    /* Metrology Table */
     .article-card {
       background: var(--bg-surface);
-      border: 1px solid var(--border-card);
+      border: 1px solid var(--border-gold);
       border-radius: 14px;
       padding: 28px;
       margin-top: 36px;
@@ -592,7 +625,7 @@
       font-size: 1.35rem;
       font-weight: 800;
       margin-bottom: 12px;
-      color: #fff;
+      color: var(--gold-light);
     }
 
     .spec-table-wrapper {
@@ -608,17 +641,17 @@
     }
 
     .spec-table th, .spec-table td {
-      border: 1px solid var(--border-card);
+      border: 1px solid var(--border-gold);
       padding: 12px;
       text-align: left;
     }
 
     .spec-table th {
       background: var(--bg-card);
-      color: #fff;
+      color: var(--gold-light);
     }
 
-    /* SEO FAQ & Knowledge Base Styling */
+    /* FAQ Accordions */
     .faq-container {
       margin-top: 24px;
       display: flex;
@@ -628,21 +661,21 @@
 
     .faq-item {
       background: var(--bg-card);
-      border: 1px solid var(--border-card);
+      border: 1px solid var(--border-gold);
       border-radius: 10px;
       overflow: hidden;
       transition: border-color 0.15s ease;
     }
 
     .faq-item:hover {
-      border-color: var(--accent-blue);
+      border-color: var(--border-gold-bright);
     }
 
     .faq-item summary {
       padding: 16px 20px;
       font-weight: 700;
       font-size: 0.98rem;
-      color: var(--text-main);
+      color: var(--gold-light);
       cursor: pointer;
       list-style: none;
       display: flex;
@@ -658,9 +691,8 @@
     .faq-item summary::after {
       content: "＋";
       font-size: 1.1rem;
-      color: var(--accent-cyan);
+      color: var(--gold-primary);
       font-weight: 800;
-      transition: transform 0.2s ease;
     }
 
     .faq-item[open] summary::after {
@@ -672,13 +704,9 @@
       color: var(--text-muted);
       font-size: 0.92rem;
       line-height: 1.7;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-top: 1px solid rgba(212, 175, 55, 0.15);
       margin-top: 4px;
       padding-top: 14px;
-    }
-
-    .faq-content strong {
-      color: #fff;
     }
 
     /* Footer */
@@ -686,7 +714,7 @@
       max-width: 1180px;
       margin: 50px auto 0;
       padding: 24px 20px 0;
-      border-top: 1px solid var(--border-card);
+      border-top: 1px solid var(--border-gold);
       text-align: center;
       font-size: 0.85rem;
       color: var(--text-muted);
@@ -701,413 +729,281 @@
     }
 
     .footer-links a {
-      color: var(--accent-blue);
+      color: var(--gold-primary);
       text-decoration: none;
       cursor: pointer;
       font-weight: 600;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Header Navigation -->
+  <!-- Top Navigation Header -->
   <header>
     <div class="nav-container">
       <a href="/" class="brand-logo">
-        OmniHardware <span>Lab</span>
+        OmniHardware <span>Diagnostics</span>
       </a>
-      <div class="badge-lab">ISO 9241 Certified Metrology</div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <button id="btnSwitchDevice" class="btn-switch-device" onclick="resetToGateway()">⇄ Switch Device</button>
+        <div class="badge-gold">ISO 9241 Standard</div>
+      </div>
     </div>
   </header>
 
   <main class="container">
 
-    <!-- Device Target Selector (Monitor, Mobile, TV, Laptop) -->
-    <div class="device-bar">
-      <div class="device-bar-label">
-        <span>Target Hardware Category:</span>
-      </div>
-      <div class="device-options">
-        <button class="device-btn active" data-device="monitor" onclick="setDevice('monitor')">🖥️ Desktop Monitor</button>
-        <button class="device-btn" data-device="laptop" onclick="setDevice('laptop')">💻 Laptop Display</button>
-        <button class="device-btn" data-device="mobile" onclick="setDevice('mobile')">📱 Smartphone / Tablet</button>
-        <button class="device-btn" data-device="tv" onclick="setDevice('tv')">📺 Smart TV / Large Screen</button>
-      </div>
-    </div>
+    <!-- 1. INITIAL LANDING GATEWAY: CHOOSE DEVICE -->
+    <section id="gateway-view">
+      <h1 class="gateway-title">Select Your <span>Hardware Target</span></h1>
+      <p class="gateway-subtitle">Choose the device category you wish to inspect. We configure screen metrology, sensor checks, and audio routines specifically for that device.</p>
 
-    <!-- Hero Title -->
-    <div class="hero-banner">
-      <h1>All-In-One Hardware & Display Diagnostics</h1>
-      <p id="deviceNotice">Select any diagnostic module below. Calibrated specifically for high-precision desktop monitor inspection.</p>
-    </div>
-
-    <!-- Diagnostic Pillars Portal Grid -->
-    <div class="portal-grid">
-
-      <!-- PILLAR 1: SCREEN & DISPLAY QUALITY -->
-      <div class="hub-card">
-        <div>
-          <div class="hub-card-header">
-            <div class="hub-icon">🖥️</div>
-            <div class="hub-title">Screen & Display Test</div>
-          </div>
-          <p class="hub-desc">
-            Full-screen EIZO-grade visual inspection: test geometry, dead & stuck pixels, uniformity, color distances, sharpness moiré, and motion response time.
-          </p>
+      <div class="device-selection-grid">
+        <div class="device-select-card" onclick="selectTargetDevice('monitor')">
+          <div class="device-select-icon">🖥️</div>
+          <div class="device-select-name">Desktop Monitor</div>
+          <div class="device-select-desc">Full screen colors, gamma 2.2, OLED burn-in, motion ghosting, and audio sweep. (No mic/touch)</div>
         </div>
-        <div class="hub-btn-group">
-          <button class="btn-main" onclick="openScreenModal()">
-            ▶ Run Complete Sequence
-          </button>
-          <button class="btn-sub" onclick="openScreenModal()">
-            ⚙️ Choose Tests Individually
-          </button>
+
+        <div class="device-select-card" onclick="selectTargetDevice('laptop')">
+          <div class="device-select-icon">💻</div>
+          <div class="device-select-name">Laptop Display</div>
+          <div class="device-select-desc">Backlight bleed, OLED check, mic VU meter, webcam inspector, and GPU renderer.</div>
+        </div>
+
+        <div class="device-select-card" onclick="selectTargetDevice('mobile')">
+          <div class="device-select-icon">📱</div>
+          <div class="device-select-name">Smartphone</div>
+          <div class="device-select-desc">Touchscreen dead-zone grid, multi-touch points, OLED burn-in, cameras, and mic.</div>
+        </div>
+
+        <div class="device-select-card" onclick="selectTargetDevice('touch')">
+          <div class="device-select-icon">👆</div>
+          <div class="device-select-name">Touchscreen / Tablet</div>
+          <div class="device-select-desc">Dedicated digitizer matrix tester, stylus/finger tracking, and color uniformity.</div>
+        </div>
+
+        <div class="device-select-card" onclick="selectTargetDevice('tv')">
+          <div class="device-select-icon">📺</div>
+          <div class="device-select-name">Smart TV Screen</div>
+          <div class="device-select-desc">Large format OLED burn-in, 4K/HDR contrast stepping, and discrete L/R stereo separation.</div>
         </div>
       </div>
+    </section>
 
-      <!-- PILLAR 2: STUCK PIXEL REVIVER (FLASHER) -->
-      <div class="hub-card">
-        <div>
-          <div class="hub-card-header">
-            <div class="hub-icon">⚡</div>
-            <div class="hub-title">Stuck Pixel Reviver</div>
-          </div>
-          <p class="hub-desc">
-            High-frequency 22Hz alternating RGB sub-pixel cycle to stimulate sluggish or stuck liquid crystals without physical panel disassembly.
-          </p>
+    <!-- 2. TAILORED WORKBENCH -->
+    <section id="workbench-view">
+      <div class="workbench-header">
+        <div class="workbench-title-box">
+          <h2 id="wbDeviceTitle">Hardware Diagnostic Workbench</h2>
+          <p id="wbDeviceDesc">Calibrated test routines configured for your hardware.</p>
         </div>
-        <div class="hub-btn-group">
-          <button class="btn-main" onclick="launchFlasher()">
-            ⚡ Launch Fullscreen Flasher
-          </button>
-        </div>
+        <button class="btn-gold-outline" onclick="resetToGateway()">⇄ Change Device</button>
       </div>
 
-      <!-- PILLAR 3: AUDIO & STEREO SPEAKERS -->
-      <div class="hub-card">
-        <div>
-          <div class="hub-card-header">
-            <div class="hub-icon">🔊</div>
-            <div class="hub-title">Speaker & Audio Test</div>
-          </div>
-          <p class="hub-desc">
-            Discrete Left/Right stereo separation checks, polarity balance, and a continuous 20Hz–20,000Hz logarithmic frequency sweep to detect chassis rattles and torn voice coils.
-          </p>
-        </div>
-        <div class="hub-btn-group">
-          <button class="btn-sub" onclick="testAudioChannel('left')">Left (L)</button>
-          <button class="btn-sub" onclick="testAudioChannel('right')">Right (R)</button>
-          <button class="btn-main" onclick="runAudioSweep()">📈 20Hz-20kHz Sweep</button>
-          <button class="btn-sub" style="background:var(--accent-rose); color:#fff;" onclick="stopAllAudio()">⏹️ Stop</button>
-        </div>
-      </div>
+      <!-- DYNAMIC DIAGNOSTIC GRID -->
+      <div class="portal-grid" id="workbenchCardsGrid"></div>
 
-      <!-- PILLAR 4: MICROPHONE TESTER -->
-      <div class="hub-card">
-        <div>
-          <div class="hub-card-header">
-            <div class="hub-icon">🎙️</div>
-            <div class="hub-title">Microphone Diagnostics</div>
-          </div>
-          <p class="hub-desc">
-            Inspect microphone input channels in real time with a live Web Audio decibel VU meter. Check frequency clarity and background noise floor.
-          </p>
-          <div class="meter-wrap">
-            <div id="micLevelBar"></div>
-          </div>
-          <div id="micStatusText" style="font-size:0.8rem; color:var(--text-muted); margin-bottom:12px;">
-            Status: Microphone Inactive
-          </div>
+      <!-- METROLOGY DASHBOARD -->
+      <div class="hub-card" style="margin-bottom:30px;">
+        <div class="hub-card-header">
+          <div class="hub-icon">🔍</div>
+          <div class="hub-title">Hardware, GPU & Display Metrology</div>
         </div>
-        <div class="hub-btn-group">
-          <button class="btn-main" id="btnStartMic" onclick="toggleMicrophone()">
-            🎙️ Start Mic Stream Test
-          </button>
+        <p class="hub-desc">Real-time parameters extracted directly from browser Graphics and Display API pipelines:</p>
+        
+        <div class="telemetry-grid">
+          <div class="telemetry-box">
+            <div class="telemetry-label">Physical Display Resolution</div>
+            <div class="telemetry-val" id="specResolution">-- x --</div>
+          </div>
+          <div class="telemetry-box">
+            <div class="telemetry-label">Device Pixel Ratio (DPR)</div>
+            <div class="telemetry-val" id="specDPR">--</div>
+          </div>
+          <div class="telemetry-box">
+            <div class="telemetry-label">Color Depth & Gamut</div>
+            <div class="telemetry-val" id="specColorGamut">--</div>
+          </div>
+          <div class="telemetry-box">
+            <div class="telemetry-label">Measured Refresh Rate</div>
+            <div class="telemetry-val" id="specRefreshRate">Benchmarking...</div>
+          </div>
+          <div class="telemetry-box" style="grid-column: 1 / -1;">
+            <div class="telemetry-label">GPU Render Pipeline (WebGL)</div>
+            <div class="telemetry-val" id="specGPU" style="font-size:1.05rem;">Detecting...</div>
+          </div>
         </div>
       </div>
 
-      <!-- PILLAR 5: CAMERA & WEBCAM INSPECTOR -->
-      <div class="hub-card">
-        <div>
-          <div class="hub-card-header">
-            <div class="hub-icon">📷</div>
-            <div class="hub-title">Camera & Webcam Test</div>
-          </div>
-          <p class="hub-desc">
-            Preview camera sensors directly in-browser. Inspect live feed aspect ratios, frame rate consistency, and hardware resolution capabilities.
-          </p>
+      <!-- ISO METROLOGY TABLE -->
+      <article class="article-card">
+        <h2>Display Metrology & Calibration Standards (ISO 9241-307)</h2>
+        <p class="hub-desc" style="margin-bottom:14px;">
+          Acceptance criteria for flat-panel liquid crystal and OLED displays under standard inspection guidelines:
+        </p>
+        <div class="spec-table-wrapper">
+          <table class="spec-table">
+            <thead>
+              <tr>
+                <th>Diagnostic Module</th>
+                <th>Evaluation Target</th>
+                <th>ISO 9241 Class II Acceptance Threshold</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Dead Pixels</strong></td>
+                <td>Unpowered thin-film transistors</td>
+                <td>Maximum 2 full dark pixels per million</td>
+              </tr>
+              <tr>
+                <td><strong>Stuck Sub-Pixels</strong></td>
+                <td>Liquid crystals locked in pure R, G, or B</td>
+                <td>Maximum 5 stuck sub-pixels per million</td>
+              </tr>
+              <tr>
+                <td><strong>Backlight Uniformity</strong></td>
+                <td>Edge-lit light leakage or panel pinch</td>
+                <td>&lt; 15% Delta L* luminance variance across quadrants</td>
+              </tr>
+              <tr>
+                <td><strong>Motion Response Time</strong></td>
+                <td>Gray-to-gray (GtG) transition smear</td>
+                <td>Synchronized frame rendering without double-image ghosting</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div class="hub-btn-group">
-          <button class="btn-main" onclick="openModal('modal-camera')">
-            📷 Open Webcam Inspector
-          </button>
+      </article>
+
+      <!-- FAQ ACCORDIONS -->
+      <section class="article-card">
+        <h2>Hardware Knowledge Base & Frequently Asked Questions</h2>
+        <p class="hub-desc">
+          Essential guides for diagnosing panel defects, OLED degradation, and sensor responsiveness.
+        </p>
+
+        <div class="faq-container">
+          <details class="faq-item" open>
+            <summary>How do you test for OLED burn-in on monitors, laptops, and phones?</summary>
+            <div class="faq-content">
+              OLED panels use organic sub-pixels that age at differing rates. Inspecting pure black, pure white, stepped grays (5%, 25%, 50%), and pure magenta reveals static taskbars, mobile notches, and UI elements. If faint ghost silhouettes remain on these uniform fields, permanent image retention has occurred.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>How do I fix a stuck pixel on a monitor or laptop display?</summary>
+            <div class="faq-content">
+              Run our <strong>⚡ Stuck Pixel Reviver</strong> for 15 to 30 minutes. Rapid 22Hz transitions between primary RGB values stimulate liquid crystal molecules to unlock and return to standard orientation.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>What is the difference between IPS glow and backlight bleed?</summary>
+            <div class="faq-content">
+              • <strong>Backlight Bleed:</strong> A physical assembly flaw where bezel pressure allows light to escape from display edges; it stays fixed at all angles.<br>
+              • <strong>IPS Glow:</strong> An optical byproduct of IPS crystal structure that shifts position, color tint, and intensity as you move off-axis.
+            </div>
+          </details>
         </div>
-      </div>
-
-      <!-- PILLAR 6: TOUCHSCREEN & DIGITIZER GRID -->
-      <div class="hub-card">
-        <div>
-          <div class="hub-card-header">
-            <div class="hub-icon">📱</div>
-            <div class="hub-title">Touch Digitizer Grid</div>
-          </div>
-          <p class="hub-desc">
-            Multi-touch finger tracker and dead-zone painter. Trace your finger across the digitizer: gaps indicate cracked flex ribbons or unresponsive sensors.
-          </p>
-        </div>
-        <div class="hub-btn-group">
-          <button class="btn-main" onclick="openModal('modal-touch')">
-            📱 Launch Touch Grid
-          </button>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- HARDWARE & GPU METROLOGY DASHBOARD -->
-    <div class="hub-card" style="margin-bottom:30px;">
-      <div class="hub-card-header">
-        <div class="hub-icon">🔍</div>
-        <div class="hub-title">Real-Time Hardware, GPU & Display Metrology</div>
-      </div>
-      <p class="hub-desc">Live parameters extracted directly from the browser's Graphics and Display API pipelines:</p>
-      
-      <div class="telemetry-grid">
-        <div class="telemetry-box">
-          <div class="telemetry-label">Physical Display Resolution</div>
-          <div class="telemetry-val" id="specResolution">-- x --</div>
-        </div>
-        <div class="telemetry-box">
-          <div class="telemetry-label">Device Pixel Ratio (DPR)</div>
-          <div class="telemetry-val" id="specDPR">--</div>
-        </div>
-        <div class="telemetry-box">
-          <div class="telemetry-label">Color Depth & Gamut</div>
-          <div class="telemetry-val" id="specColorGamut">--</div>
-        </div>
-        <div class="telemetry-box">
-          <div class="telemetry-label">Measured Refresh Rate</div>
-          <div class="telemetry-val" id="specRefreshRate">Benchmarking...</div>
-        </div>
-        <div class="telemetry-box" style="grid-column: 1 / -1;">
-          <div class="telemetry-label">GPU Render Pipeline (WebGL)</div>
-          <div class="telemetry-val" id="specGPU" style="font-size:1.05rem;">Detecting...</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ISO DEFECT METROLOGY ARTICLE (ADSENSE & SEARCH COMPLIANCE) -->
-    <article class="article-card">
-      <h2>Display Metrology & Calibration Physics (ISO 9241-307)</h2>
-      <p class="hub-desc" style="margin-bottom:14px;">
-        Evaluating liquid crystal displays (IPS, VA, TN) and Organic Light Emitting Diode (OLED) panels requires calibrated spatial and colorimetric stimuli:
-      </p>
-      <div class="spec-table-wrapper">
-        <table class="spec-table">
-          <thead>
-            <tr>
-              <th>Diagnostic Module</th>
-              <th>Evaluation Target</th>
-              <th>ISO 9241 Class II Acceptance Threshold</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Dead Pixels</strong></td>
-              <td>Unpowered thin-film transistors</td>
-              <td>Maximum 2 full dark pixels per million</td>
-            </tr>
-            <tr>
-              <td><strong>Stuck Sub-Pixels</strong></td>
-              <td>Liquid crystals locked in pure R, G, or B</td>
-              <td>Maximum 5 stuck sub-pixels per million</td>
-            </tr>
-            <tr>
-              <td><strong>Backlight Uniformity</strong></td>
-              <td>Edge-lit light leakage or panel pinch</td>
-              <td>&lt; 15% Delta L* luminance variance across quadrants</td>
-            </tr>
-            <tr>
-              <td><strong>Motion Response Time</strong></td>
-              <td>Gray-to-gray (GtG) transition smear</td>
-              <td>Synchronized frame rendering without double-image ghosting</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </article>
-
-    <!-- KNOWLEDGE BASE & DIAGNOSTIC FAQS (HIGH-INTENT SEO CONTENT) -->
-    <section class="article-card">
-      <h2>Hardware Diagnostic Knowledge Base & Frequently Asked Questions</h2>
-      <p class="hub-desc">
-        Comprehensive hardware inspection guides covering display panel defects, acoustic calibration, and sensor validation.
-      </p>
-
-      <div class="faq-container">
-
-        <details class="faq-item" open>
-          <summary>How do I fix a stuck pixel on a gaming monitor or laptop screen?</summary>
-          <div class="faq-content">
-            A <strong>stuck pixel</strong> occurs when one or two liquid crystal sub-pixels (Red, Green, or Blue) remain permanently energized, displaying a persistent bright dot on dark backgrounds. Unlike physically dead pixels, stuck sub-pixels can often be revived:
-            <br><br>
-            1. <strong>Rapid Color Cycling (Flasher):</strong> Run our <em>⚡ Stuck Pixel Reviver</em> for 15 to 30 minutes. Rapid 22Hz transitions between primary RGB values force the liquid crystals to repeatedly untangle and resume their normal alignment.<br>
-            2. <strong>The Microfiber Pressure Method:</strong> Turn off the display. Take a clean, dry microfiber cloth and wrap it around your fingertip. Apply gentle, concentrated pressure directly to the coordinate of the stuck pixel, then power the monitor on while holding the pressure. Release after 2 seconds.
-          </div>
-        </details>
-
-        <details class="faq-item">
-          <summary>What is the difference between IPS glow and backlight bleed?</summary>
-          <div class="faq-content">
-            While both issues appear as unwanted luminescence on dark backgrounds, their root causes and solutions differ:
-            <br><br>
-            • <strong>Backlight Bleed:</strong> A physical assembly flaw caused by uneven bezel pressure pinching the LCD sandwich, letting backlight LEDs escape around the frame edges. Backlight bleed remains in the exact same spot regardless of your head position.<br>
-            • <strong>IPS Glow:</strong> An inherent optical byproduct of wide-viewing-angle In-Plane Switching liquid crystal geometry. IPS glow shifts, changes color (often yellowish or purplish), and changes intensity as you tilt your head or move further back from the display.
-          </div>
-        </details>
-
-        <details class="faq-item">
-          <summary>How many dead pixels are allowed under manufacturer warranty returns?</summary>
-          <div class="faq-content">
-            Under international standard <strong>ISO 9241-307 Class II</strong> (which applies to virtually all commercial displays from ASUS, Dell, HP, LG, and Samsung), a monitor is not considered legally defective if it contains up to 2 permanently dead pixels or 5 stuck sub-pixels per million pixels. 
-            <br><br>
-            For a standard 1080p display (approx. 2 million pixels), manufacturers typically require 4 or more defective pixels before approving an RMA replacement, making an immediate inspection during your retailer's 14–30 day return window critical.
-          </div>
-        </details>
-
-        <details class="faq-item">
-          <summary>How do I test for touchscreen dead zones on mobile phones and tablets?</summary>
-          <div class="faq-content">
-            Touch digitizer panels use fine grid conductive lines (Indium Tin Oxide) overlaid above the display. Drops or flex damage can sever a single ribbon trace, causing an entire horizontal or vertical band of the screen to become unresponsive.
-            <br><br>
-            Using our <strong>📱 Touch Digitizer Grid</strong>, swipe your finger systematically across the screen. Every touched block illuminates in green. Any strip or block that remains uncolored indicates a dead digitizer zone requiring a screen assembly replacement.
-          </div>
-        </details>
-
-        <details class="faq-item">
-          <summary>Why do laptop speakers crackle or rattle at high volumes?</summary>
-          <div class="faq-content">
-            Audio buzz and distortion in laptop speakers generally stem from three causes:
-            <br><br>
-            1. <strong>Chassis Resonance:</strong> Thin ultrabook speaker cavities can vibrate loose screws, fan shrouds, or battery adhesives when playing specific low-mid frequencies.<br>
-            2. <strong>Blown Driver Gasket:</strong> If the speaker cone's flexible rubber surround has torn, the voice coil will physically scrape against the magnet.<br>
-            3. <strong>Digital Clipping:</strong> Operating system audio enhancements (such as Dolby Atmos or Windows Audio Enhancements) pushing gain past 0 dBFS.
-            <br><br>
-            Running our <strong>20Hz–20kHz Logarithmic Frequency Sweep</strong> isolates the exact resonant frequency triggering the vibration.
-          </div>
-        </details>
-
-        <details class="faq-item">
-          <summary>How can I test whether my microphone is picking up room background noise?</summary>
-          <div class="faq-content">
-            Launch our <strong>🎙️ Microphone Diagnostics</strong> tool in a quiet room without speaking. Observe the live decibel VU meter:
-            <br><br>
-            • <strong>Ideal Noise Floor:</strong> The meter should remain completely below 5–10% when silent.<br>
-            • <strong>High Noise Floor (&gt; 20%):</strong> Indicates electrical ground loop hum, aggressive PC fan noise, or unshielded microphone cables. Adjust your operating system microphone gain slider down to 70–80% to eliminate digital preamp hiss.
-          </div>
-        </details>
-
-        <details class="faq-item">
-          <summary>Can OLED screens suffer from permanent burn-in or image retention?</summary>
-          <div class="faq-content">
-            Yes. Organic Light Emitting Diodes degrade based on cumulative usage and luminance. If static user interface elements (such as taskbars, game HUDs, or TV news chyrons) remain displayed for thousands of hours, those individual sub-pixels lose luminance faster than neighboring pixels.
-            <br><br>
-            To evaluate OLED health, launch our <strong>Screen & Display Test</strong> and inspect solid 50% gray and solid magenta fields in full screen. Image retention will reveal faint outlines of the static element.
-          </div>
-        </details>
-
-      </div>
+      </section>
     </section>
 
   </main>
 
-  <!-- MODAL: SCREEN TEST CHOOSER & SEQUENCE LAUNCHER -->
+  <!-- MODAL: SCREEN TEST SELECTOR -->
   <div class="modal-overlay" id="modal-screen">
     <div class="modal-box">
       <h3>Screen Quality & Calibration Routines</h3>
       <p style="color:var(--text-muted); font-size:0.88rem;">Select tests to run in sequence, or click ▶ to launch any individual test immediately:</p>
 
-      <div class="eizo-list">
-        <div class="eizo-row">
-          <div class="eizo-row-left">
+      <div class="test-list">
+        <div class="test-row">
+          <div class="test-row-left">
             <button class="btn-play-mini" onclick="runSingleRoutine('pattern')">▶</button>
             <span style="font-weight:700;">Test Pattern (Geometry)</span>
           </div>
           <input type="checkbox" class="screen-cb" data-test="pattern" checked>
         </div>
 
-        <div class="eizo-row">
-          <div class="eizo-row-left">
+        <div class="test-row">
+          <div class="test-row-left">
             <button class="btn-play-mini" onclick="runSingleRoutine('defective_pixels')">▶</button>
             <span style="font-weight:700;">Defective Pixels (RGBW)</span>
           </div>
           <input type="checkbox" class="screen-cb" data-test="defective_pixels" checked>
         </div>
 
-        <div class="eizo-row">
-          <div class="eizo-row-left">
+        <div class="test-row">
+          <div class="test-row-left">
+            <button class="btn-play-mini" onclick="runSingleRoutine('oled_check')">▶</button>
+            <span style="font-weight:700;">OLED Burn-In Full Suite</span>
+          </div>
+          <input type="checkbox" class="screen-cb" data-test="oled_check" checked>
+        </div>
+
+        <div class="test-row">
+          <div class="test-row-left">
             <button class="btn-play-mini" onclick="runSingleRoutine('uniformity')">▶</button>
             <span style="font-weight:700;">Uniformity & Bleed</span>
           </div>
           <input type="checkbox" class="screen-cb" data-test="uniformity" checked>
         </div>
 
-        <div class="eizo-row">
-          <div class="eizo-row-left">
+        <div class="test-row">
+          <div class="test-row-left">
             <button class="btn-play-mini" onclick="runSingleRoutine('color_distances')">▶</button>
             <span style="font-weight:700;">Color Distances</span>
           </div>
           <input type="checkbox" class="screen-cb" data-test="color_distances" checked>
         </div>
 
-        <div class="eizo-row">
-          <div class="eizo-row-left">
+        <div class="test-row">
+          <div class="test-row-left">
             <button class="btn-play-mini" onclick="runSingleRoutine('gradients')">▶</button>
             <span style="font-weight:700;">Gradients & Banding</span>
           </div>
           <input type="checkbox" class="screen-cb" data-test="gradients" checked>
         </div>
 
-        <div class="eizo-row">
-          <div class="eizo-row-left">
+        <div class="test-row">
+          <div class="test-row-left">
             <button class="btn-play-mini" onclick="runSingleRoutine('sharpness')">▶</button>
             <span style="font-weight:700;">Sharpness (Moiré)</span>
           </div>
           <input type="checkbox" class="screen-cb" data-test="sharpness" checked>
         </div>
 
-        <div class="eizo-row">
-          <div class="eizo-row-left">
-            <button class="btn-play-mini" onclick="runSingleRoutine('viewing_angle')">▶</button>
-            <span style="font-weight:700;">Viewing Angle Shift</span>
-          </div>
-          <input type="checkbox" class="screen-cb" data-test="viewing_angle" checked>
-        </div>
-
-        <div class="eizo-row">
-          <div class="eizo-row-left">
+        <div class="test-row">
+          <div class="test-row-left">
             <button class="btn-play-mini" onclick="runSingleRoutine('gamma')">▶</button>
             <span style="font-weight:700;">Gamma Calibration</span>
           </div>
           <input type="checkbox" class="screen-cb" data-test="gamma" checked>
         </div>
 
-        <div class="eizo-row" style="grid-column: 1 / -1;">
-          <div class="eizo-row-left">
+        <div class="test-row" style="grid-column: 1 / -1;">
+          <div class="test-row-left">
             <button class="btn-play-mini" onclick="runSingleRoutine('response_time')">▶</button>
-            <span style="font-weight:700;">Response Time & Ghosting (Moving Block)</span>
+            <span style="font-weight:700;">Response Time & Ghosting</span>
           </div>
           <input type="checkbox" class="screen-cb" data-test="response_time" checked>
         </div>
       </div>
 
       <div style="display:flex; justify-content:space-between; align-items:center; margin-top:20px; flex-wrap:wrap; gap:12px;">
-        <span style="color:var(--accent-blue); text-decoration:underline; cursor:pointer; font-size:0.85rem; font-weight:700;" onclick="toggleAllScreenCbs()">
+        <span style="color:var(--gold-primary); text-decoration:underline; cursor:pointer; font-size:0.85rem; font-weight:700;" onclick="toggleAllScreenCbs()">
           Toggle All / None
         </span>
         <div style="display:flex; gap:10px;">
-          <button class="btn-sub" onclick="closeModal('modal-screen')">Cancel</button>
-          <button class="btn-main" onclick="startSelectedScreenSequence()">▶ Start Full Test Run</button>
+          <button class="btn-gold-outline" onclick="closeModal('modal-screen')">Cancel</button>
+          <button class="btn-red" onclick="startSelectedScreenSequence()">▶ Start Full Test Run</button>
         </div>
       </div>
     </div>
@@ -1124,26 +1020,26 @@
         <div id="camPlaceholder" style="color:var(--text-muted); font-size:0.9rem;">Camera feed standby</div>
       </div>
       
-      <div id="camTelemetry" style="font-size:0.85rem; color:var(--accent-cyan); margin-bottom:16px;"></div>
+      <div id="camTelemetry" style="font-size:0.85rem; color:var(--gold-primary); margin-bottom:16px;"></div>
 
       <div style="display:flex; gap:10px; justify-content:flex-end;">
-        <button class="btn-sub" onclick="stopCameraStream(); closeModal('modal-camera');">Close</button>
-        <button class="btn-main" id="btnToggleCam" onclick="toggleCameraStream()">Activate Camera</button>
+        <button class="btn-gold-outline" onclick="stopCameraStream(); closeModal('modal-camera');">Close</button>
+        <button class="btn-red" id="btnToggleCam" onclick="toggleCameraStream()">Activate Camera</button>
       </div>
     </div>
   </div>
 
-  <!-- MODAL: TOUCHSCREEN DIGITIZER GRID -->
+  <!-- MODAL: TOUCH DIGITIZER GRID -->
   <div class="modal-overlay" id="modal-touch">
     <div class="modal-box" style="max-width:800px;">
       <div style="display:flex; justify-content:space-between; align-items:center;">
         <h3>Touchscreen Digitizer Dead-Zone Grid</h3>
-        <span id="touchPointsReadout" style="font-weight:700; color:var(--accent-cyan); font-size:0.85rem;">
+        <span id="touchPointsReadout" style="font-weight:700; color:var(--gold-primary); font-size:0.85rem;">
           Touch Points: 0
         </span>
       </div>
       <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:10px;">
-        Swipe across the canvas to illuminate all blocks in green. Gaps indicate broken digitizer zones.
+        Swipe across the canvas to illuminate all blocks in green. Gaps indicate broken digitizer tracks.
       </p>
 
       <div class="touch-canvas-box">
@@ -1151,19 +1047,19 @@
       </div>
 
       <div style="display:flex; justify-content:space-between; margin-top:16px;">
-        <button class="btn-sub" onclick="clearTouchGrid()">Clear Grid</button>
-        <button class="btn-main" onclick="closeModal('modal-touch')">Done</button>
+        <button class="btn-gold-outline" onclick="clearTouchGrid()">Clear Grid</button>
+        <button class="btn-red" onclick="closeModal('modal-touch')">Done</button>
       </div>
     </div>
   </div>
 
   <!-- FULLSCREEN INTERACTIVE CANVAS & NAVIGATION HUD -->
-  <div id="fullscreen-layer">
+  <div id="fullscreen-layer" tabindex="0">
     <div id="screen-hud">
       <span class="hud-title" id="hudTestTitle">Test Routine</span>
-      <button class="hud-btn" onclick="prevScreen()">◀ Prev</button>
-      <button class="hud-btn" onclick="nextScreen()">Next ▶</button>
-      <button class="hud-btn btn-exit" onclick="exitFullscreen()">✕ Exit</button>
+      <button class="hud-btn" onclick="prevScreen(event)">◀ Prev</button>
+      <button class="hud-btn" onclick="nextScreen(event)">Next ▶</button>
+      <button class="hud-btn btn-exit" onclick="exitFullscreen(event)">✕ Exit</button>
     </div>
     <canvas id="testCanvas"></canvas>
   </div>
@@ -1171,30 +1067,30 @@
   <!-- Footer -->
   <footer>
     <div class="footer-links">
-      <a onclick="openModal('modal-about')">About OmniHardware Lab</a>
+      <a onclick="openModal('modal-about')">About OmniHardware</a>
       <a onclick="openModal('modal-privacy')">Privacy Policy</a>
       <a onclick="openModal('modal-terms')">Terms of Service</a>
       <a onclick="openModal('modal-contact')">Contact & GitHub</a>
     </div>
-    <div>&copy; 2026 OmniHardware Lab. Open Web Hardware Metrology Suite.</div>
+    <div>&copy; 2026 OmniHardware Diagnostics. Open Web Metrology Platform.</div>
   </footer>
 
   <!-- Informational Modals -->
   <div class="modal-overlay" id="modal-privacy">
     <div class="modal-box">
       <h3>Privacy Policy</h3>
-      <p style="font-size:0.9rem; color:var(--text-muted);">OmniHardware Lab processes camera, microphone, audio, and display diagnostics locally within browser memory. No microphone audio feeds, camera streams, or device identifiers are ever collected, recorded, or transmitted to any server.</p>
+      <p style="font-size:0.9rem; color:var(--text-muted);">OmniHardware processes camera, microphone, audio, and display diagnostics locally within browser memory. No audio feeds, camera streams, or device identifiers are collected, recorded, or transmitted to any external server.</p>
       <br>
       <p style="font-size:0.9rem; color:var(--text-muted);"><strong>Third-Party Advertising:</strong> Third-party vendors, including Google, use cookies to serve ads based on prior visits. Users may opt out of personalized advertising by visiting Google Ads Settings.</p>
-      <button class="btn-main" style="margin-top:16px;" onclick="closeModal('modal-privacy')">Close</button>
+      <button class="btn-red" style="margin-top:16px;" onclick="closeModal('modal-privacy')">Close</button>
     </div>
   </div>
 
   <div class="modal-overlay" id="modal-about">
     <div class="modal-box">
-      <h3>About OmniHardware Lab</h3>
-      <p style="font-size:0.9rem; color:var(--text-muted);">OmniHardware Lab is a free, web-based diagnostic utility engineered for refurbished hardware audits, monitor calibration, and sensor health checks across desktop monitors, laptops, mobile screens, and smart TVs.</p>
-      <button class="btn-main" style="margin-top:16px;" onclick="closeModal('modal-about')">Close</button>
+      <h3>About OmniHardware</h3>
+      <p style="font-size:0.9rem; color:var(--text-muted);">OmniHardware is an open web metrology utility engineered for refurbished hardware audits, monitor calibration, and sensor health checks across desktop monitors, laptops, mobile screens, and smart TVs.</p>
+      <button class="btn-red" style="margin-top:16px;" onclick="closeModal('modal-about')">Close</button>
     </div>
   </div>
 
@@ -1202,7 +1098,7 @@
     <div class="modal-box">
       <h3>Terms of Service</h3>
       <p style="font-size:0.9rem; color:var(--text-muted);">This software is provided for display and sensor verification. High-frequency flashing modes should be used with discretion by photosensitive individuals. Audio sweeps should be monitored at safe volume levels.</p>
-      <button class="btn-main" style="margin-top:16px;" onclick="closeModal('modal-terms')">Close</button>
+      <button class="btn-red" style="margin-top:16px;" onclick="closeModal('modal-terms')">Close</button>
     </div>
   </div>
 
@@ -1210,30 +1106,154 @@
     <div class="modal-box">
       <h3>Contact & GitHub</h3>
       <p style="font-size:0.9rem; color:var(--text-muted);">Open source contributions, issue reporting, and hardware diagnostic proposals can be submitted via the root GitHub repository.</p>
-      <button class="btn-main" style="margin-top:16px;" onclick="closeModal('modal-contact')">Close</button>
+      <button class="btn-red" style="margin-top:16px;" onclick="closeModal('modal-contact')">Close</button>
     </div>
   </div>
 
   <script>
     /* ==========================================================================
-       TARGET HARDWARE CATEGORY SELECTION ENGINE
+       TARGET DEVICE ROUTING & WORKBENCH BUILDER
        ========================================================================== */
-    let selectedDevice = "monitor";
-    const deviceNotice = document.getElementById("deviceNotice");
+    let currentDevice = null;
 
-    function setDevice(device) {
-      selectedDevice = device;
-      document.querySelectorAll(".device-btn").forEach(btn => {
-        btn.classList.toggle("active", btn.getAttribute("data-device") === device);
-      });
+    const DEVICE_CONFIGS = {
+      monitor: {
+        title: "Desktop Monitor Diagnostics",
+        desc: "Calibrated for desktop panels: full-screen colors, gamma 2.2, OLED burn-in, motion ghosting, and stereo speakers.",
+        cards: ['screen', 'oled', 'flasher', 'audio']
+      },
+      laptop: {
+        title: "Laptop Display & Hardware Diagnostics",
+        desc: "Calibrated for laptop systems: backlight uniformity, OLED burn-in, webcam stream, microphone VU meter, and audio sweep.",
+        cards: ['screen', 'oled', 'flasher', 'audio', 'mic', 'camera']
+      },
+      mobile: {
+        title: "Smartphone & Mobile Screen Diagnostics",
+        desc: "Calibrated for smartphones: touch digitizer dead-zone grid, multi-touch points, OLED burn-in, camera sensors, and microphone.",
+        cards: ['screen', 'oled', 'flasher', 'touch', 'audio', 'mic', 'camera']
+      },
+      touch: {
+        title: "Touchscreen & Digitizer Diagnostics",
+        desc: "Dedicated to touch digitizer health: grid dead-zone trace, multi-point detection, stylus tracking, and screen uniformity.",
+        cards: ['touch', 'screen', 'oled', 'flasher']
+      },
+      tv: {
+        title: "Smart TV & Large Display Diagnostics",
+        desc: "Calibrated for large displays: OLED image retention, contrast stepping, primary color purity, and discrete stereo separation.",
+        cards: ['screen', 'oled', 'flasher', 'audio']
+      }
+    };
 
-      const notices = {
-        monitor: "Calibrated for desktop monitors: sub-pixel layout, gamma 2.2 curves, and high refresh-rate gaming displays.",
-        laptop: "Calibrated for laptop panels: assesses low-voltage backlight bleed, battery-saver display scaling, and integrated webcams.",
-        mobile: "Calibrated for mobile displays: touch digitizer tracking, OLED burn-in detection, and front sensor checks.",
-        tv: "Calibrated for Smart TVs: high contrast linearity, HDR color gamut limits, and discrete stereo separation."
+    function selectTargetDevice(deviceKey) {
+      currentDevice = deviceKey;
+      const conf = DEVICE_CONFIGS[deviceKey];
+
+      document.getElementById("gateway-view").style.display = "none";
+      document.getElementById("workbench-view").style.display = "block";
+      document.getElementById("btnSwitchDevice").style.display = "inline-block";
+
+      document.getElementById("wbDeviceTitle").textContent = conf.title;
+      document.getElementById("wbDeviceDesc").textContent = conf.desc;
+
+      renderWorkbenchCards(conf.cards);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function resetToGateway() {
+      document.getElementById("workbench-view").style.display = "none";
+      document.getElementById("gateway-view").style.display = "block";
+      document.getElementById("btnSwitchDevice").style.display = "none";
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderWorkbenchCards(cardList) {
+      const container = document.getElementById("workbenchCardsGrid");
+      container.innerHTML = "";
+
+      const cardTemplates = {
+        screen: `
+          <div class="hub-card">
+            <div>
+              <div class="hub-card-header"><div class="hub-icon">🖥️</div><div class="hub-title">Screen Diagnostic Suite</div></div>
+              <p class="hub-desc">EIZO-grade visual inspection: test geometry, dead & stuck pixels, uniformity, color distances, sharpness, and motion response time.</p>
+            </div>
+            <div class="hub-btn-group">
+              <button class="btn-red" onclick="openScreenModal()">▶ Run Complete Sequence</button>
+              <button class="btn-gold-outline" onclick="openScreenModal()">⚙️ Custom Test Picker</button>
+            </div>
+          </div>`,
+        oled: `
+          <div class="hub-card">
+            <div>
+              <div class="hub-card-header"><div class="hub-icon">✨</div><div class="hub-title">OLED Burn-In Inspector</div></div>
+              <p class="hub-desc">Full 10-slide OLED test: Pure Black (pixel-off), Pure White (ABL), 5% dark gray (near-black banding), 25% & 50% grays, Magenta, and RGB decay fields.</p>
+            </div>
+            <div class="hub-btn-group">
+              <button class="btn-red" onclick="runSingleRoutine('oled_check')">✨ Launch OLED Burn-In Test</button>
+            </div>
+          </div>`,
+        flasher: `
+          <div class="hub-card">
+            <div>
+              <div class="hub-card-header"><div class="hub-icon">⚡</div><div class="hub-title">Stuck Pixel Reviver</div></div>
+              <p class="hub-desc">High-frequency 22Hz alternating RGB sub-pixel cycle to stimulate sluggish or stuck liquid crystals without physical panel disassembly.</p>
+            </div>
+            <div class="hub-btn-group">
+              <button class="btn-red" onclick="launchFlasher()">⚡ Launch Fullscreen Flasher</button>
+            </div>
+          </div>`,
+        touch: `
+          <div class="hub-card">
+            <div>
+              <div class="hub-card-header"><div class="hub-icon">📱</div><div class="hub-title">Touch Digitizer Grid</div></div>
+              <p class="hub-desc">Interactive grid painter and multi-touch tracker. Drag your finger across the display: uncolored gaps pinpoint broken digitizer ribbons.</p>
+            </div>
+            <div class="hub-btn-group">
+              <button class="btn-red" onclick="openModal('modal-touch')">📱 Launch Touch Grid</button>
+            </div>
+          </div>`,
+        audio: `
+          <div class="hub-card">
+            <div>
+              <div class="hub-card-header"><div class="hub-icon">🔊</div><div class="hub-title">Speaker & Audio Test</div></div>
+              <p class="hub-desc">Discrete Left/Right stereo separation checks and a continuous 20Hz–20,000Hz logarithmic frequency sweep to detect chassis rattles and torn voice coils.</p>
+            </div>
+            <div class="hub-btn-group">
+              <button class="btn-gold-outline" onclick="testAudioChannel('left')">Left (L)</button>
+              <button class="btn-gold-outline" onclick="testAudioChannel('right')">Right (R)</button>
+              <button class="btn-red" onclick="runAudioSweep()">📈 20Hz-20kHz Sweep</button>
+              <button class="btn-gold-outline" style="border-color:var(--red-primary); color:#fca5a5;" onclick="stopAllAudio()">⏹️ Stop</button>
+            </div>
+          </div>`,
+        mic: `
+          <div class="hub-card">
+            <div>
+              <div class="hub-card-header"><div class="hub-icon">🎙️</div><div class="hub-title">Microphone Diagnostics</div></div>
+              <p class="hub-desc">Inspect input channels in real time with a live Web Audio decibel VU meter. Check frequency clarity and background noise floor.</p>
+              <div class="meter-wrap"><div id="micLevelBar"></div></div>
+              <div id="micStatusText" style="font-size:0.8rem; color:var(--text-muted); margin-bottom:12px;">Status: Microphone Inactive</div>
+            </div>
+            <div class="hub-btn-group">
+              <button class="btn-red" id="btnStartMic" onclick="toggleMicrophone()">🎙️ Start Mic Stream Test</button>
+            </div>
+          </div>`,
+        camera: `
+          <div class="hub-card">
+            <div>
+              <div class="hub-card-header"><div class="hub-icon">📷</div><div class="hub-title">Camera & Webcam Test</div></div>
+              <p class="hub-desc">Preview camera sensors directly in-browser. Inspect live feed aspect ratios, frame rate consistency, and hardware resolution capabilities.</p>
+            </div>
+            <div class="hub-btn-group">
+              <button class="btn-red" onclick="openModal('modal-camera')">📷 Open Camera Inspector</button>
+            </div>
+          </div>`
       };
-      deviceNotice.textContent = notices[device] || notices.monitor;
+
+      cardList.forEach(key => {
+        if (cardTemplates[key]) {
+          container.innerHTML += cardTemplates[key];
+        }
+      });
     }
 
     /* ==========================================================================
@@ -1260,7 +1280,7 @@
     });
 
     /* ==========================================================================
-       SCREEN TEST ROUTINES (EIZO-GRADE)
+       ROUTINES REGISTRY (EXPANDED OLED SUITE & SCREEN TESTS)
        ========================================================================== */
     const testCanvas = document.getElementById("testCanvas");
     const ctx = testCanvas.getContext("2d");
@@ -1274,31 +1294,39 @@
     let lastTapTime = 0;
 
     const ROUTINES = {
+      // 1. Full OLED Suite
+      oled_check: [
+        { title: "OLED: Pure Black (#000000) - True Off & Hot Pixel Check", render: () => { ctx.fillStyle = "#000000"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }},
+        { title: "OLED: Pure White (#ffffff) - ABL & Uniform Peak Brightness", render: () => { ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }},
+        { title: "OLED: 5% Dark Gray (#0d0d0d) - Near-Black Banding & Chrominance", render: () => { ctx.fillStyle = "#0d0d0d"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }},
+        { title: "OLED: 25% Low Gray (#404040) - Subtle Shadow Retention", render: () => { ctx.fillStyle = "#404040"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }},
+        { title: "OLED: 50% Mid Gray (#808080) - Taskbar, Notch & Logo Burn-In", render: () => { ctx.fillStyle = "#808080"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }},
+        { title: "OLED: Pure Magenta (#ff00ff) - Red/Blue Differential Aging", render: () => { ctx.fillStyle = "#ff00ff"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }},
+        { title: "OLED: Pure Red (#ff0000) - Red Organic Sub-pixel Decay", render: () => { ctx.fillStyle = "#ff0000"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }},
+        { title: "OLED: Pure Green (#00ff00) - Green Organic Sub-pixel Decay", render: () => { ctx.fillStyle = "#00ff00"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }},
+        { title: "OLED: Pure Blue (#0000ff) - Blue Fast-Wear Sub-pixel Decay", render: () => { ctx.fillStyle = "#0000ff"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }},
+        { title: "OLED: Pure Cyan (#00ffff) - Green/Blue Blend Retention", render: () => { ctx.fillStyle = "#00ffff"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }}
+      ],
+
+      // 2. Geometry Test Pattern
       pattern: {
         title: "Test Pattern (Geometry & Scaling)",
         render: () => {
           const w = testCanvas.width, h = testCanvas.height;
-          ctx.fillStyle = "#1e293b"; ctx.fillRect(0, 0, w, h);
-          ctx.strokeStyle = "#475569"; ctx.lineWidth = 1;
+          ctx.fillStyle = "#120a0d"; ctx.fillRect(0, 0, w, h);
+          ctx.strokeStyle = "#38252a"; ctx.lineWidth = 1;
           for (let x = 0; x < w; x += 50) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke(); }
           for (let y = 0; y < h; y += 50) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke(); }
           const cx = w / 2, cy = h / 2;
-          ctx.strokeStyle = "#38bdf8"; ctx.lineWidth = 2;
+          ctx.strokeStyle = "#d4af37"; ctx.lineWidth = 2;
           for (let r = 80; r <= Math.min(w, h)/2; r += 80) { ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.stroke(); }
-          ctx.strokeStyle = "#f43f5e";
+          ctx.strokeStyle = "#dc2626";
           ctx.beginPath(); ctx.moveTo(cx, 0); ctx.lineTo(cx, h); ctx.stroke();
           ctx.beginPath(); ctx.moveTo(0, cy); ctx.lineTo(w, cy); ctx.stroke();
         }
       },
-      sharpness: {
-        title: "Sharpness (1px Moiré Grid)",
-        render: () => {
-          const w = testCanvas.width, h = testCanvas.height;
-          ctx.fillStyle = "#000"; ctx.fillRect(0, 0, w, h);
-          ctx.fillStyle = "#fff";
-          for (let y = 0; y < h; y += 2) ctx.fillRect(0, y, w, 1);
-        }
-      },
+
+      // 3. Defective Pixels Suite
       defective_pixels: [
         { title: "Defective Pixels (Red)", render: () => { ctx.fillStyle = "#f00"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }},
         { title: "Defective Pixels (Green)", render: () => { ctx.fillStyle = "#0f0"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }},
@@ -1306,34 +1334,14 @@
         { title: "Defective Pixels (White)", render: () => { ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }},
         { title: "Defective Pixels (Black)", render: () => { ctx.fillStyle = "#000"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }}
       ],
-      viewing_angle: {
-        title: "Viewing Angle & Sub-pixel Contrast",
-        render: () => {
-          const w = testCanvas.width, h = testCanvas.height;
-          ctx.fillStyle = "#b91c1c"; ctx.fillRect(0, 0, w/2, h/2);
-          ctx.fillStyle = "#15803d"; ctx.fillRect(w/2, 0, w/2, h/2);
-          ctx.fillStyle = "#1d4ed8"; ctx.fillRect(0, h/2, w/2, h/2);
-          ctx.fillStyle = "#ca8a04"; ctx.fillRect(w/2, h/2, w/2, h/2);
-          ctx.fillStyle = "#fff"; ctx.fillRect(w/2 - 100, h/2 - 100, 200, 200);
-          ctx.fillStyle = "#000"; ctx.fillRect(w/2 - 50, h/2 - 50, 100, 100);
-        }
-      },
+
+      // 4. Uniformity & Bleed
       uniformity: [
         { title: "Uniformity (10% Dark Gray - Backlight Bleed)", render: () => { ctx.fillStyle = "#1a1a1a"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }},
         { title: "Uniformity (50% Mid Gray - IPS Glow)", render: () => { ctx.fillStyle = "#808080"; ctx.fillRect(0, 0, testCanvas.width, testCanvas.height); }}
       ],
-      gamma: {
-        title: "Gamma Calibration Wedge (2.2 Target)",
-        render: () => {
-          const w = testCanvas.width, h = testCanvas.height;
-          const steps = 16, stepW = w / steps;
-          for (let i = 0; i < steps; i++) {
-            const val = Math.round((i / (steps - 1)) * 255);
-            ctx.fillStyle = `rgb(${val},${val},${val})`;
-            ctx.fillRect(i * stepW, 0, stepW, h);
-          }
-        }
-      },
+
+      // 5. Color Distances
       color_distances: {
         title: "Color Distances & Saturation Stepping",
         render: () => {
@@ -1352,24 +1360,8 @@
           });
         }
       },
-      response_time: {
-        title: "Response Time & Ghosting (Moving Block)",
-        render: () => {
-          let posX = 0;
-          function animate() {
-            const w = testCanvas.width, h = testCanvas.height;
-            ctx.fillStyle = "#1e293b"; ctx.fillRect(0, 0, w, h);
-            ctx.fillStyle = "#fff"; ctx.fillRect(0, h * 0.25, w, 80);
-            ctx.fillStyle = "#000"; ctx.fillRect(posX, h * 0.25, 80, 80);
-            ctx.fillStyle = "#0f172a"; ctx.fillRect(0, h * 0.55, w, 80);
-            ctx.fillStyle = "#06b6d4"; ctx.fillRect(w - posX - 80, h * 0.55, 80, 80);
-            posX += 8;
-            if (posX > w) posX = -80;
-            animFrameId = requestAnimationFrame(animate);
-          }
-          animate();
-        }
-      },
+
+      // 6. Gradients & Banding
       gradients: {
         title: "Gradients & Bit-Depth Banding",
         render: () => {
@@ -1379,6 +1371,51 @@
           grad.addColorStop(0.4, "#ff0"); grad.addColorStop(0.6, "#0f0");
           grad.addColorStop(0.8, "#00f"); grad.addColorStop(1, "#fff");
           ctx.fillStyle = grad; ctx.fillRect(0, 0, w, h);
+        }
+      },
+
+      // 7. Sharpness
+      sharpness: {
+        title: "Sharpness (1px Moiré Grid)",
+        render: () => {
+          const w = testCanvas.width, h = testCanvas.height;
+          ctx.fillStyle = "#000"; ctx.fillRect(0, 0, w, h);
+          ctx.fillStyle = "#fff";
+          for (let y = 0; y < h; y += 2) ctx.fillRect(0, y, w, 1);
+        }
+      },
+
+      // 8. Gamma Wedge
+      gamma: {
+        title: "Gamma Calibration Wedge (2.2 Target)",
+        render: () => {
+          const w = testCanvas.width, h = testCanvas.height;
+          const steps = 16, stepW = w / steps;
+          for (let i = 0; i < steps; i++) {
+            const val = Math.round((i / (steps - 1)) * 255);
+            ctx.fillStyle = `rgb(${val},${val},${val})`;
+            ctx.fillRect(i * stepW, 0, stepW, h);
+          }
+        }
+      },
+
+      // 9. Response Time & Ghosting
+      response_time: {
+        title: "Response Time & Ghosting (Moving Block)",
+        render: () => {
+          let posX = 0;
+          function animate() {
+            const w = testCanvas.width, h = testCanvas.height;
+            ctx.fillStyle = "#140e10"; ctx.fillRect(0, 0, w, h);
+            ctx.fillStyle = "#fff"; ctx.fillRect(0, h * 0.25, w, 80);
+            ctx.fillStyle = "#000"; ctx.fillRect(posX, h * 0.25, 80, 80);
+            ctx.fillStyle = "#261519"; ctx.fillRect(0, h * 0.55, w, 80);
+            ctx.fillStyle = "#d4af37"; ctx.fillRect(w - posX - 80, h * 0.55, 80, 80);
+            posX += 8;
+            if (posX > w) posX = -80;
+            animFrameId = requestAnimationFrame(animate);
+          }
+          animate();
         }
       }
     };
@@ -1425,6 +1462,7 @@
       testCanvas.width = window.innerWidth;
       testCanvas.height = window.innerHeight;
       fullscreenLayer.style.display = "block";
+      fullscreenLayer.focus(); // Ensure fullscreen layer catches keyboard strokes immediately
       window.history.pushState({ runnerActive: true }, "");
 
       const root = document.documentElement;
@@ -1442,7 +1480,11 @@
       step.render();
     }
 
-    function nextScreen() {
+    function nextScreen(e) {
+      if (e) {
+        e.stopPropagation();
+        e.preventDefault();
+      }
       if (currentStepIndex < activeSequence.length - 1) {
         currentStepIndex++;
         renderCurrentStep();
@@ -1451,14 +1493,22 @@
       }
     }
 
-    function prevScreen() {
+    function prevScreen(e) {
+      if (e) {
+        e.stopPropagation();
+        e.preventDefault();
+      }
       if (currentStepIndex > 0) {
         currentStepIndex--;
         renderCurrentStep();
       }
     }
 
-    function exitFullscreen() {
+    function exitFullscreen(e) {
+      if (e) {
+        e.stopPropagation();
+        e.preventDefault();
+      }
       if (animFrameId) cancelAnimationFrame(animFrameId);
       clearInterval(flasherInterval);
       fullscreenLayer.style.display = "none";
@@ -1472,6 +1522,7 @@
 
     window.addEventListener("popstate", () => exitFullscreen());
 
+    // Single click / tap advances; rapid double-tap exits
     fullscreenLayer.addEventListener("click", (e) => {
       if (e.target.closest("#screen-hud")) return;
       const now = Date.now();
@@ -1483,11 +1534,18 @@
       nextScreen();
     });
 
+    // Universal Keyboard Navigation Listener (Supports Spacebar, Enter, Arrow Keys, and Escape)
     window.addEventListener("keydown", (e) => {
       if (fullscreenLayer.style.display === "block") {
-        if (e.key === "Escape") exitFullscreen();
-        if (e.key === "ArrowRight" || e.key === " ") nextScreen();
-        if (e.key === "ArrowLeft") prevScreen();
+        if (e.key === "Escape") {
+          exitFullscreen(e);
+        } else if (e.key === " " || e.code === "Space" || e.key === "ArrowRight" || e.key === "Enter") {
+          e.preventDefault();
+          nextScreen(e);
+        } else if (e.key === "ArrowLeft") {
+          e.preventDefault();
+          prevScreen(e);
+        }
       }
     });
 
@@ -1498,6 +1556,7 @@
       testCanvas.width = window.innerWidth;
       testCanvas.height = window.innerHeight;
       fullscreenLayer.style.display = "block";
+      fullscreenLayer.focus();
       hudTitle.textContent = "Stuck Pixel Flasher (22Hz Alternating)";
 
       const colors = ["#ff0000", "#00ff00", "#0000ff", "#ffffff", "#000000"];
@@ -1604,9 +1663,9 @@
         micStream = null;
       }
       if (micAnimId) cancelAnimationFrame(micAnimId);
-      micLevelBar.style.width = "0%";
-      micStatusText.textContent = "Status: Microphone Inactive";
-      btnStartMic.textContent = "🎙️ Start Mic Stream Test";
+      if (micLevelBar) micLevelBar.style.width = "0%";
+      if (micStatusText) micStatusText.textContent = "Status: Microphone Inactive";
+      if (btnStartMic) btnStartMic.textContent = "🎙️ Start Mic Stream Test";
     }
 
     /* ==========================================================================
@@ -1632,7 +1691,7 @@
 
         const track = camStream.getVideoTracks()[0];
         const settings = track.getSettings();
-        camTelemetry.textContent = `Active Sensor: ${track.label || "Webcam"} | Resolution: ${settings.width || "?"}x${settings.height || "?"} @ ${Math.round(settings.frameRate || 30)} FPS`;
+        camTelemetry.textContent = `Active Sensor: ${track.label || "Webcam"} | ${settings.width || "?"}x${settings.height || "?"} @ ${Math.round(settings.frameRate || 30)} FPS`;
       } catch (err) {
         alert("Camera permission denied or camera device not found: " + err.message);
       }
@@ -1667,12 +1726,12 @@
     function drawTouchGrid() {
       const w = touchCanvas.width / gridCols;
       const h = touchCanvas.height / gridRows;
-      tCtx.fillStyle = "#0a0a0c";
+      tCtx.fillStyle = "#060405";
       tCtx.fillRect(0, 0, touchCanvas.width, touchCanvas.height);
 
       for (let r = 0; r < gridRows; r++) {
         for (let c = 0; c < gridCols; c++) {
-          tCtx.fillStyle = gridState[r][c] ? "#10b981" : "#182033";
+          tCtx.fillStyle = gridState[r][c] ? "#10b981" : "#1c1015";
           tCtx.fillRect(c * w + 1, r * h + 1, w - 2, h - 2);
         }
       }
