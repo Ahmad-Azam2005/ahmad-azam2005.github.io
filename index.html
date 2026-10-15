@@ -3,8 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OmniHardware - Targeted Display, Audio & Hardware Diagnostic Suite</title>
-  <meta name="description" content="Free multi-device hardware and screen diagnostic suite. Test monitors, laptops, mobile phones, touchscreens, and TVs for dead pixels, OLED burn-in, audio, and sensors.">
+  
+  <!-- HIGH-INTENT PRIMARY SEARCH TITLE & META DESCRIPTION -->
+  <title>Screen Test & Dead Pixel Checker Online | OLED Burn-In & Mic Tester</title>
+  <meta name="description" content="Free online screen test and dead pixel checker. Test PC monitors, laptops, TVs, and mobile screens for dead pixels, OLED burn-in, stuck pixels, mic SNR dBFS, and speakers.">
+  <meta name="keywords" content="screen test, dead pixel test, dead pixel checker, oled burn in test, monitor check online, stuck pixel fixer, mic test online, speaker test 20hz, touch screen test, backlight bleed test, laptop screen tester">
   <link rel="canonical" href="https://ahmad-azam2005.github.io/">
 
   <!-- FAVICON & WEB APP ICONS -->
@@ -23,51 +26,107 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5501194472375706"
        crossorigin="anonymous"></script>
 
-  <!-- OPEN GRAPH META TAGS -->
-  <meta property="og:title" content="OmniHardware - Targeted Hardware Diagnostic Suite">
-  <meta property="og:description" content="Device-tailored diagnostics: Monitor, Laptop, Phone, TV, and Touchscreen testing with dedicated OLED burn-in and SI acoustic scoring tools.">
+  <!-- OPEN GRAPH / SOCIAL SEARCH TAGS -->
+  <meta property="og:title" content="Screen Test & Dead Pixel Checker Online | OmniHardware">
+  <meta property="og:description" content="Free multi-device display, sound, and sensor test. Check monitors, laptops, and phones for dead pixels, OLED burn-in, audio rattle, and mic health.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ahmad-azam2005.github.io/">
 
-  <!-- SCHEMA.ORG DUAL STRUCTURED DATA: WEBAPPLICATION + FAQPAGE -->
+  <!-- SCHEMA.ORG STRUCTURED DATA: WEBAPPLICATION + 10 HIGH-INTENT FAQS -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "WebApplication",
-        "name": "OmniHardware",
+        "name": "OmniHardware - Screen & Hardware Diagnostic Suite",
         "url": "https://ahmad-azam2005.github.io/",
         "applicationCategory": "UtilitiesApplication",
         "operatingSystem": "All",
         "browserRequirements": "Requires JavaScript, Web Audio API, and HTML5 Canvas support",
-        "description": "Targeted hardware diagnostic suite tailored for monitors, laptops, phones, touchscreens, and TVs. Detects dead pixels, OLED burn-in, microphone SNR/dBFS health metrics, and speaker acoustic performance."
+        "description": "Comprehensive hardware testing suite: dead pixel check, OLED burn-in detection, microphone SNR dBFS rating, speaker sweeps, touch digitizer tester, and GPU metrology."
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "How does the microphone health score work?",
+            "name": "How to test for dead pixels on a computer monitor or laptop?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "The microphone health score measures physical SI-derived acoustic and digital parameters: Signal-to-Noise Ratio (SNR in dB), baseline digital noise floor (in dBFS), and input dynamic headroom. The result is mapped to an objective 10-point scale reflecting speech transmission quality (ITU-T P.862 / IEC 60268-4 standards)."
+              "text": "Open a full-screen color test cycling through solid white, black, red, green, and blue. A completely dead pixel remains dark and unlit on white backgrounds, while stuck sub-pixels appear as persistent colored dots on dark screens."
             }
           },
           {
             "@type": "Question",
-            "name": "How do you test for OLED burn-in on monitors, laptops, and phones?",
+            "name": "Can a stuck pixel be fixed online without software installation?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "OLED burn-in is tested using pure black, pure white, stepped gray fields (5%, 25%, 50%), and pure magenta. This reveals uneven sub-pixel aging, near-black banding, and static taskbar or status-bar ghost outlines."
+              "text": "Yes, many stuck pixels can be revived by running a high-frequency color flasher (22Hz RGB cycling) for 15 to 30 minutes. The rapid voltage shifts stimulate sluggish liquid crystals to reset without needing physical screen disassembly."
             }
           },
           {
             "@type": "Question",
-            "name": "What is the difference between IPS glow and backlight bleed?",
+            "name": "How do you check for OLED burn-in and image retention on screens & TVs?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Backlight bleed is a hardware assembly flaw where light leaks from display edges and remains fixed regardless of head position. IPS glow is an optical byproduct of IPS crystal structure that shifts position and color tint when viewing off-axis."
+              "text": "OLED burn-in is tested by inspecting solid 50% dark gray, 5% low-light gray, and pure magenta full-screen test patterns. Because organic sub-pixels degrade unevenly, ghost silhouettes of static taskbars, logos, or phone notches stand out clearly."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the difference between backlight bleed and IPS glow?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Backlight bleed is a manufacturing flaw where panel bezel pressure leaks light along the screen edges; it stays fixed at any viewing angle. IPS glow is an optical byproduct of wide-angle IPS liquid crystals that shifts position and tint as you move your head."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does the microphone test calculate health score and noise floor?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The microphone diagnostic samples your input channel using Web Audio API to measure Signal-to-Noise Ratio (SNR in dB) and baseline digital noise floor (in dBFS). Scores above 8.0/10 reflect broadcast-quality audio with minimal background hiss."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I test for touchscreen dead zones on mobile phones and tablets?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Using an interactive touch digitizer grid, drag your finger across the entire panel. Every functional sensor block illuminates in green; any blank blocks indicate cracked ribbon cables or unresponsive digitizer tracks."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why do laptop or monitor speakers buzz during a 20Hz-20kHz sound sweep?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A continuous logarithmic acoustic sweep reveals mechanical resonances. Low-frequency buzz (20-150 Hz) usually points to loose chassis screws, while mid-frequency distortion indicates a torn voice coil suspension."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How many dead pixels are allowed before a monitor can be returned under warranty?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Under standard ISO 9241-307 Class II guidelines used by Dell, ASUS, LG, and Samsung, manufacturers typically require more than 2 fully dead pixels or 5 stuck sub-pixels per million pixels before approving warranty claims."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I test my webcam and front camera sensor resolution online?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Launch the in-browser camera inspector. The browser directly accesses the hardware feed to reveal physical sensor resolution (e.g., 1080p, 720p), framerate (FPS), and optical color balance without third-party installations."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is motion ghosting and how do I test monitor response time?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Motion ghosting is a trailing blur caused by slow pixel response times during gray-to-gray (GtG) transitions. Our high-speed moving block test lets you visually check for smearing and inverse ghosting artifacts."
             }
           }
         ]
@@ -93,11 +152,7 @@
       --text-muted: #bda89b;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       background-color: var(--bg-black);
@@ -197,14 +252,12 @@
       color: var(--text-main);
     }
 
-    .gateway-title span {
-      color: var(--gold-primary);
-    }
+    .gateway-title span { color: var(--gold-primary); }
 
     .gateway-subtitle {
       color: var(--text-muted);
       font-size: 1.1rem;
-      max-width: 650px;
+      max-width: 680px;
       margin: 0 auto 36px;
     }
 
@@ -236,27 +289,11 @@
       background: var(--bg-card);
     }
 
-    .device-select-icon {
-      font-size: 3rem;
-      margin-bottom: 14px;
-    }
+    .device-select-icon { font-size: 3rem; margin-bottom: 14px; }
+    .device-select-name { font-size: 1.25rem; font-weight: 800; color: var(--gold-light); margin-bottom: 6px; }
+    .device-select-desc { font-size: 0.82rem; color: var(--text-muted); }
 
-    .device-select-name {
-      font-size: 1.25rem;
-      font-weight: 800;
-      color: var(--gold-light);
-      margin-bottom: 6px;
-    }
-
-    .device-select-desc {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-    }
-
-    #workbench-view {
-      display: none;
-      animation: fadeIn 0.3s ease;
-    }
+    #workbench-view { display: none; animation: fadeIn 0.3s ease; }
 
     .workbench-header {
       display: flex;
@@ -269,16 +306,8 @@
       gap: 12px;
     }
 
-    .workbench-title-box h2 {
-      font-size: 1.8rem;
-      font-weight: 900;
-      color: var(--text-main);
-    }
-
-    .workbench-title-box p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-    }
+    .workbench-title-box h2 { font-size: 1.8rem; font-weight: 900; color: var(--text-main); }
+    .workbench-title-box p { color: var(--text-muted); font-size: 0.95rem; }
 
     .portal-grid {
       display: grid;
@@ -304,12 +333,7 @@
       transform: translateY(-2px);
     }
 
-    .hub-card-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
+    .hub-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
 
     .hub-icon {
       width: 44px;
@@ -324,24 +348,9 @@
       color: var(--gold-primary);
     }
 
-    .hub-title {
-      font-size: 1.2rem;
-      font-weight: 800;
-      color: var(--gold-light);
-    }
-
-    .hub-desc {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      margin-bottom: 20px;
-      flex-grow: 1;
-    }
-
-    .hub-btn-group {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
+    .hub-title { font-size: 1.2rem; font-weight: 800; color: var(--gold-light); }
+    .hub-desc { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px; flex-grow: 1; }
+    .hub-btn-group { display: flex; gap: 10px; flex-wrap: wrap; }
 
     .btn-red {
       background: linear-gradient(135deg, var(--red-primary), #991b1b);
@@ -381,7 +390,6 @@
       color: #fff;
     }
 
-    /* SI Acoustic Score Badges & Panels */
     .health-score-box {
       background: rgba(0, 0, 0, 0.45);
       border: 1.5px solid var(--border-gold);
@@ -402,23 +410,9 @@
       white-space: nowrap;
     }
 
-    .score-badge small {
-      font-size: 1rem;
-      color: var(--text-muted);
-      font-weight: 600;
-    }
-
-    .score-details {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      line-height: 1.4;
-      text-align: right;
-    }
-
-    .score-details span {
-      color: var(--gold-light);
-      font-weight: 700;
-    }
+    .score-badge small { font-size: 1rem; color: var(--text-muted); font-weight: 600; }
+    .score-details { font-size: 0.8rem; color: var(--text-muted); line-height: 1.4; text-align: right; }
+    .score-details span { color: var(--gold-light); font-weight: 700; }
 
     .meter-wrap {
       width: 100%;
@@ -438,7 +432,6 @@
       transition: width 0.05s ease;
     }
 
-    /* Modals & Picker */
     .test-list {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -446,9 +439,7 @@
       margin: 20px 0;
     }
 
-    @media (max-width: 600px) {
-      .test-list { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 600px) { .test-list { grid-template-columns: 1fr; } }
 
     .test-row {
       display: flex;
@@ -460,11 +451,7 @@
       border: 1px solid var(--border-gold);
     }
 
-    .test-row-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+    .test-row-left { display: flex; align-items: center; gap: 10px; }
 
     .btn-play-mini {
       width: 26px;
@@ -482,12 +469,7 @@
 
     .btn-play-mini:hover { background: var(--red-hover); }
 
-    .screen-cb {
-      accent-color: var(--red-primary);
-      width: 17px;
-      height: 17px;
-      cursor: pointer;
-    }
+    .screen-cb { accent-color: var(--red-primary); width: 17px; height: 17px; cursor: pointer; }
 
     .telemetry-grid {
       display: grid;
@@ -512,11 +494,7 @@
       margin-bottom: 4px;
     }
 
-    .telemetry-val {
-      font-size: 1.2rem;
-      font-weight: 800;
-      color: var(--text-main);
-    }
+    .telemetry-val { font-size: 1.2rem; font-weight: 800; color: var(--text-main); }
 
     .touch-canvas-box {
       position: relative;
@@ -629,12 +607,7 @@
       text-align: left;
     }
 
-    .modal-box h3 {
-      font-size: 1.25rem;
-      font-weight: 800;
-      margin-bottom: 8px;
-      color: var(--gold-light);
-    }
+    .modal-box h3 { font-size: 1.25rem; font-weight: 800; margin-bottom: 8px; color: var(--gold-light); }
 
     .article-card {
       background: var(--bg-surface);
@@ -644,12 +617,7 @@
       margin-top: 36px;
     }
 
-    .article-card h2 {
-      font-size: 1.35rem;
-      font-weight: 800;
-      margin-bottom: 12px;
-      color: var(--gold-light);
-    }
+    .article-card h2 { font-size: 1.35rem; font-weight: 800; margin-bottom: 12px; color: var(--gold-light); }
 
     .spec-table-wrapper { overflow-x: auto; margin: 16px 0; }
 
@@ -660,12 +628,7 @@
       min-width: 550px;
     }
 
-    .spec-table th, .spec-table td {
-      border: 1px solid var(--border-gold);
-      padding: 12px;
-      text-align: left;
-    }
-
+    .spec-table th, .spec-table td { border: 1px solid var(--border-gold); padding: 12px; text-align: left; }
     .spec-table th { background: var(--bg-card); color: var(--gold-light); }
 
     .faq-container { margin-top: 24px; display: flex; flex-direction: column; gap: 14px; }
@@ -752,8 +715,8 @@
 
     <!-- 1. INITIAL LANDING GATEWAY: CHOOSE DEVICE -->
     <section id="gateway-view">
-      <h1 class="gateway-title">Select Your <span>Hardware Target</span></h1>
-      <p class="gateway-subtitle">Choose your device category. Screen metrology, acoustic SI scoring, and sensor inspection configure specifically for your hardware.</p>
+      <h1 class="gateway-title">Online <span>Screen & Hardware</span> Diagnostic Suite</h1>
+      <p class="gateway-subtitle">Instant browser-based test suite for computer monitors, laptops, mobile screens, and smart TVs. Check for dead pixels, OLED burn-in, microphone SNR, and speaker audio rattle.</p>
 
       <div class="device-selection-grid">
         <div class="device-select-card" onclick="selectTargetDevice('monitor')">
@@ -874,36 +837,82 @@
         </div>
       </article>
 
-      <!-- FAQ ACCORDIONS -->
+      <!-- 10 MOST SEARCHED LONG-TAIL QUESTIONS & KNOWLEDGE BASE -->
       <section class="article-card">
-        <h2>Hardware Knowledge Base & Frequently Asked Questions</h2>
+        <h2>Top 10 Display, Audio & Hardware Diagnostic Guides</h2>
         <p class="hub-desc">
-          Guides covering microphone SNR measurements, electroacoustic speaker health, and OLED degradation.
+          Authoritative guides answering the most common questions regarding dead pixel verification, OLED burn-in prevention, microphone noise tests, and screen repairs.
         </p>
 
         <div class="faq-container">
           <details class="faq-item" open>
-            <summary>How is the Microphone Health Score (X/10) calculated?</summary>
+            <summary>1. How to test for dead pixels on a computer monitor or laptop screen?</summary>
             <div class="faq-content">
-              Our acoustic engine follows <strong>IEC 60268-4</strong> and <strong>ITU-T P.862</strong> standards. When you run the test, the browser's Web Audio Analyzer samples your audio stream at 44.1/48 kHz:
-              <br><br>
-              1. <strong>Noise Floor (dBFS):</strong> Measures self-noise and room acoustics during silence.<br>
-              2. <strong>Peak Acoustic Energy:</strong> Captures speech input levels.<br>
-              3. <strong>Signal-to-Noise Ratio (SNR):</strong> The decibel gap between your vocal peaks and the background noise floor. An SNR of &gt;50 dB yields 9–10/10; 35–49 dB yields 7–8/10; &lt;25 dB yields below 5/10 due to excessive hiss.
+              To test for dead pixels, wipe your display clean with a microfiber cloth to prevent dust particles from mimicking defects. Then, run a full-screen color test cycling through solid white, black, red, green, and blue. A completely <strong>dead pixel</strong> receives no electrical current and remains dark on solid white backgrounds. A <strong>stuck sub-pixel</strong> is locked into one color (red, green, or blue) and stands out sharply against black backgrounds.
             </div>
           </details>
 
           <details class="faq-item">
-            <summary>How do you test for OLED burn-in on monitors, laptops, and phones?</summary>
+            <summary>2. Can a stuck pixel be revived or fixed online without software?</summary>
             <div class="faq-content">
-              OLED panels use organic sub-pixels that age at differing rates. Inspecting pure black, pure white, stepped grays (5%, 25%, 50%), and pure magenta reveals static taskbars, mobile notches, and UI elements.
+              Yes, stuck pixels can frequently be recovered using our built-in <strong>⚡ Stuck Pixel Reviver</strong>. By cycling primary red, green, and blue sub-pixels at 22Hz, the rapid voltage swings force the sluggish liquid crystal molecules to untangle and return to their proper alignment. Run the flasher for 15 to 30 minutes over the affected area.
             </div>
           </details>
 
           <details class="faq-item">
-            <summary>What causes speaker rattle during the 20Hz–20kHz frequency sweep?</summary>
+            <summary>3. How do you check for OLED burn-in and image retention on screens & TVs?</summary>
             <div class="faq-content">
-              A sine wave sweep isolates mechanical resonances. Buzzing in the sub-bass (20–120 Hz) indicates loose screws or chassis vibrations; distortion in the mid-range (500–2000 Hz) indicates a torn surround or scraping voice coil.
+              OLED panels use organic light-emitting diodes that wear down based on cumulative luminance. To check for burn-in, launch our <strong>✨ OLED Burn-In Test</strong>. View the 50% dark gray and pure magenta slides: static elements like Windows taskbars, YouTube borders, news tickers, or mobile status bar icons will show up as permanent faint silhouettes or discoloration.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>4. What is the difference between backlight bleed and IPS glow?</summary>
+            <div class="faq-content">
+              • <strong>Backlight Bleed:</strong> A physical assembly defect where bezel pressure pinches LCD layers, allowing LED light to escape from display edges. It stays in the exact same spot regardless of your head position.<br>
+              • <strong>IPS Glow:</strong> An optical byproduct of wide-angle IPS crystal structure. IPS glow changes in brightness and color tint as you shift your viewing angle or step back from the monitor.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>5. How does the online microphone test measure dBFS noise floor and SNR?</summary>
+            <div class="faq-content">
+              Our acoustic engine follows <strong>IEC 60268-4</strong> standards. Using the browser's Web Audio API at a 44.1/48 kHz sample rate, it measures your ambient silence to determine the digital noise floor (in dBFS) and analyzes speech peaks. The calculated <strong>Signal-to-Noise Ratio (SNR in dB)</strong> is converted into an objective 10-point health score: scores above 8.0/10 denote clean, studio-grade speech intelligibility.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>6. How do I test for touchscreen dead zones on mobile phones and tablets?</summary>
+            <div class="faq-content">
+              Mobile screens use an Indium Tin Oxide (ITO) digitizer grid to sense finger capacitance. Drops or flex impacts can sever individual ribbon tracks, disabling an entire stripe of the touch sensor. Launch our <strong>📱 Touch Digitizer Grid</strong> and paint every square across the screen with your finger. Any uncolored blocks reveal dead touch zones.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>7. Why do laptop or monitor speakers buzz during a 20Hz–20kHz sound sweep?</summary>
+            <div class="faq-content">
+              Our logarithmic 20Hz–20,000Hz frequency sweep isolates electroacoustic resonance. Sub-bass vibrations (20–120 Hz) indicate loose interior screws or plastic chassis rattles. Rattling or buzzing in the vocal mid-range (500–2,000 Hz) usually indicates a torn speaker surround or a damaged voice coil scraping against the driver magnet.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>8. How many dead pixels are allowed under manufacturer warranty return policies?</summary>
+            <div class="faq-content">
+              Most monitors from brands like Dell, ASUS, Acer, LG, and Samsung adhere to <strong>ISO 9241-307 Class II</strong> standards. Manufacturers generally require more than 2 fully dead pixels or more than 5 stuck sub-pixels per million pixels before honoring a warranty replacement, making immediate inspection upon delivery crucial.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>9. How do I test my webcam and front camera sensor resolution online?</summary>
+            <div class="faq-content">
+              Click <strong>📷 Open Camera Inspector</strong> and grant browser permission. OmniHardware queries the hardware track to display active sensor resolution (e.g., 1920x1080), framerate capture (FPS), and aspect ratio without saving or uploading any video data.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>10. What is motion ghosting and how do I test monitor response time?</summary>
+            <div class="faq-content">
+              Motion ghosting occurs when display pixels cannot switch colors fast enough during fast-moving scenes, leaving a blurry smear behind objects. Our <strong>Response Time & Ghosting</strong> routine renders a synchronized moving block across high-contrast backgrounds to expose slow gray-to-gray (GtG) transitions and overdrive coronas.
             </div>
           </details>
         </div>
@@ -1576,7 +1585,7 @@
       const details = document.getElementById("speakerHealthDetails");
       if (!scoreBadge || !details) return;
 
-      let score = 5.0; // Baseline
+      let score = 5.0;
       if (speakerLeftTested && speakerRightTested) score += 2.5;
       else if (speakerLeftTested || speakerRightTested) score += 1.0;
 
@@ -1672,7 +1681,6 @@
         function computeAcoustics() {
           analyser.getFloatTimeDomainData(dataArray);
 
-          // Calculate RMS Amplitude in linear scale
           let sumSquares = 0;
           let currentPeak = 0;
           for (let i = 0; i < dataArray.length; i++) {
@@ -1682,38 +1690,26 @@
           }
           const rms = Math.sqrt(sumSquares / dataArray.length);
 
-          // Convert to Decibels Relative to Full Scale (dBFS)
-          // 0 dBFS is digital maximum, silence approaches -100 dBFS
           const currentDbfs = rms > 0.00001 ? Math.max(-100, 20 * Math.log10(rms)) : -100;
 
-          // Track initial ambient noise floor in first 60 frames (~1 sec)
           sampleCounter++;
           if (sampleCounter < 60) {
             noiseFloorSamples.push(currentDbfs);
           } else {
-            // Track peak speech level
             if (currentDbfs > peakVocalMagnitude) peakVocalMagnitude = currentDbfs;
           }
 
-          // UI VU Meter visual
           const visualPct = Math.min(100, Math.max(0, Math.round(((currentDbfs + 80) / 80) * 100)));
           if (micLevelBar) micLevelBar.style.width = `${visualPct}%`;
 
-          // Live Metric Calculations
           let avgNoiseFloor = -65;
           if (noiseFloorSamples.length > 0) {
             avgNoiseFloor = noiseFloorSamples.reduce((a, b) => a + b, 0) / noiseFloorSamples.length;
           }
 
-          // Dynamic Signal to Noise Ratio (SNR = Peak - Noise Floor in dB)
           const liveSnr = Math.max(0, peakVocalMagnitude - avgNoiseFloor);
 
-          // Standard ITU-T / IEC Scoring Algorithm (Mapped 1 to 10)
-          // Studio grade: SNR > 55 dB => 9.5 - 10
-          // Great consumer: SNR 40 - 55 dB => 8.0 - 9.4
-          // Acceptable: SNR 25 - 40 dB => 6.0 - 7.9
-          // Poor / Noisy: SNR < 25 dB => < 6.0
-          let rawScore = 3.0; // Base presence
+          let rawScore = 3.0;
           if (liveSnr > 50) rawScore = 9.0 + Math.min(1.0, (liveSnr - 50) / 15);
           else if (liveSnr > 38) rawScore = 7.5 + ((liveSnr - 38) / 12) * 1.4;
           else if (liveSnr > 22) rawScore = 5.5 + ((liveSnr - 22) / 16) * 1.9;
