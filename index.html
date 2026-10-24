@@ -32,13 +32,21 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ahmad-azam2005.github.io/">
 
-  <!-- SCHEMA.ORG STRUCTURED DATA: WEBAPPLICATION + 10 FAQS -->
+  <!-- SCHEMA.ORG STRUCTURED DATA: WEBSITE (FOR GOOGLE SITE NAME) + WEBAPPLICATION + 10 FAQS -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "WebSite",
+        "@id": "https://ahmad-azam2005.github.io/#website",
+        "name": "OmniHardware",
+        "alternateName": ["OmniHardware Diagnostics", "Omni Hardware"],
+        "url": "https://ahmad-azam2005.github.io/"
+      },
+      {
         "@type": "WebApplication",
+        "@id": "https://ahmad-azam2005.github.io/#webapp",
         "name": "OmniHardware - Screen & Hardware Diagnostic Suite",
         "url": "https://ahmad-azam2005.github.io/",
         "applicationCategory": "UtilitiesApplication",
@@ -48,6 +56,7 @@
       },
       {
         "@type": "FAQPage",
+        "@id": "https://ahmad-azam2005.github.io/#faq",
         "mainEntity": [
           {
             "@type": "Question",
