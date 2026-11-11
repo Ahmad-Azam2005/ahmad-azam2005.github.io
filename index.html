@@ -1191,5 +1191,75 @@
       const rect = touchCanvas.getBoundingClientRect(), c = Math.floor((x - rect.left) / (touchCanvas.width / gridCols)), r = Math.floor((y - rect.top) / (touchCanvas.height / gridRows));
       if (r >= 0 && r < gridRows && c >= 0 && c < gridCols) gridState[r][c] = true;
     }
-    touchCanvas.addEventListener("pointermove", (e) => { if (e.buttons > 0 || e.pointerType === "touch") { registerTouch(e.clientX, e.clientY); drawTouchGrid(); } });
-    touchCanvas.addEventListener("touchstart
+    
+    touchCanvas.addEventListener("pointermove", (e) => { 
+      if (e.buttons > 0 || e.pointerType === "touch") { registerTouch(e.clientX, e.clientY); drawTouchGrid(); } 
+    });
+    
+    touchCanvas.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+      touchPointsReadout.textContent = `Touch Points: ${e.touches.length}`;
+      for (let i = 0; i < e.touches.length; i++) registerTouch(e.touches[i].clientX, e.touches[i].clientY);
+      drawTouchGrid();
+    }, { passive: false });
+
+    touchCanvas.addEventListener("touchmove", (e) => {
+      e.preventDefault();
+      for (let i = 0; i < e.touches.length; i++) registerTouch(e.touches[i].clientX, e.touches[i].clientY);
+      drawTouchGrid();
+    }, { passive: false });
+
+    touchCanvas.addEventListener("touchend", (e) => {
+      touchPointsReadout.textContent = `Touch Points: ${e.touches.length}`;
+    });
+
+    function clearTouchGrid() {
+      gridState = Array(gridRows).fill(null).map(() => Array(gridCols).fill(false));
+      drawTouchGrid();
+    }
+
+    function detectHardwareSpecs() {
+      const dpr = window.devicePixelRatio || 1;
+      const physicalW = Math.round(window.screen.width * dpr);
+      const physicalH = Math.round(window.screen.height * dpr);
+      document.getElementById("specResolution").textContent = `${physicalW} x ${physicalH} px`;
+      document.getElementById("specDPR").textContent = `${dpr.toFixed(2)}x (${window.screen.width}x${window.screen.height} CSS)`;
+
+      let gamut = "sRGB (Standard)";
+      if (window.matchMedia("(color-gamut: p3)").matches) gamut = "Display P3 (Wide Gamut)";
+      if (window.matchMedia("(color-gamut: rec2020)").matches) gamut = "Rec. 2020 (Ultra HDR)";
+      document.getElementById("specColorGamut").textContent = `${window.screen.colorDepth}-Bit | ${gamut}`;
+
+      try {
+        const glCanvas = document.createElement("canvas");
+        const gl = glCanvas.getContext("webgl") || glCanvas.getContext("experimental-webgl");
+        if (gl) {
+          const debugInfo = gl.getExtension("WEBGL_debug_renderer_info");
+          if (debugInfo) {
+            document.getElementById("specGPU").textContent = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
+          } else {
+            document.getElementById("specGPU").textContent = "Supported (Generic WebGL Driver)";
+          }
+        }
+      } catch (err) {
+        document.getElementById("specGPU").textContent = "Hardware Acceleration Disabled";
+      }
+
+      let frameCount = 0, startTime = performance.now();
+      function measureFrames(now) {
+        frameCount++;
+        if (now - startTime >= 1000) {
+          const fps = Math.round((frameCount * 1000) / (now - startTime));
+          document.getElementById("specRefreshRate").textContent = `${fps} Hz`;
+        } else {
+          requestAnimationFrame(measureFrames);
+        }
+      }
+      requestAnimationFrame(measureFrames);
+    }
+    
+    // Launch metrology on page load
+    detectHardwareSpecs();
+  </script>
+</body>
+</html>
